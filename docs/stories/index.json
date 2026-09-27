@@ -1,0 +1,263 @@
+[
+ {
+  "id": "1.1",
+  "title": "Repo scaffold & local docker stack",
+  "owner": "B",
+  "deps": [],
+  "file": "1.1.repo-scaffold-local-docker-stack.md"
+ },
+ {
+  "id": "1.2",
+  "title": "CI pipeline (lint, type, test, build)",
+  "owner": "B",
+  "deps": [
+   "1.1"
+  ],
+  "file": "1.2.ci-pipeline-lint-type-test-build.md"
+ },
+ {
+  "id": "1.3",
+  "title": "LLM gateway via LiteLLM (Bedrock + mock)",
+  "owner": "A",
+  "deps": [
+   "1.1"
+  ],
+  "file": "1.3.llm-gateway-via-litellm-bedrock-mock.md"
+ },
+ {
+  "id": "1.4",
+  "title": "MLflow tracing baseline & PHI redaction",
+  "owner": "B",
+  "deps": [
+   "1.1"
+  ],
+  "file": "1.4.mlflow-tracing-baseline-phi-redaction.md"
+ },
+ {
+  "id": "2.1",
+  "title": "DB schema, migrations & synthetic seed",
+  "owner": "B",
+  "deps": [
+   "1.1"
+  ],
+  "file": "2.1.db-schema-migrations-synthetic-seed.md"
+ },
+ {
+  "id": "2.2",
+  "title": "Mock payer eligibility service",
+  "owner": "B",
+  "deps": [
+   "2.1"
+  ],
+  "file": "2.2.mock-payer-eligibility-service.md"
+ },
+ {
+  "id": "2.3",
+  "title": "FastMCP coverage tools",
+  "owner": "B",
+  "deps": [
+   "2.2"
+  ],
+  "file": "2.3.fastmcp-coverage-tools.md"
+ },
+ {
+  "id": "2.4",
+  "title": "FastMCP verification tools",
+  "owner": "B",
+  "deps": [
+   "2.3"
+  ],
+  "file": "2.4.fastmcp-verification-tools.md"
+ },
+ {
+  "id": "2.5",
+  "title": "FastMCP case tools",
+  "owner": "B",
+  "deps": [
+   "2.1"
+  ],
+  "file": "2.5.fastmcp-case-tools.md"
+ },
+ {
+  "id": "3.1",
+  "title": "LangGraph skeleton, state & checkpointer",
+  "owner": "A",
+  "deps": [
+   "1.3"
+  ],
+  "file": "3.1.langgraph-skeleton-state-checkpointer.md"
+ },
+ {
+  "id": "3.2",
+  "title": "Intent classifier & global router",
+  "owner": "A",
+  "deps": [
+   "3.1"
+  ],
+  "file": "3.2.intent-classifier-global-router.md"
+ },
+ {
+  "id": "3.3",
+  "title": "Intake node (member ID + name)",
+  "owner": "A",
+  "deps": [
+   "3.1"
+  ],
+  "file": "3.3.intake-node-member-id-name.md"
+ },
+ {
+  "id": "3.4",
+  "title": "Verify node: challenge loop & lockout",
+  "owner": "A",
+  "deps": [
+   "3.3",
+   "2.4"
+  ],
+  "file": "3.4.verify-node-challenge-loop-lockout.md"
+ },
+ {
+  "id": "3.5",
+  "title": "Policy display node (verified gate)",
+  "owner": "A",
+  "deps": [
+   "3.4",
+   "2.3"
+  ],
+  "file": "3.5.policy-display-node-verified-gate.md"
+ },
+ {
+  "id": "4.1",
+  "title": "Claim schema & NL extraction",
+  "owner": "A",
+  "deps": [
+   "1.3"
+  ],
+  "file": "4.1.claim-schema-nl-extraction.md"
+ },
+ {
+  "id": "4.2",
+  "title": "Gap detection & clarify loop",
+  "owner": "A",
+  "deps": [
+   "4.1",
+   "3.1"
+  ],
+  "file": "4.2.gap-detection-clarify-loop.md"
+ },
+ {
+  "id": "4.3",
+  "title": "Confirm & create case",
+  "owner": "A",
+  "deps": [
+   "4.2",
+   "2.5"
+  ],
+  "file": "4.3.confirm-create-case.md"
+ },
+ {
+  "id": "4.4",
+  "title": "Human handoff & cancel paths",
+  "owner": "A",
+  "deps": [
+   "3.2"
+  ],
+  "file": "4.4.human-handoff-cancel-paths.md"
+ },
+ {
+  "id": "5.1",
+  "title": "FastAPI session/chat/case endpoints",
+  "owner": "B",
+  "deps": [
+   "3.1"
+  ],
+  "file": "5.1.fastapi-session-chat-case-endpoints.md"
+ },
+ {
+  "id": "5.2",
+  "title": "Web chat UI",
+  "owner": "B",
+  "deps": [
+   "5.1"
+  ],
+  "file": "5.2.web-chat-ui.md"
+ },
+ {
+  "id": "6.1",
+  "title": "Golden dataset & eval harness",
+  "owner": "A",
+  "deps": [
+   "3.1",
+   "1.4"
+  ],
+  "file": "6.1.golden-dataset-eval-harness.md"
+ },
+ {
+  "id": "6.2",
+  "title": "CI eval gate & nightly Bedrock evals",
+  "owner": "B",
+  "deps": [
+   "6.1",
+   "1.2"
+  ],
+  "file": "6.2.ci-eval-gate-nightly-bedrock-evals.md"
+ },
+ {
+  "id": "6.3",
+  "title": "Red-team & safety scenarios",
+  "owner": "A",
+  "deps": [
+   "6.1"
+  ],
+  "file": "6.3.red-team-safety-scenarios.md"
+ },
+ {
+  "id": "7.1",
+  "title": "AWS infrastructure (Terraform)",
+  "owner": "B",
+  "deps": [
+   "1.1"
+  ],
+  "file": "7.1.aws-infrastructure-terraform.md"
+ },
+ {
+  "id": "7.2",
+  "title": "CD pipeline via GitHub OIDC",
+  "owner": "B",
+  "deps": [
+   "7.1",
+   "1.2"
+  ],
+  "file": "7.2.cd-pipeline-via-github-oidc.md"
+ },
+ {
+  "id": "7.3",
+  "title": "Demo readiness: smoke test & runbook",
+  "owner": "A+B",
+  "deps": [
+   "3.5",
+   "4.3",
+   "5.2",
+   "6.2",
+   "7.2"
+  ],
+  "file": "7.3.demo-readiness-smoke-test-runbook.md"
+ },
+ {
+  "id": "8.1",
+  "title": "Voice: WebSocket + Transcribe streaming",
+  "owner": "B",
+  "deps": [
+   "5.1"
+  ],
+  "file": "8.1.voice-websocket-transcribe-streaming.md"
+ },
+ {
+  "id": "8.2",
+  "title": "Voice: Polly TTS & turn-taking",
+  "owner": "A",
+  "deps": [
+   "8.1"
+  ],
+  "file": "8.2.voice-polly-tts-turn-taking.md"
+ }
+]
