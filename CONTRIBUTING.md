@@ -8,7 +8,7 @@
 | Reviews | Track B PRs | Track A PRs |
 | Shared | `docs/contracts/`, `shared/`, `CLAUDE.md` (both must approve) | same |
 
-`CODEOWNERS` enforces this split.
+Add a `.github/CODEOWNERS` file to enforce this split automatically.
 
 ## Story lifecycle (BMAD → GitHub)
 
@@ -65,7 +65,25 @@ gh auth login
 DEV_A=<gh-user> DEV_B=<gh-user> ./scripts/create_github_issues.sh
 ```
 
-Configure branch protection in GitHub: Settings → Branches → `main`, with required checks `lint`, `typecheck`, `test`, `integration`, `eval-mock` and `build`.
+Configure branch protection in GitHub: Settings → Branches → `main`.
+
+### Required branch protection rules
+
+- **CI must be all-green** before a PR can merge. Required status checks:
+  - `Lint` (`lint` job — ruff + mypy)
+  - `Unit tests` (`test-unit` job)
+  - `Integration tests` (`test-integration` job)
+  - `Docker build` (`docker-build` job)
+  - `Eval (mock)` (`eval` job)
+- **1 approving review** required (from the other track's developer — see the Roles table above).
+- **Squash merge only** — no merge commits, no rebase merges.
+- **Branch must be up to date** with `main` before merge.
+
+### CI invariants — never break these
+
+- `LLM_MODE=mock` is always set in CI. A test that calls `litellm.completion` without a mock override will fail with an `AssertionError` from `tests/conftest.py`.
+- Never commit `.env` files or credentials to the repository. The CI environment never has real AWS credentials.
+- `make eval` (and the `eval` CI job) must always exit 0. The eval runner silently succeeds when no scenarios are registered.
 
 ## Definition of Done
 
