@@ -1,6 +1,8 @@
 # Intents & Conversation Design
 
 > Used by story 3.2 (intent classifier & router). Classifier runs on every user turn with the **fast** model (`purpose="intent"`) and returns `IntentResult`.
+>
+> **Implementation status (2026-09-27):** only the `cancel` and `request_human` regex fast-paths described below are built (`agent/nodes/router.py`, story 3.1). The `IntentResult` classifier, the rest of the intent catalog, the allowed-intents-per-phase table, and `abuse` handling are still design/target — not implemented. See `_bmad-output/implementation-artifacts/deferred-work.md`.
 
 ```python
 class IntentResult(BaseModel):

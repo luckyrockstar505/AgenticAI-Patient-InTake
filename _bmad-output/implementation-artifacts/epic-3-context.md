@@ -9,7 +9,7 @@ Build the LangGraph flow that captures a member's identity, verifies it determin
 ## Stories
 
 - Story 3.1: LangGraph skeleton, state & checkpointer
-- Story 3.2: Phase-based stub router (full intent classification deferred to a follow-up story)
+- Story 3.2: Phase-based stub router — ✅ Done, delivered inside 3.1 (`agent/nodes/router.py`); full intent classification deferred, see `deferred-work.md`
 - Story 3.3: Intake node (member ID + name)
 - Story 3.4: Verify node — challenge loop & PENDING_CALLBACK
 - Story 3.5: Policy display node (verified gate)
