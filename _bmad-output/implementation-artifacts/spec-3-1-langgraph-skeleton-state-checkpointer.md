@@ -2,9 +2,10 @@
 title: 'LangGraph skeleton, state & checkpointer (Story 3.1)'
 type: 'feature'
 created: '2026-09-27'
-status: 'draft'
+status: 'in-progress'
 route: 'dispatch'
 review_loop_iteration: 0
+baseline_commit: '6d53ddf545ae40dc52181384b06de4ed01f7a9ef'
 context: ['{project-root}/CLAUDE.md', '{project-root}/docs/architecture.md', '{project-root}/docs/contracts/mcp-tools.md']
 ---
 
@@ -20,7 +21,9 @@ context: ['{project-root}/CLAUDE.md', '{project-root}/docs/architecture.md', '{p
 
 **Always:** nodes and `mcp_client` are async end-to-end (`agent/llm.py:complete()` stays sync — call it normally from inside async nodes); stub nodes return canned messages only, no real verification/extraction/LLM calls; `fake_mcp.py` implements the same async method surface the real MCP tools will, reading from `data/seed/members.json`/`coverage.json`, so later stories swap in the real server as a drop-in; checkpointer is `AsyncPostgresSaver`, `thread_id=session_id`, tables created via `.setup()` (not Alembic).
 
-**Never:** no real verification/extraction logic, no `mcp_tools/` server code, no `request_callback` tool (not yet in the contract — later story); do not edit `docs/architecture.md` or `docs/contracts/mcp-tools.md` directly — record needed doc updates in this story's Completion Notes instead; no Makefile or CI changes.
+**Never:** no real verification/extraction logic, no `mcp_tools/` server code, no `request_callback` tool (not yet in the contract — later story); no Makefile or CI changes.
+
+**Decision:** the 3rd-failed-verification Phase value is `LOCKED` — matches `docs/architecture.md` §3.1 and `docs/contracts/mcp-tools.md` exactly as they stand today. No doc updates needed for this story.
 
 ## I/O & Edge-Case Matrix
 
@@ -34,13 +37,9 @@ context: ['{project-root}/CLAUDE.md', '{project-root}/docs/architecture.md', '{p
 
 </frozen-after-approval>
 
-## Open Questions
-
-- **Phase value for the 3rd-failed-verification outcome** — options: `LOCKED` (matches `docs/architecture.md` §3.1 and `docs/contracts/mcp-tools.md` verbatim as they stand today, but contradicts the party-mode-reviewed decision A-1 recorded in `_bmad-output/planning-artifacts/epics.md`) / `PENDING_CALLBACK` (matches the newer, reviewed team decision and `epic-3-context.md`, but means architecture.md + the mcp-tools contract are now stale and need a follow-up doc PR that this story would flag, not make). This sets the vocabulary every later story (3.4, 2.4, 2.5) builds against.
-
 ## Code Map
 
-- `agent/state.py` -- all 16 `AgentState` fields already correct; only change is the Phase enum value above.
+- `agent/state.py` -- all 16 `AgentState` fields and the `Phase` enum (including `LOCKED`) already correct as-is — no change needed.
 - `agent/graph.py` -- stub `build_graph() -> Any: raise NotImplementedError`; rewrite to `build_graph(mcp, llm, checkpointer)` wiring router + 8 nodes per architecture §3.2.
 - `agent/mcp_client.py` -- stub `MCPClient(base_url)` has only generic `call_tool`/`ping`; add 7 typed async methods (`fetch_coverage`, `start_verification`, `check_answer`, `get_policy_view`, `create_case`, `get_case`, `end_session`) per the contract doc.
 - `agent/nodes/` -- currently only `__init__.py`; add one stub file per architecture §2's listed nodes: `router.py`, `intake.py`, `verify.py`, `policy.py`, `claim.py`, `clarify.py`, `confirm.py`, `handoff.py`.
@@ -56,7 +55,6 @@ context: ['{project-root}/CLAUDE.md', '{project-root}/docs/architecture.md', '{p
 ## Tasks & Acceptance
 
 **Execution:**
-- [ ] `agent/state.py` -- apply the resolved Phase value -- unblocks everything naming the same state
 - [ ] `agent/mcp_client.py` -- add 7 typed async tool methods -- shared typed surface for nodes + fake
 - [ ] `tests/fakes/fake_mcp.py` -- implement the 7 tools in-memory from seed JSON -- AC4, no real server needed for tests
 - [ ] `agent/nodes/{router,intake,verify,policy,claim,clarify,confirm,handoff}.py` -- stub nodes, canned messages, `mcp`/`llm` injected -- AC2
@@ -66,7 +64,7 @@ context: ['{project-root}/CLAUDE.md', '{project-root}/docs/architecture.md', '{p
 - [ ] `docs/graph.mmd` -- export via `draw_mermaid()`, commit -- AC6
 - [ ] `tests/unit/test_graph_routing.py` -- table-driven routing tests -- Dev Notes testing requirement
 - [ ] `tests/integration/test_checkpoint_resume.py` -- resume test -- Dev Notes testing requirement
-- [ ] `docs/stories/3.1.langgraph-skeleton-state-checkpointer.md` -- tick tasks, Dev Agent Record, File List, Change Log, and a Completion Notes → Proposed doc changes entry for the Phase-naming decision above
+- [ ] `docs/stories/3.1.langgraph-skeleton-state-checkpointer.md` -- tick tasks, Dev Agent Record, File List, Change Log
 
 **Acceptance Criteria:**
 - Given a fresh session with no checkpoint, when invoked with `phase=INTAKE`, then it routes to `intake` and returns a canned message without calling any MCP tool.

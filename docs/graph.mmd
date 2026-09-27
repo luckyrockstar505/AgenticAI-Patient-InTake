@@ -1,0 +1,36 @@
+---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+	__start__([<p>__start__</p>]):::first
+	router(router)
+	intake(intake)
+	verify(verify)
+	policy(policy)
+	claim_extract(claim_extract)
+	clarify(clarify)
+	confirm(confirm)
+	handoff(handoff)
+	__end__([<p>__end__</p>]):::last
+	__start__ --> router;
+	claim_extract --> __end__;
+	clarify --> __end__;
+	confirm --> __end__;
+	handoff --> __end__;
+	intake --> __end__;
+	policy --> __end__;
+	verify --> __end__;
+	router -.-> intake;
+	router -.-> verify;
+	router -.-> policy;
+	router -.-> claim_extract;
+	router -.-> clarify;
+	router -.-> confirm;
+	router -.-> handoff;
+	router -. &nbsp;cancelled&nbsp; .-> __end__;
+	router -.-> __end__;
+	classDef default fill:#f2f0ff,line-height:1.2
+	classDef first fill-opacity:0
+	classDef last fill:#bfb6fc
