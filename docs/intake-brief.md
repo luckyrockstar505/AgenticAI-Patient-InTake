@@ -89,21 +89,89 @@ A LangGraph-orchestrated agent with a strict, stateful flow:
 - A well-described claim needs at most 2 follow-up questions.
 - Members never have to repeat information they've already given.
 
-**KPIs (enforced by evals).**
+**KPIs (enforced by evals, measured against `eval/labelled_claims.csv`).**
 
-| KPI | Target |
-|---|---|
-| Cases created for unverified sessions | **0** (hard gate) |
-| Policy data shown before verification | **0** (hard gate) |
-| Patient details echoed in messages or traces | **0** (hard gate) |
-| Claim field extraction accuracy | ≥ 90% |
-| Intent classification accuracy | ≥ 90% |
-| p95 agent turn latency (text) | ≤ 4 s |
-| Scenario outcome match | ≥ 95% (mock) / ≥ 90% (live) |
+| KPI | Target | Measured by |
+|---|---|---|
+| Cases created for unverified sessions | **0** (hard gate) | Code check |
+| Policy data shown before verification | **0** (hard gate) | Code check |
+| Patient details echoed in messages or traces | **0** (hard gate) | Code check |
+| Claim field extraction accuracy | ≥ 90% on 20 labelled scenarios | Code check vs. `expected_answer` |
+| Intent classification accuracy | ≥ 90% | Code check vs. `expected_answer` |
+| Tool call sequence correctness | ≥ 90% | `tool_order` check vs. `expected_tools` |
+| Response quality (clear, grounded, no hallucination) | ≥ 90% | LLM judge on `why` column |
+| p95 agent turn latency (text) | ≤ 4 s | MLflow span timing |
+| Holdout scenario outcome match | ≥ 90% (10 withheld examples) | Code check + judge |
+
+---
+
+## 5a. Data & Evaluation Assets
+
+### Golden Dataset — `eval/labelled_claims.csv`
+
+One row per scenario. **Labelled by the claims operations team — never by the agent.**
+
+| Column | Holds | Checked by |
+|---|---|---|
+| `input` | The member scenario as the agent sees it (member ID, name, claim description) | — |
+| `expected_answer` | Correct structured claim fields or verification outcome | Code check |
+| `expected_tools` | Tool calls in the correct order | `tool_order` check |
+| `why` | Reason the expected answer is correct | LLM judge or domain reviewer |
+
+**Build set (20+ scenarios)** covering:
+- Happy path: verified member, complete claim in one pass
+- Verification failure: wrong answers, 3-attempt lockout
+- Partial claim: missing fields, clarify loop resolves them
+- Human handoff: member requests agent mid-flow
+- Cancel: member abandons before confirmation
+- Dependent claim: subscriber files on behalf of a dependent
+
+**Holdout set (10 scenarios):** labels withheld until the final eval run. Used only once — no second runs.
+
+**Who writes the labels:** claims operations staff or the product owner. Never inferred from agent output. If 10 labelled examples cannot be written before build starts, treat that as a project risk.
+
+### Seed Data — `data/seed/*.csv`
+
+Synthetic member records, coverage snapshots, and policy data loaded into `app.db` at startup. Separate from the golden eval set. Covers the same scenario space so the agent has valid data to resolve during eval runs.
+
+### Results Export — `results.json`
+
+Every eval run saves a structured export:
+
+```json
+{
+  "run_id": "...",
+  "timestamp": "...",
+  "model": "...",
+  "coding_tokens": 0,
+  "agent_tokens": 0,
+  "scenarios": [
+    {
+      "id": "...",
+      "input": "...",
+      "decision": "...",
+      "expected": "...",
+      "code_check": true,
+      "judge_score": 0.95,
+      "tool_order_match": true,
+      "why": "..."
+    }
+  ],
+  "summary": {
+    "total": 20,
+    "passed": 18,
+    "score": 0.90
+  }
+}
+```
+
+**CI rule:** deterministic code checks run on every push. Live LLM judge evals stay out of CI — they need secrets, hit rate limits, and vary run to run.
 
 ## 6. MVP Scope
 
 **Must have.**
+- **Golden dataset first:** `eval/labelled_claims.csv` with 20+ human-labelled scenarios (build set) and 10 withheld holdout examples — built before agent code, never by the agent.
+- **Seed data:** synthetic member and coverage records in `data/seed/*.csv`, loaded into `app.db` at startup.
 - Member ID and name intake, with format validation.
 - A coverage fetch tool backed by a mock payer, storing an unverified snapshot.
 - Deterministic identity verification: challenge questions, 3-attempt lockout, and no hint about whether a member ID exists.
@@ -112,7 +180,8 @@ A LangGraph-orchestrated agent with a strict, stateful flow:
 - Confirmation, then case creation with a case number.
 - Cancel and human handoff available at any point.
 - A web chat UI.
-- MLflow tracing with patient details masked, and an eval suite gated in CI.
+- MLflow tracing with patient details masked, and an eval suite gated in CI (code checks only in CI; LLM judge run manually).
+- Eval results exported to `results.json` (decision, scores, token counts) after each eval run.
 - Docker, GitHub Actions, and deployment to AWS.
 
 **Out of scope for MVP.**
@@ -142,6 +211,20 @@ A LangGraph-orchestrated agent with a strict, stateful flow:
   - The same pattern (verify, then fetch, then intake, then case) for prior authorization, dental and vision claims, and KYC/KYB onboarding.
 
 ## 8. Technical Considerations
+
+**Three-layer summary.**
+
+| Layer | What it is | Stack |
+|---|---|---|
+| Front end | Web chat UI the member uses | React or Next.js (Streamlit acceptable for demo) |
+| Back end | Agent logic, MCP tools, API, data | FastAPI + LangGraph + FastMCP + Postgres |
+| DevOps | Tests and deploys on every push | GitHub Actions (CI) + AWS ECS Fargate (CD) |
+
+**Data: what the agent reads and writes.**
+- Reads: member records, coverage snapshots, policy data, challenge-question answers (all from Postgres via MCP tools).
+- Writes: one case record per completed intake, one audit log entry per tool call, one verification record per session.
+
+**What waits for a person's yes:** verification failure after 3 attempts routes to a human agent queue. Human handoff is also available on member request at any turn. No automated case creation without member confirmation.
 
 - **Platform:** a web chat. Voice is a stretch goal.
 - **Language and runtime:** Python 3.12.
