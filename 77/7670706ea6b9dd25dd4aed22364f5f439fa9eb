@@ -1,0 +1,139 @@
+docs/contracts/mcp-tools.md
+  s_0b67de214459b9::t_93a22540040d99 1-122
+.claude/skills/bmad-deep-recon/customize.toml
+  s_0b67de214459b9::t_c3f8a960c6c3df 30
+.claude/skills/bmad-product-brief/SKILL.md
+  s_0b67de214459b9::t_e2c24313f82af8 45
+.claude/skills/bmad-product-brief/customize.toml
+  s_0b67de214459b9::t_aad6df668f99af 98
+CLAUDE.md
+  s_0b67de214459b9::t_a88c93d29f7422 1-73
+CONTRIBUTING.md
+  s_0b67de214459b9::t_338e553a07b30f 1-72
+README.md
+  s_0b67de214459b9::t_740adcc7cba327 1-43
+data/seed/README.md
+  s_0b67de214459b9::t_08e208288e32a5 1-15
+data/seed/coverage.json
+  s_0b67de214459b9::t_812a7db19bea4a 1-188
+data/seed/members.json
+  s_0b67de214459b9::t_5c3a7ce978a68f 1-74
+docs/architecture.md
+  s_0b67de214459b9::t_2281659d4c4a8e 1-210
+docs/bmad-setup.md
+  s_0b67de214459b9::t_9e4b0d2fbe500d 1-66
+docs/brief.md
+  s_0b67de214459b9::t_8945d397061aa9 1-220
+docs/epics/epic-1-foundation-devex.md
+  s_0b67de214459b9::t_f18ffc117162bf 1-19
+docs/epics/epic-2-data-mcp-tools.md
+  s_0b67de214459b9::t_03634edbff6891 1-20
+docs/epics/epic-3-identity-policy-flow.md
+  s_0b67de214459b9::t_2920a2f79e5cb7 1-20
+docs/epics/epic-4-claim-intake-case.md
+  s_0b67de214459b9::t_ffeba1310264d3 1-19
+docs/epics/epic-5-api-chat-ui.md
+  s_0b67de214459b9::t_3223d29678ab64 1-17
+docs/epics/epic-6-evals-quality.md
+  s_0b67de214459b9::t_2719ad99b174c6 1-18
+docs/epics/epic-7-deploy-demo.md
+  s_0b67de214459b9::t_cec4a199444f73 1-18
+docs/epics/epic-8-voice-stretch.md
+  s_0b67de214459b9::t_7b20a5219e6444 1-17
+docs/intake-brief.md
+  s_0b67de214459b9::t_e64dcd2a2b7ffe 1-220
+docs/intents.md
+  s_0b67de214459b9::t_768b2bee17749e 1-66
+docs/prd.md
+  s_0b67de214459b9::t_783a6e53c64bee 1-116
+docs/qa/eval-plan.md
+  s_0b67de214459b9::t_bd0b710603d993 1-90
+docs/qa/test-strategy.md
+  s_0b67de214459b9::t_bb549ace78b159 1-44
+docs/stories/1.1.repo-scaffold-local-docker-stack.md
+  s_0b67de214459b9::t_e93fb74f88d667 1-90
+docs/stories/1.2.ci-pipeline-lint-type-test-build.md
+  s_0b67de214459b9::t_447c5a9e048dce 1-84
+docs/stories/1.3.llm-gateway-via-litellm-bedrock-mock.md
+  s_0b67de214459b9::t_462d52b06ea241 1-88
+docs/stories/1.4.mlflow-tracing-baseline-phi-redaction.md
+  s_0b67de214459b9::t_6cc7642fdca6b3 1-87
+docs/stories/2.1.db-schema-migrations-synthetic-seed.md
+  s_0b67de214459b9::t_ffdfb7efe548a5 1-83
+docs/stories/2.2.mock-payer-eligibility-service.md
+  s_0b67de214459b9::t_deb8604812d979 1-81
+docs/stories/2.3.fastmcp-coverage-tools.md
+  s_0b67de214459b9::t_5e47c5fc18e18f 1-85
+docs/stories/2.4.fastmcp-verification-tools.md
+  s_0b67de214459b9::t_c2dae9dbb3d150 1-88
+docs/stories/2.5.fastmcp-case-tools.md
+  s_0b67de214459b9::t_387cf2c94d05e0 1-83
+docs/stories/3.1.langgraph-skeleton-state-checkpointer.md
+  s_0b67de214459b9::t_4d5e6d94ad48fe 1-89
+docs/stories/3.2.intent-classifier-global-router.md
+  s_0b67de214459b9::t_82875c06f87c1d 1-86
+docs/stories/3.3.intake-node-member-id-name.md
+  s_0b67de214459b9::t_ab1a99b1058d10 1-85
+docs/stories/3.4.verify-node-challenge-loop-lockout.md
+  s_0b67de214459b9::t_f9502bf6be550c 1-82
+docs/stories/3.5.policy-display-node-verified-gate.md
+  s_0b67de214459b9::t_4e1471acca809b 1-83
+docs/stories/4.1.claim-schema-nl-extraction.md
+  s_0b67de214459b9::t_6359598939e849 1-85
+docs/stories/4.2.gap-detection-clarify-loop.md
+  s_0b67de214459b9::t_f959499af694ea 1-84
+docs/stories/4.3.confirm-create-case.md
+  s_0b67de214459b9::t_7a91bb50fb63c5 1-84
+docs/stories/4.4.human-handoff-cancel-paths.md
+  s_0b67de214459b9::t_43b721ee419e92 1-82
+docs/stories/5.1.fastapi-session-chat-case-endpoints.md
+  s_0b67de214459b9::t_bd4e6d5b6805e8 1-84
+docs/stories/5.2.web-chat-ui.md
+  s_0b67de214459b9::t_6713ebe20ac32b 1-82
+docs/stories/6.1.golden-dataset-eval-harness.md
+  s_0b67de214459b9::t_2a61536f16f72c 1-83
+docs/stories/6.2.ci-eval-gate-nightly-bedrock-evals.md
+  s_0b67de214459b9::t_6c19da1375f446 1-80
+docs/stories/6.3.red-team-safety-scenarios.md
+  s_0b67de214459b9::t_52127683626c57 1-80
+docs/stories/7.1.aws-infrastructure-terraform.md
+  s_0b67de214459b9::t_9a990493945456 1-86
+docs/stories/7.2.cd-pipeline-via-github-oidc.md
+  s_0b67de214459b9::t_9f95b99ab53f78 1-83
+docs/stories/7.3.demo-readiness-smoke-test-runbook.md
+  s_0b67de214459b9::t_14322b90078d6a 1-79
+docs/stories/8.1.voice-websocket-transcribe-streaming.md
+  s_0b67de214459b9::t_5039fd1d775bc4 1-82
+docs/stories/8.2.voice-polly-tts-turn-taking.md
+  s_0b67de214459b9::t_1ee60af78485a6 1-81
+docs/stories/index.json
+  s_0b67de214459b9::t_716b94dbca245a 1-263
+docs/tracing.md
+  s_0b67de214459b9::t_a3b820cba25fb9 1-75
+evals/datasets/claims_extraction.jsonl
+  s_0b67de214459b9::t_6fda7fbc8b03e9 1-8
+evals/datasets/intents.jsonl
+  s_0b67de214459b9::t_e2f5d01f1751b0 1-20
+evals/datasets/scenarios.jsonl
+  s_0b67de214459b9::t_aa134be5ddcef2 1-18
+evals/thresholds.yaml
+  s_0b67de214459b9::t_0b2e787b3dc004 1-20
+scripts/create_github_issues.sh
+  s_0b67de214459b9::t_a8cdbbb7815f8b 1-58
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "777670706ea6b9dd25dd4aed22364f5f439fa9eb",
+  "prompts": {},
+  "sessions": {
+    "s_0b67de214459b9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4f773422-a80e-4822-8f8e-edc7ddc2f40a",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Srimaan Yarram <srimaan.yarram@gmail.com>"
+    }
+  }
+}
