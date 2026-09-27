@@ -1,4 +1,4 @@
-"""Global router node (story 3.1 skeleton; story 3.2 adds real intent classification).
+"""Global router node — phase-based stub router (stories 3.1 + 3.2).
 
 Per architecture §3.2:
 
@@ -6,10 +6,13 @@ Per architecture §3.2:
                     ├─(intent=handoff)──────► handoff → END
                     └─(by phase) ─► <phase node>
 
-This story only implements the regex fast-paths from `docs/intents.md`
-("Regex fast-paths run before the LLM") plus phase-based dispatch — no LLM
-intent classification yet (that's story 3.2's `IntentResult`). Every user
-message re-enters the graph at this node.
+This implements the regex fast-paths from `docs/intents.md` ("Regex
+fast-paths run before the LLM") plus phase-based dispatch — no LLM intent
+classification. Fast-model classification into `IntentResult`, a per-phase
+allowed-intents policy table, and abuse/prompt-injection handling are real,
+un-built scope — see `_bmad-output/implementation-artifacts/deferred-work.md`
+(not yet assigned a story number). Every user message re-enters the graph at
+this node.
 """
 from __future__ import annotations
 
@@ -52,7 +55,7 @@ def _last_human_text(messages: list[AnyMessage]) -> str:
 
 
 async def router(state: AgentState, *, mcp: MCPClientProtocol, llm: LLMFn) -> dict[str, Any]:
-    """Classify the cancel/handoff fast-paths; real intent classification is story 3.2.
+    """Classify the cancel/handoff fast-paths; real intent classification is deferred (unassigned story).
 
     Never calls `mcp` or `llm` — routing here is pure regex + `state.phase`.
     """

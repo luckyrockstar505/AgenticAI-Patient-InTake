@@ -214,12 +214,12 @@ UX-DR5: Error/lockout messages use plain language; no technical jargon exposed t
 | Story | Title | Owner | Reviewer | Depends on | Size | Priority |
 |---|---|---|---|---|---|---|
 | [3.1](../../docs/stories/3.1.langgraph-skeleton-state-checkpointer.md) | LangGraph skeleton, state & checkpointer | **Bharath** | Srimaan | 1.3, 2.1 | M | ⚡ |
-| [3.2](../../docs/stories/3.2.intent-classifier-global-router.md) | Phase-based stub router (intent classifier enhancement later) | **Bharath** | Srimaan | 3.1 | S | ⚡ |
+| [3.2](../../docs/stories/3.2.intent-classifier-global-router.md) | Phase-based stub router ✅ Done — delivered by 3.1 | **Bharath** | Srimaan | 3.1 | S | ⚡ |
 | [3.3](../../docs/stories/3.3.intake-node-member-id-name.md) | Intake node (member ID + name) | **Bharath** | Srimaan | 3.1 | S | ⚡ |
 | [3.4](../../docs/stories/3.4.verify-node-challenge-loop-lockout.md) | Verify node — challenge loop & callback | **Bharath** | Srimaan | 3.3, 2.4 | M | ⚡ |
 | [3.5](../../docs/stories/3.5.policy-display-node-verified-gate.md) | Policy display node (verified gate) | **Bharath** | Srimaan | 3.4, 2.3 | S | ⚡ |
 
-> **3.2 updated (party mode fix):** stub router (routes by `state.phase`) ships with E3 to unblock 3.3, 3.4, 3.5. Full intent classification (cancel/handoff/edit detection) is a follow-up story within E3. Do NOT defer 3.2 — it is required for the graph to dispatch.
+> **3.2 closed out (2026-09-27):** the stub router (routes by `state.phase`, regex cancel/handoff fast-paths) shipped inside story 3.1 (`agent/nodes/router.py`), which is why the original "Do NOT defer 3.2 — it is required for the graph to dispatch" constraint no longer blocks: that requirement is already satisfied. Full intent classification (fast-model `IntentResult`, phase policy table, abuse handling, prompt registry) was never built — logged in `_bmad-output/implementation-artifacts/deferred-work.md`, not yet assigned a story number.
 > **3.4 updated (A-1):** verification failure after 3 attempts → `PENDING_CALLBACK` state, calls `request_callback` tool, NOT hard lock. State enum: rename `LOCKED` → `PENDING_CALLBACK`.
 
 ### Epic 3 done when
