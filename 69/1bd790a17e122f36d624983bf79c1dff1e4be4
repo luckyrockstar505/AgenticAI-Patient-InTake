@@ -1,0 +1,88 @@
+agent/state.py
+  s_35caad9d45fb32::t_b0329fa1c66a13 1-46
+evals/__init__.py
+  s_35caad9d45fb32::t_82e6f980e7cfa2 1
+shared/__init__.py
+  s_35caad9d45fb32::t_10610a8deb5097 1
+mcp_tools/db/__init__.py
+  s_35caad9d45fb32::t_9467a9b4d1311a 1
+Makefile
+  s_35caad9d45fb32::t_b2cc7c98e97214 1-84
+agent/__init__.py
+  s_35caad9d45fb32::t_7568b8748e2e0a 1
+agent/llm.py
+  s_35caad9d45fb32::t_be0a38bf7a15a1 1-29
+mcp_tools/__init__.py
+  s_35caad9d45fb32::t_2caf81b03ba249 1
+tests/unit/test_health.py
+  s_35caad9d45fb32::t_d6c562f48fdea8 1-45
+api/routes/__init__.py
+  s_35caad9d45fb32::t_4630152cd7cf52 1
+observability/redaction.py
+  s_35caad9d45fb32::t_ee3e3d969f1fba 1-27
+README.md
+  s_35caad9d45fb32::t_61176942e9c7cc 3,7,9,11-40,44-48,50-51,53-54,56,58,61-67,69-75
+_bmad-output/implementation-artifacts/spec-1-1-repo-scaffold-local-docker-stack.md
+  s_35caad9d45fb32::t_228736bdb6c8db 8
+  s_35caad9d45fb32::t_cf984501a8ac29 74-82
+  s_35caad9d45fb32::t_2743656d850300 1-4,6-7,9-73,83-106
+  s_35caad9d45fb32::t_3a346249813802 5
+_bmad-output/implementation-artifacts/epic-1-context.md
+  s_35caad9d45fb32::t_f3106212743c52 1-60
+pyproject.toml
+  s_35caad9d45fb32::t_317a53eacfcabd 23
+  s_35caad9d45fb32::t_d4c0cec6742129 83-93
+  s_35caad9d45fb32::t_6d14773009ad45 61-70
+  s_35caad9d45fb32::t_33adf3939a653d 1-22,24-60,71-82,94-97
+Dockerfile.mcp
+  s_35caad9d45fb32::t_8040e4944cf55c 1-44
+agent/nodes/__init__.py
+  s_35caad9d45fb32::t_7ebe821c46af90 1
+.gitignore
+  s_35caad9d45fb32::t_4156e50bd5da80 97-104
+agent/mcp_client.py
+  s_35caad9d45fb32::t_b25c666646d521 1-23
+mcp_tools/tools/__init__.py
+  s_35caad9d45fb32::t_4974ee0175e6fb 1
+shared/schemas.py
+  s_35caad9d45fb32::t_01cc2369b62fb7 1-56
+api/__init__.py
+  s_35caad9d45fb32::t_97259c54ea4a6f 1
+.env.example
+  s_35caad9d45fb32::t_e1d209fb921f2c 1-33
+docker-compose.yml
+  s_35caad9d45fb32::t_25c7fcdb0ae7f9 1-136
+observability/tracing.py
+  s_35caad9d45fb32::t_545d24827502f9 1-7,9,11-19
+  s_35caad9d45fb32::t_a13c334e57b26f 8,10
+Dockerfile.api
+  s_35caad9d45fb32::t_890f4ae305dcb8 1-48
+mcp_tools/server.py
+  s_35caad9d45fb32::t_603cfa7b9b4ba6 1-52
+evals/runner.py
+  s_35caad9d45fb32::t_a3a8540d1395ac 1-32
+api/main.py
+  s_35caad9d45fb32::t_3ddd8b795df311 1-71
+agent/graph.py
+  s_35caad9d45fb32::t_49b5b51554bfec 1-15
+observability/__init__.py
+  s_35caad9d45fb32::t_5ad7e165942fa4 1
+uv.lock
+  s_35caad9d45fb32::t_95765e8508a677 1-4001
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "691bd790a17e122f36d624983bf79c1dff1e4be4",
+  "prompts": {},
+  "sessions": {
+    "s_35caad9d45fb32": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d83052ea-1ded-4160-b1e7-6a4993ea8d47",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Srimaan Yarram <srimaan.yarram@gmail.com>"
+    }
+  }
+}
