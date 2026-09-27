@@ -1,0 +1,485 @@
+.claude/skills/bmad-review/scripts/tests/test_word_metrics.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-62
+.claude/skills/bmad-deep-recon/scripts/recon_kit.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-322
+.claude/skills/bmad-ux/references/headless.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-37
+.claude/skills/bmad-walkthrough/step-05-wrapup.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-30
+_bmad/_config/bmad-help.csv
+  s_7a6f8210f4041a::t_5342e822540e7f 1-28
+.claude/skills/bmad-deep-recon/assets/research.template.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-18
+.claude/skills/bmad-deep-recon/references/verification.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-29
+.claude/skills/bmad-architecture/scripts/tests/test_lint_spine.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-270
+.claude/skills/bmad-build-auto/step-02-plan.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-27
+.claude/skills/bmad-code-review/steps/step-04-present.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-134
+.claude/skills/bmad-retrospective/references/retro-document.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-84
+.claude/skills/bmad-sprint-planning/references/readiness-gate.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-20
+.claude/skills/bmad-sprint-planning/sprint-status-template.yaml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-71
+.claude/skills/bmad-ux/assets/design-example-shadcn.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-109
+.claude/skills/bmad-deep-recon/types/user-voice.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-19
+_bmad/scripts/resolve_config.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-82
+.claude/skills/bmad-code-review/references/claims-check.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-14
+.claude/skills/bmad-ux/assets/key-screens.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-29
+.claude/skills/bmad-prd/assets/prd-validation-checklist.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-135
+.claude/skills/bmad-party-mode/references/mode-agent-team.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-13
+.claude/skills/bmad-review/references/lens-edge-case-hunter.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-72
+.claude/skills/bmad-project-context/references/best-practices.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-84
+.claude/skills/bmad-build-auto/references/claims-check.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-14
+.claude/skills/bmad-product-brief/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-91
+.claude/skills/bmad-sprint-planning/references/fix-sprint-status.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-30
+.claude/skills/bmad-sprint-planning/references/generate-tracking.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-25
+.claude/skills/bmad-walkthrough/step-03-detail-pass.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-106
+.claude/skills/bmad-brainstorming/references/mode-partner.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-16
+.claude/skills/bmad-prfaq/assets/prfaq-template.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-62
+.claude/skills/bmad-product-brief/assets/brief-template.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-41
+.claude/skills/bmad-agent-ux-designer/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-76
+.claude/skills/bmad-create-epics-and-stories/steps/step-03-create-stories.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-255
+.claude/skills/bmad-build/step-oneshot.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-107
+.claude/skills/bmad-agent-pm/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-73
+.claude/skills/bmad-create-epics-and-stories/templates/epics-template.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-61
+.claude/skills/bmad-product-brief/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-100
+.claude/skills/bmad-review/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-50
+.claude/skills/bmad-prfaq/references/verdict.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-83
+.claude/skills/bmad-brainstorming/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-80
+.claude/skills/bmad-help/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-77
+.claude/skills/bmad-build-auto/workflow.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-104
+.claude/skills/bmad-sprint-planning/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-39
+_bmad/scripts/render_skill.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-401
+.claude/skills/bmad-ux/references/design-md-spec.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-50
+.claude/skills/bmad-deep-recon/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-212
+.claude/skills/bmad-brainstorming/references/headless.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-54
+.claude/skills/bmad-build-auto/step-01-clarify-and-route.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-84
+.claude/skills/bmad-prd/assets/headless-schemas.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-76
+_bmad/core/v6-shims/README.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-25
+.claude/skills/bmad-architecture/references/reviewer-gate.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-13
+.claude/skills/bmad-ux/assets/design-example-mobile.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-93
+.claude/skills/bmad-review/references/lens-structure.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-9
+.claude/skills/bmad-agent-ux-designer/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-58
+.claude/skills/bmad-retrospective/scripts/git_evidence.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-304
+.claude/skills/bmad-project-context/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-121
+.claude/skills/bmad-build/step-03-implement.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-51
+.claude/skills/bmad-prd/assets/prd-template.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-165
+.claude/skills/bmad-walkthrough/generate-trail.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-38
+.claude/skills/bmad-build-auto/compile-epic-context.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-62
+.claude/skills/bmad-deep-recon/references/html-briefing.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-16
+_bmad/bmm/config.yaml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-16
+.claude/skills/bmad-brainstorming/references/finalize.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-26
+.claude/skills/bmad-build/workflow.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-84
+.claude/skills/bmad-customize/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-111
+.claude/skills/bmad-prfaq/agents/artifact-analyzer.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-60
+.claude/skills/bmad-retrospective/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-94
+.claude/skills/bmad-advanced-elicitation/assets/methods.csv
+  s_7a6f8210f4041a::t_5342e822540e7f 1-72
+_bmad/custom/config.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-7
+.claude/skills/bmad-sprint-planning/references/status-view.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-14
+_bmad/_config/files-manifest.csv
+  s_7a6f8210f4041a::t_5342e822540e7f 1-236
+.claude/skills/bmad-advanced-elicitation/scripts/pick_methods.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-233
+.claude/skills/bmad-party-mode/scripts/resolve_party.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-284
+.claude/skills/bmad-brainstorming/scripts/tests/test_brain.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-289
+.claude/skills/bmad-review/scripts/word_metrics.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-102
+.claude/skills/bmad-create-epics-and-stories/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-93
+.claude/skills/bmad-spec/assets/stories-schema.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-44
+.claude/skills/bmad-deep-recon/references/finalize.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-11
+.claude/skills/bmad-prfaq/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-135
+.claude/skills/bmad-create-epics-and-stories/steps/step-01-validate-prerequisites.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-263
+.claude/skills/bmad-ux/assets/excalidraw-wireframe.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-19
+.claude/skills/bmad-brainstorming/assets/brain-icons.json
+  s_7a6f8210f4041a::t_5342e822540e7f 1-166
+.claude/skills/bmad-build/references/claims-check.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-14
+.claude/skills/bmad-retrospective/scripts/sprint_status.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-746
+.claude/skills/bmad-advanced-elicitation/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-54
+_bmad/scripts/memlog.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-224
+.claude/skills/bmad-prfaq/agents/web-researcher.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-49
+.claude/skills/bmad-brainstorming/references/resume.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-5
+.claude/skills/bmad-correct-course/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-39
+.claude/skills/bmad-deep-recon/types/market.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-19
+.claude/skills/bmad-ux/references/creative-tools.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-19
+.claude/skills/bmad-project-context/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-24
+.claude/skills/bmad-brainstorming/references/in-chat-techniques.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-18
+.claude/skills/bmad-retrospective/references/evidence-gathering.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-30
+.claude/skills/bmad-forge-idea/scripts/tests/test_resolve_personas.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-160
+.claude/skills/bmad-advanced-elicitation/scripts/tests/test_pick_methods.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-228
+.claude/skills/bmad-deep-recon/references/lifecycle.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-11
+.claude/skills/bmad-forge-idea/scripts/resolve_personas.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-277
+.claude/skills/bmad-review/references/lens-verification-gap.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-92
+.claude/skills/bmad-agent-analyst/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-76
+.claude/skills/bmad-build/step-01-clarify-and-route.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-100
+.claude/skills/bmad-retrospective/scripts/tests/fixtures/sprint-status-template.yaml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-71
+.claude/skills/bmad-build-auto/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-119
+.claude/skills/bmad-retrospective/references/acceptance-verdict.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-55
+_bmad/config.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-61
+.claude/skills/bmad-deep-recon/references/process.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-10
+.claude/skills/bmad-spec/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-160
+.claude/skills/bmad-create-epics-and-stories/steps/step-02-design-epics.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-242
+.claude/skills/bmad-advanced-elicitation/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-64
+.claude/skills/bmad-brainstorming/references/mode-autonomous.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-10
+.claude/skills/bmad-party-mode/references/mode-subagent.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-31
+.claude/skills/bmad-code-review/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-90
+.claude/skills/bmad-deep-recon/types/academic-lit.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-19
+.claude/skills/bmad-prfaq/references/customer-faq.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-55
+_bmad/render/.gitignore
+  s_7a6f8210f4041a::t_5342e822540e7f 1-2
+.claude/skills/bmad-walkthrough/step-04-testing.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-74
+.claude/skills/bmad-build/review-prompts/edge-case-hunter.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-112
+.claude/skills/bmad-build-auto/references/deletion-check.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-14
+.claude/skills/bmad-architecture/assets/spine-template.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-79
+.claude/skills/bmad-architecture/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-101
+.claude/skills/bmad-qa-generate-e2e-tests/checklist.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-33
+_bmad/bmm/v6-shims/README.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-29
+.claude/skills/bmad-retrospective/references/aggregate-views.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-17
+.claude/skills/bmad-prd/assets/validation-report-template.html
+  s_7a6f8210f4041a::t_5342e822540e7f 1-325
+.claude/skills/bmad-build/compile-epic-context.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-62
+.claude/skills/bmad-review/references/editorial-common.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-56
+.claude/skills/bmad-party-mode/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-211
+.claude/skills/bmad-code-review/review-prompts/verification-gap.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-113
+.claude/skills/bmad-sprint-planning/scripts/tests/test_sprint_plan.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-524
+.claude/skills/bmad-ux/assets/design-directions.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-9
+.claude/skills/bmad-code-review/steps/step-01-gather-context.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-94
+_bmad/_config/skill-manifest.csv
+  s_7a6f8210f4041a::t_5342e822540e7f 1-30
+.claude/skills/bmad-build/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-152
+.claude/skills/bmad-build/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-13
+.claude/skills/bmad-forge-idea/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-41
+.claude/skills/bmad-build/step-02-plan.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-62
+.claude/skills/bmad-code-review/steps/step-02-review.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-32
+.claude/skills/bmad-prfaq/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-39
+.claude/skills/bmad-deep-recon/scripts/tests/test_recon_kit.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-144
+.claude/skills/bmad-ux/assets/experience-example-mobile.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-112
+_bmad/_config/manifest.yaml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-22
+.claude/skills/bmad-correct-course/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-308
+_bmad/core/module-help.csv
+  s_7a6f8210f4041a::t_5342e822540e7f 1-10
+.claude/skills/bmad-ux/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-100
+.claude/skills/bmad-build-auto/review-prompts/edge-case-hunter.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-112
+.claude/skills/bmad-forge-idea/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-107
+.claude/skills/bmad-ux/assets/validation-report-template.html
+  s_7a6f8210f4041a::t_5342e822540e7f 1-319
+.claude/skills/bmad-party-mode/scripts/tests/test_resolve_party.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-168
+.claude/skills/bmad-deep-recon/references/run.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-73
+_bmad/scripts/resolve_customization.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-164
+.claude/skills/bmad-ux/assets/experience-example-shadcn.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-133
+.claude/skills/bmad-brainstorming/assets/brain-methods.csv
+  s_7a6f8210f4041a::t_5342e822540e7f 1-109
+.claude/skills/bmad-build/step-05-present.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-43
+.claude/skills/bmad-agent-dev/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-76
+.claude/skills/bmad-build/sync-sprint-status.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-5
+.claude/skills/bmad-agent-architect/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-63
+.claude/skills/bmad-build/spec-template.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-111
+.claude/skills/bmad-brainstorming/assets/brain-selector.html
+  s_7a6f8210f4041a::t_5342e822540e7f 1-328
+.claude/skills/bmad-build-auto/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-13
+.claude/skills/bmad-retrospective/scripts/tests/test_git_evidence.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-750
+_bmad/custom/.gitignore
+  s_7a6f8210f4041a::t_5342e822540e7f 1
+.claude/skills/bmad-build-auto/step-04-review.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-116
+.claude/skills/bmad-walkthrough/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-39
+.claude/skills/bmad-build/references/deletion-check.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-14
+.claude/skills/bmad-agent-analyst/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-103
+.claude/skills/bmad-sprint-planning/references/validate.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-10
+.claude/skills/bmad-review/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-141
+.claude/skills/bmad-deep-recon/types/competitive.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-19
+.claude/skills/bmad-deep-recon/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-82
+.claude/skills/bmad-build-auto/step-03-implement.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-48
+.claude/skills/bmad-brainstorming/scripts/brain.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-789
+.claude/skills/bmad-review/references/lens-adversarial.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-19
+.claude/skills/bmad-spec/assets/spec-template.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-49
+.claude/skills/bmad-brainstorming/references/converge.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-24
+.claude/skills/bmad-walkthrough/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-68
+_bmad/scripts/config_utils.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-119
+.claude/skills/bmad-build-auto/spec-template.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-96
+.claude/skills/bmad-ux/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-90
+.claude/skills/bmad-build/review-prompts/verification-gap.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-113
+.claude/skills/bmad-ux/assets/headless-schemas.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-84
+.claude/skills/bmad-prfaq/bmad-manifest.json
+  s_7a6f8210f4041a::t_5342e822540e7f 1-16
+.claude/skills/bmad-prfaq/references/internal-faq.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-51
+.claude/skills/bmad-prd/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-94
+.claude/skills/bmad-architecture/scripts/lint_spine.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-257
+.claude/skills/bmad-retrospective/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-39
+.claude/skills/bmad-review/references/structure-models.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-44
+.claude/skills/bmad-walkthrough/step-02-walkthrough.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-89
+.claude/skills/bmad-brainstorming/references/mode-facilitator.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-11
+.claude/skills/bmad-customize/scripts/tests/test_list_customizable_skills.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-249
+.claude/skills/bmad-review/references/lens-prose.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-7
+.claude/skills/bmad-correct-course/checklist.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-288
+.claude/skills/bmad-spec/assets/headless-schemas.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-33
+.claude/skills/bmad-party-mode/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-60
+.claude/skills/bmad-sprint-planning/scripts/sprint_plan.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-697
+.claude/skills/bmad-prfaq/references/press-release.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-60
+.claude/skills/bmad-customize/scripts/list_customizable_skills.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-231
+.claude/skills/bmad-project-context/references/template.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-55
+.claude/skills/bmad-qa-generate-e2e-tests/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-176
+.claude/skills/bmad-brainstorming/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-83
+.claude/skills/bmad-code-review/review-prompts/edge-case-hunter.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-112
+.claude/skills/bmad-ux/assets/design-example-editorial.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-158
+.claude/skills/bmad-retrospective/references/team-discussion.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-22
+_bmad/config.user.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-17
+.claude/skills/bmad-qa-generate-e2e-tests/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-39
+.claude/skills/bmad-build/step-04-review.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-85
+_bmad/bmm/module-help.csv
+  s_7a6f8210f4041a::t_5342e822540e7f 1-19
+.claude/skills/bmad-party-mode/references/mode-auto.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-13
+.claude/skills/bmad-agent-dev/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-81
+.claude/skills/bmad-deep-recon/types/technical.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-19
+.claude/skills/bmad-prd/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-148
+.claude/skills/bmad-create-epics-and-stories/steps/step-04-final-validation.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-143
+.claude/skills/bmad-architecture/references/headless.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-26
+.claude/skills/bmad-ux/references/validate.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-115
+.claude/skills/bmad-deep-recon/types/domain.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-19
+.claude/skills/bmad-agent-architect/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-76
+.claude/skills/bmad-agent-pm/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-76
+_bmad/core/config.yaml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-10
+.claude/skills/bmad-deep-recon/references/draft.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-8
+.claude/skills/bmad-party-mode/references/create-party.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-70
+.claude/skills/bmad-code-review/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-110
+.claude/skills/bmad-architecture/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-85
+.claude/skills/bmad-sprint-planning/SKILL.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-62
+.claude/skills/bmad-deep-recon/references/synthesis.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-16
+.claude/skills/bmad-code-review/steps/step-03-triage.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-54
+.claude/skills/bmad-deep-recon/references/selection.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-13
+.claude/skills/bmad-prd/references/validate.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-97
+.claude/skills/bmad-walkthrough/step-01-orientation.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-105
+.claude/skills/bmad-ux/assets/color-themes.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-9
+.claude/skills/bmad-party-mode/references/party-memory.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-51
+.claude/skills/bmad-spec/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-52
+.claude/skills/bmad-build-auto/review-prompts/verification-gap.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-113
+.claude/skills/bmad-retrospective/scripts/tests/test_sprint_status.py
+  s_7a6f8210f4041a::t_5342e822540e7f 1-1579
+.claude/skills/bmad-create-epics-and-stories/customize.toml
+  s_7a6f8210f4041a::t_5342e822540e7f 1-39
+.claude/skills/bmad-prd/references/headless.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-39
+.claude/skills/bmad-code-review/references/deletion-check.md
+  s_7a6f8210f4041a::t_5342e822540e7f 1-14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "68a103f517a687a783f2c92c02760bf7d260d51d",
+  "prompts": {},
+  "sessions": {
+    "s_7a6f8210f4041a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c8ce102d-76dc-4a63-9df6-5574c8ded10e",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Srimaan Yarram <srimaan.yarram@gmail.com>"
+    }
+  }
+}
