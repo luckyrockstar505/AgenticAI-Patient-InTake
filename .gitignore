@@ -94,3 +94,11 @@ Desktop.ini
 # Docker
 .dockerignore
 docker-compose.override.yml
+
+# MLflow local files
+mlflow.db
+mlruns/
+mlartifacts/
+
+# uv
+.python-version

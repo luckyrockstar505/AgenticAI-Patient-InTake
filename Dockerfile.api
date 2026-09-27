@@ -1,0 +1,48 @@
+# ---------------------------------------------------------------------------
+# Stage 1 — builder: install Python dependencies into a virtual environment
+# ---------------------------------------------------------------------------
+FROM python:3.12-slim AS builder
+
+WORKDIR /build
+
+# Install uv (fast Python package manager)
+RUN pip install --no-cache-dir uv==0.7.3
+
+# Copy dependency manifest and lock file
+COPY pyproject.toml uv.lock* ./
+
+# Install production dependencies only into /build/.venv
+# --frozen: use exact versions from uv.lock (reproducible builds)
+# --no-dev:  skip dev extras (pytest, ruff, mypy)
+# --no-cache: keep image layers lean
+RUN uv sync --frozen --no-dev --no-cache 2>/dev/null \
+    || uv sync --no-dev --no-cache
+
+# ---------------------------------------------------------------------------
+# Stage 2 — runtime: minimal image with non-root user
+# ---------------------------------------------------------------------------
+FROM python:3.12-slim AS runtime
+
+WORKDIR /app
+
+# Create a non-root user (principle of least privilege)
+RUN groupadd -r appuser && useradd -r -g appuser -d /app appuser
+
+# Copy the pre-built virtual environment
+COPY --from=builder /build/.venv /app/.venv
+
+# Copy only the packages needed by the api service
+COPY api/       ./api/
+COPY shared/    ./shared/
+COPY observability/ ./observability/
+
+# Activate the venv for all subsequent commands
+ENV PATH="/app/.venv/bin:$PATH" \
+    PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
+
+USER appuser
+
+EXPOSE 8000
+
+CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
