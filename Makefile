@@ -14,6 +14,7 @@ help:
 	@echo "  make test    Run unit tests with pytest"
 	@echo "  make eval    Run the eval suite (exits 0 even with no scenarios)"
 	@echo "  make lint    Run ruff + mypy"
+	@echo "  make migrate Run Alembic migrations (alembic upgrade head)"
 	@echo "  make seed    Seed the database with synthetic member data"
 	@echo "  make logs    Tail logs for all running containers"
 	@echo "  make lock    Regenerate uv.lock from pyproject.toml"
@@ -50,10 +51,13 @@ lint:
 	$(UV) run ruff check .
 	$(UV) run mypy .
 
+.PHONY: migrate
+migrate:
+	$(UV) run alembic -c mcp_tools/db/migrations/alembic.ini upgrade head
+
 .PHONY: seed
 seed:
-	@echo "seed: TBD — story 2.1 adds real seed targets"
-	@exit 0
+	$(UV) run python scripts/seed.py
 
 .PHONY: logs
 logs:
