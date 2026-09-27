@@ -1,0 +1,52 @@
+tests/unit/test_health.py
+  s_35caad9d45fb32::t_448b501b1d7381 7,20-26,29-31,33-34,39,45,51
+agent/llm.py
+  s_35caad9d45fb32::t_34ca82175d424a 14,23
+  s_35caad9d45fb32::t_8d3fa9e8ddf1cf 156-157
+  s_35caad9d45fb32::t_d3ddd9b34f088b 189-192,199
+mcp_tools/db/utils.py
+  s_35caad9d45fb32::t_73baab04f280fe 1-23
+tests/unit/test_redaction.py
+  s_35caad9d45fb32::t_8fe5159b013427 215-223
+  s_35caad9d45fb32::t_279f23b4fe94fe 92-105
+mcp_tools/db/models.py
+  s_35caad9d45fb32::t_8558843ac5700b 90
+  s_35caad9d45fb32::t_9d86aa5d22261c 14-24
+  s_35caad9d45fb32::t_073326b25b59dc 56-59
+Makefile
+  s_35caad9d45fb32::t_9865a5cb511c1c 12-22
+  s_35caad9d45fb32::t_49a070edd0cbe0 47-53
+mcp_tools/db/session.py
+  s_35caad9d45fb32::t_3283828d7f7fee 4-7,23,25,27-28,32,40-48,50-59
+observability/redaction.py
+  s_35caad9d45fb32::t_a3b5c91500a6be 10,16-17,22,63,77-78,104-109,111,138,143,147-159
+  s_35caad9d45fb32::t_9e85b22c1dda9a 160-161
+mcp_tools/db/migrations/env.py
+  s_35caad9d45fb32::t_6930d2c95f8c39 40
+  s_35caad9d45fb32::t_4fa8450f0b08c0 19
+tests/unit/test_main_config.py
+  s_35caad9d45fb32::t_bbdcd40bf108d0 1-24
+api/main.py
+  s_35caad9d45fb32::t_25faad9dd705c6 14,30-31,33-34
+  s_35caad9d45fb32::t_c269a5677143e3 54-55,57-66
+scripts/seed.py
+  s_35caad9d45fb32::t_23203ebe8e8eaa 39-40,45
+docker-compose.yml
+  s_35caad9d45fb32::t_24fc66cf042aa9 110
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "68cb9a6ac4b5747499c4055b5a6d2c31631690a7",
+  "prompts": {},
+  "sessions": {
+    "s_35caad9d45fb32": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d83052ea-1ded-4160-b1e7-6a4993ea8d47",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Srimaan Yarram <srimaan.yarram@gmail.com>"
+    }
+  }
+}
