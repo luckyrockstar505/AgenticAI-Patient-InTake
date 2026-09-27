@@ -46,7 +46,7 @@ test:
 
 .PHONY: test-integration
 test-integration:
-	$(UV) run pytest tests/integration -v
+	$(UV) run pytest tests/integration tests/contracts -v
 
 .PHONY: test-all
 test-all: test test-integration
