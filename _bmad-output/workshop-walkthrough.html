@@ -4,108 +4,147 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Claims Intake Agent · Workshop Walkthrough</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0f1117;
-    --surface: #1a1d27;
-    --surface2: #22263a;
-    --border: #2e3150;
-    --accent: #6c63ff;
-    --accent2: #3ecfcf;
-    --warn: #f5a623;
-    --danger: #e05c5c;
-    --green: #4caf82;
-    --text: #e8eaf6;
-    --muted: #8b90b0;
-    --mono: 'JetBrains Mono', 'Fira Code', monospace;
+    --bg:          #FAF9F7;
+    --surface:     #FFFFFF;
+    --surface2:    #F5F3EF;
+    --border:      #E8E5DF;
+    --border-soft: #F0EDE8;
+    --accent:      #CF4D2C;     /* Anthropic orange */
+    --accent-mid:  #E8622E;
+    --accent-light:#FEF0EB;
+    --accent-dark: #A33B1F;
+    --teal:        #1A6363;
+    --teal-light:  #EBF4F4;
+    --warn:        #92400E;
+    --warn-light:  #FFFBEB;
+    --danger:      #B91C1C;
+    --danger-light:#FEF2F2;
+    --green:       #166534;
+    --green-light: #F0FDF4;
+    --text:        #1C1917;
+    --text2:       #44403C;
+    --muted:       #78716C;
+    --mono:        'JetBrains Mono', 'Fira Code', monospace;
+    --sans:        'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: var(--sans);
     font-size: 15px;
-    line-height: 1.6;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
   }
-  a { color: var(--accent2); text-decoration: none; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
 
-  /* ── Header ── */
-  .hero {
-    background: linear-gradient(135deg, #1a1d27 0%, #12152a 100%);
+  /* ── Top nav bar ── */
+  .topbar {
+    background: var(--surface);
     border-bottom: 1px solid var(--border);
-    padding: 48px 48px 36px;
+    padding: 0 48px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
-  .hero-tag {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--accent2);
-    margin-bottom: 12px;
+  .topbar-brand {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 600; font-size: 14px; color: var(--text);
   }
-  .hero h1 { font-size: 2rem; font-weight: 700; letter-spacing: -.02em; }
-  .hero h1 span { color: var(--accent); }
-  .hero-sub { color: var(--muted); margin-top: 8px; font-size: 14px; }
-  .hero-meta {
-    display: flex; gap: 24px; margin-top: 20px; flex-wrap: wrap;
+  .topbar-brand .logo {
+    width: 28px; height: 28px;
+    background: var(--accent);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 700; font-size: 13px;
   }
-  .hero-meta .chip {
-    background: var(--surface2);
-    border: 1px solid var(--border);
+  .topbar-right { font-size: 12px; color: var(--muted); }
+
+  /* ── Hero ── */
+  .hero {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 56px 48px 44px;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent-light);
+    border: 1px solid #F5D0C0;
     border-radius: 20px;
     padding: 4px 14px;
-    font-size: 12px;
-    color: var(--muted);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: var(--accent-dark);
+    margin-bottom: 20px;
   }
-  .hero-meta .chip strong { color: var(--text); }
+  .hero h1 {
+    font-size: 2.25rem; font-weight: 700;
+    letter-spacing: -.03em; line-height: 1.2;
+    color: var(--text);
+  }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero-sub {
+    color: var(--muted); margin-top: 10px;
+    font-size: 15px; max-width: 560px; line-height: 1.6;
+  }
+  .hero-chips { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+  .chip {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-size: 12px; color: var(--text2);
+  }
+  .chip strong { color: var(--text); font-weight: 600; }
 
   /* ── Layout ── */
-  .main { max-width: 1000px; margin: 0 auto; padding: 48px 48px 80px; }
+  .main { max-width: 980px; margin: 0 auto; padding: 48px 48px 96px; }
+  @media (max-width: 700px) { .main { padding: 24px 20px 64px; } .hero { padding: 36px 20px 28px; } .topbar { padding: 0 20px; } }
 
-  /* ── Progress bar ── */
+  /* ── Progress track ── */
   .progress-track {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 20px 24px;
     margin-bottom: 48px;
-    display: flex;
-    align-items: center;
-    gap: 0;
+    display: flex; align-items: center; gap: 0;
     overflow-x: auto;
+    box-shadow: 0 1px 3px rgba(0,0,0,.04);
   }
-  .step-dot {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    min-width: 90px;
-  }
+  .step-dot { display: flex; flex-direction: column; align-items: center; gap: 7px; min-width: 84px; }
   .step-dot .dot {
     width: 32px; height: 32px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 700;
+    font-size: 12px; font-weight: 700;
     border: 2px solid var(--border);
-    background: var(--surface2);
-    color: var(--muted);
-    position: relative;
-    z-index: 1;
+    background: var(--surface2); color: var(--muted);
+    position: relative; z-index: 1;
   }
-  .step-dot.done .dot { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .step-dot.active .dot { background: var(--accent2); border-color: var(--accent2); color: #000; }
-  .step-dot .label { font-size: 10px; color: var(--muted); text-align: center; max-width: 80px; }
-  .step-dot.done .label, .step-dot.active .label { color: var(--text); }
-  .step-line {
-    flex: 1; height: 2px; background: var(--border); margin: 0 -2px;
-    margin-bottom: 26px; min-width: 20px;
-  }
+  .step-dot.done .dot  { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .step-dot.active .dot { background: var(--text); border-color: var(--text); color: #fff; }
+  .step-dot .label { font-size: 10px; font-weight: 500; color: var(--muted); text-align: center; max-width: 78px; }
+  .step-dot.done .label  { color: var(--text2); }
+  .step-dot.active .label { color: var(--text); font-weight: 600; }
+  .step-line { flex: 1; height: 2px; background: var(--border); margin: 0 -2px; margin-bottom: 26px; min-width: 16px; }
   .step-line.done { background: var(--accent); }
 
-  /* ── Section heading ── */
+  /* ── Section label ── */
   .section-label {
-    font-size: 11px; font-weight: 700; letter-spacing: .1em;
+    font-size: 10px; font-weight: 700; letter-spacing: .12em;
     text-transform: uppercase; color: var(--muted);
-    margin-bottom: 20px; margin-top: 48px;
+    margin-bottom: 16px; margin-top: 44px;
+    padding-bottom: 8px; border-bottom: 1px solid var(--border-soft);
   }
   .section-label:first-child { margin-top: 0; }
 
@@ -114,159 +153,193 @@
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,.04);
+    transition: box-shadow .15s;
   }
+  .step-card:hover { box-shadow: 0 3px 10px rgba(0,0,0,.07); }
+  .step-card.active { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light); }
+
   .step-header {
-    display: flex; align-items: flex-start; gap: 16px;
-    padding: 20px 24px;
-    border-bottom: 1px solid var(--border);
-    cursor: pointer;
-    user-select: none;
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 18px 22px; cursor: pointer; user-select: none;
+    border-radius: 12px;
   }
   .step-header:hover { background: var(--surface2); }
+
   .step-num {
-    width: 28px; height: 28px; border-radius: 50%;
-    background: var(--accent); color: #fff;
-    font-size: 12px; font-weight: 700;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--accent); color: white;
+    font-size: 11px; font-weight: 700;
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0; margin-top: 2px;
   }
-  .step-num.upcoming {
-    background: var(--surface2); color: var(--muted);
-    border: 2px solid var(--border);
-  }
+  .step-num.dim { background: var(--surface2); color: var(--muted); border: 2px solid var(--border); }
+
   .step-title-block { flex: 1; }
-  .step-title {
-    font-size: 16px; font-weight: 600; color: var(--text);
-    display: flex; align-items: center; gap: 10px;
+  .step-title { font-size: 15px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 9px; }
+  .step-skill { font-size: 11px; color: var(--muted); margin-top: 3px; font-family: var(--mono); }
+
+  .badge {
+    font-size: 10px; font-weight: 600; letter-spacing: .06em;
+    text-transform: uppercase; padding: 2px 8px; border-radius: 4px;
   }
-  .step-badge {
-    font-size: 10px; font-weight: 700; letter-spacing: .08em;
-    text-transform: uppercase; padding: 2px 8px; border-radius: 10px;
-  }
-  .badge-done { background: #1a3a2a; color: var(--green); }
-  .badge-active { background: #1a2a3a; color: var(--accent2); }
-  .badge-next { background: var(--surface2); color: var(--muted); border: 1px solid var(--border); }
-  .step-skill { font-size: 12px; color: var(--muted); margin-top: 4px; font-family: var(--mono); }
-  .chevron { color: var(--muted); font-size: 14px; margin-top: 4px; flex-shrink: 0; }
+  .badge-done   { background: var(--green-light);   color: var(--green); }
+  .badge-active { background: var(--accent-light);  color: var(--accent-dark); }
+  .badge-next   { background: var(--surface2); color: var(--muted); border: 1px solid var(--border); }
+
+  .chevron { color: var(--muted); font-size: 13px; margin-top: 4px; flex-shrink: 0; }
 
   /* ── Step body ── */
-  .step-body { padding: 24px; display: none; }
+  .step-body { padding: 0 22px 22px; display: none; }
   .step-body.open { display: block; }
 
-  .what-row {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;
-  }
-  @media (max-width: 640px) { .what-row { grid-template-columns: 1fr; } }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+  @media (max-width: 640px) { .row2 { grid-template-columns: 1fr; } }
 
-  .what-box {
-    background: var(--surface2); border: 1px solid var(--border);
+  .info-box {
+    background: var(--surface2);
+    border: 1px solid var(--border-soft);
     border-radius: 8px; padding: 14px 16px;
   }
-  .what-box h4 {
+  .info-box h4 {
     font-size: 10px; font-weight: 700; letter-spacing: .1em;
-    text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 7px;
   }
-  .what-box p { font-size: 13px; color: var(--text); }
+  .info-box p { font-size: 13px; color: var(--text2); line-height: 1.55; }
 
   .insight {
     border-left: 3px solid var(--accent);
-    background: #1a1730;
+    background: var(--accent-light);
     border-radius: 0 8px 8px 0;
-    padding: 12px 16px;
-    font-size: 13px;
-    color: var(--text);
-    margin-bottom: 16px;
+    padding: 11px 15px;
+    font-size: 13px; color: var(--text2);
+    margin-bottom: 14px;
   }
-  .insight strong { color: var(--accent); }
+  .insight strong { color: var(--accent-dark); }
 
-  .output-list { list-style: none; }
-  .output-list li {
+  .insight.teal {
+    border-left-color: var(--teal);
+    background: var(--teal-light);
+  }
+  .insight.teal strong { color: var(--teal); }
+
+  /* ── File list ── */
+  .file-list { list-style: none; margin-top: 14px; }
+  .file-list li {
     display: flex; align-items: baseline; gap: 10px;
-    font-size: 13px; color: var(--muted);
-    padding: 5px 0; border-bottom: 1px solid var(--border);
+    font-size: 12px; color: var(--muted);
+    padding: 6px 0; border-bottom: 1px solid var(--border-soft);
   }
-  .output-list li:last-child { border-bottom: none; }
-  .output-list li .file {
-    font-family: var(--mono); font-size: 11px;
-    color: var(--accent2); flex: 1; min-width: 0; overflow: hidden;
-    text-overflow: ellipsis; white-space: nowrap;
-  }
-  .output-list li .desc { font-size: 12px; color: var(--muted); flex-shrink: 0; }
+  .file-list li:last-child { border-bottom: none; }
+  .file-list .path { font-family: var(--mono); font-size: 11px; color: var(--teal); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .file-list .desc { font-size: 11px; color: var(--muted); flex-shrink: 0; }
 
-  /* ── Finding tags ── */
-  .findings { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+  /* ── Findings ── */
+  .findings { display: flex; flex-direction: column; gap: 7px; margin-top: 14px; }
   .finding {
     display: flex; align-items: flex-start; gap: 10px;
-    background: var(--surface2); border: 1px solid var(--border);
+    background: var(--surface2); border: 1px solid var(--border-soft);
     border-radius: 8px; padding: 10px 14px; font-size: 13px;
   }
-  .finding .pri {
-    font-size: 10px; font-weight: 700; letter-spacing: .06em;
-    text-transform: uppercase; padding: 2px 7px; border-radius: 8px;
+  .pri {
+    font-size: 9px; font-weight: 700; letter-spacing: .06em;
+    text-transform: uppercase; padding: 2px 7px; border-radius: 4px;
     flex-shrink: 0; margin-top: 2px;
   }
-  .pri-high { background: #3a1a1a; color: var(--danger); }
-  .pri-med  { background: #2a2a10; color: var(--warn); }
-  .pri-low  { background: #1a2a1a; color: var(--green); }
-  .finding .text { color: var(--text); }
-  .finding .by { font-size: 11px; color: var(--muted); margin-left: auto; flex-shrink: 0; }
+  .pri-high { background: var(--danger-light); color: var(--danger); }
+  .pri-med  { background: var(--warn-light);   color: var(--warn); }
+  .pri-done { background: var(--green-light);  color: var(--green); }
+  .finding .ftext { color: var(--text2); line-height: 1.5; flex: 1; }
+  .finding .by { font-size: 11px; color: var(--muted); flex-shrink: 0; margin-top: 2px; }
 
   /* ── Quote ── */
   .quote-block {
-    border-left: 3px solid var(--accent2);
-    background: var(--surface2); border-radius: 0 8px 8px 0;
-    padding: 12px 16px; margin-top: 16px;
-    font-style: italic; font-size: 13px; color: var(--text);
+    border-left: 3px solid var(--border);
+    background: var(--surface2);
+    border-radius: 0 8px 8px 0;
+    padding: 11px 15px; margin-top: 14px;
+    font-size: 13px; font-style: italic; color: var(--text2);
+    line-height: 1.6;
   }
-  .quote-block cite { font-style: normal; color: var(--muted); font-size: 11px; display: block; margin-top: 6px; }
+  .quote-block cite { font-style: normal; color: var(--muted); font-size: 11px; display: block; margin-top: 5px; }
 
   /* ── Next steps ── */
-  .next-steps {
-    background: linear-gradient(135deg, #1a1d27, #12152a);
-    border: 1px solid var(--accent);
-    border-radius: 12px;
-    padding: 24px;
-    margin-top: 48px;
+  .next-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent);
+    border-radius: 0 0 12px 12px;
+    padding: 24px; margin-top: 48px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.04);
   }
-  .next-steps h3 { color: var(--accent); margin-bottom: 16px; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; }
+  .next-box h3 {
+    font-size: 11px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 16px;
+  }
   .next-item {
-    display: flex; align-items: flex-start; gap: 12px;
-    padding: 10px 0; border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 10px 0; border-bottom: 1px solid var(--border-soft);
     font-size: 13px;
   }
   .next-item:last-child { border-bottom: none; }
-  .next-item .cmd { font-family: var(--mono); font-size: 11px; color: var(--accent2); flex-shrink: 0; }
-  .next-item .desc { color: var(--muted); }
+  .next-item .cmd { font-family: var(--mono); font-size: 11px; color: var(--accent); flex-shrink: 0; padding-top: 2px; min-width: 180px; }
+  .next-item .desc { color: var(--muted); line-height: 1.5; }
+
+  /* ── Decision table ── */
+  .decision-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 14px; }
+  .decision-table th { text-align: left; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 0 12px 8px 0; border-bottom: 1px solid var(--border); }
+  .decision-table td { padding: 8px 12px 8px 0; border-bottom: 1px solid var(--border-soft); color: var(--text2); vertical-align: top; }
+  .decision-table tr:last-child td { border-bottom: none; }
+  .decision-table td:first-child { font-family: var(--mono); font-size: 11px; color: var(--accent-dark); white-space: nowrap; padding-right: 16px; }
+
+  /* ── Code block ── */
+  pre {
+    background: var(--surface2); border: 1px solid var(--border-soft);
+    border-radius: 8px; padding: 14px 16px;
+    font-family: var(--mono); font-size: 11px; line-height: 1.7;
+    color: var(--text2); overflow-x: auto; margin-top: 12px;
+  }
 
   /* ── Footer ── */
   footer {
-    text-align: center; padding: 32px;
+    text-align: center; padding: 32px 20px;
     font-size: 11px; color: var(--muted);
     border-top: 1px solid var(--border);
+    background: var(--surface);
   }
-
-  /* ── Expand toggle script ── */
+  footer a { color: var(--accent); }
 </style>
 </head>
 <body>
 
+<!-- Top nav -->
+<nav class="topbar">
+  <div class="topbar-brand">
+    <div class="logo">A</div>
+    Claims Intake Agent
+  </div>
+  <div class="topbar-right">Workshop Day 2 · 2026-09-27</div>
+</nav>
+
+<!-- Hero -->
 <div class="hero">
-  <div class="hero-tag">Agentic AI Workshop · Day 2 · 2026-09-27</div>
-  <h1>Claims Intake <span>Agent</span></h1>
-  <div class="hero-sub">From brief to PRD — step-by-step walkthrough for the workshop audience</div>
-  <div class="hero-meta">
+  <div class="hero-eyebrow">Agentic AI Workshop · Day 2</div>
+  <h1>Claims Intake <em>Agent</em></h1>
+  <p class="hero-sub">Step-by-step walkthrough — from product brief to deployed, evaluated agent. Built with Claude Code + BMad.</p>
+  <div class="hero-chips">
     <div class="chip">Project <strong>AgenticAI-Patient-InTake</strong></div>
     <div class="chip">Method <strong>BMad</strong></div>
     <div class="chip">Model <strong>Claude Sonnet 4.6</strong></div>
-    <div class="chip">Steps completed <strong>5 of 7</strong></div>
+    <div class="chip">Deploy <strong>AWS AgentCore</strong></div>
+    <div class="chip">Steps completed <strong>6 of 7</strong></div>
   </div>
 </div>
 
 <div class="main">
 
-  <!-- Progress track -->
+  <!-- Progress bar -->
   <div class="progress-track">
     <div class="step-dot done"><div class="dot">✓</div><div class="label">Brief</div></div>
     <div class="step-line done"></div>
@@ -276,14 +349,14 @@
     <div class="step-line done"></div>
     <div class="step-dot done"><div class="dot">✓</div><div class="label">Party Review</div></div>
     <div class="step-line done"></div>
-    <div class="step-dot done"><div class="dot">✓</div><div class="label">PRD Fix</div></div>
+    <div class="step-dot done"><div class="dot">✓</div><div class="label">PRD Fixes</div></div>
+    <div class="step-line done"></div>
+    <div class="step-dot done"><div class="dot">✓</div><div class="label">Epics &amp; Stories</div></div>
     <div class="step-line"></div>
-    <div class="step-dot active"><div class="dot">6</div><div class="label">Epics &amp; Stories</div></div>
-    <div class="step-line"></div>
-    <div class="step-dot"><div class="dot">7</div><div class="label">Build &amp; Eval</div></div>
+    <div class="step-dot active"><div class="dot">7</div><div class="label">Build &amp; Eval</div></div>
   </div>
 
-  <!-- ── COMPLETED STEPS ── -->
+  <!-- ── COMPLETED ── -->
   <div class="section-label">Completed steps</div>
 
   <!-- Step 1 -->
@@ -291,28 +364,26 @@
     <div class="step-header" onclick="toggle(this)">
       <div class="step-num">1</div>
       <div class="step-title-block">
-        <div class="step-title">Product Brief <span class="step-badge badge-done">Done</span></div>
+        <div class="step-title">Product Brief <span class="badge badge-done">Done</span></div>
         <div class="step-skill">/bmad-product-brief · docs/intake-brief.md</div>
       </div>
       <div class="chevron">▾</div>
     </div>
     <div class="step-body open">
-      <div class="what-row">
-        <div class="what-box">
+      <div class="row2">
+        <div class="info-box">
           <h4>What happened</h4>
-          <p>Started with an existing brief for a <strong>Claims Intake Agent</strong> — a conversational AI that replaces the manual medical claim intake front door. The brief covered problem, solution, target users, MVP scope, and technical stack.</p>
+          <p>Existing brief for a <strong>Claims Intake Agent</strong> — a conversational AI replacing the manual medical claim intake front door. Covered problem, solution, users, MVP scope, and technical stack.</p>
         </div>
-        <div class="what-box">
+        <div class="info-box">
           <h4>Key decision</h4>
-          <p>Chose <strong>Update</strong> intent over Create — the brief existed but needed alignment with the workshop's eval framework (golden datasets, labelled examples, results export).</p>
+          <p><strong>Update</strong> intent over Create — brief existed but needed the workshop's eval framework: golden datasets, labelled examples, results export.</p>
         </div>
       </div>
-      <div class="insight">
-        <strong>Workshop insight:</strong> A brief must answer 7 things — Problem, Decision, Success, Human, Data, Out, Layers. All 7 were there; 2 were thin (golden dataset and layers summary were buried or absent).
-      </div>
-      <ul class="output-list">
-        <li><span class="file">docs/intake-brief.md</span><span class="desc">Source brief (updated)</span></li>
-        <li><span class="file">docs/.memlog.md</span><span class="desc">Audit trail</span></li>
+      <div class="insight"><strong>Workshop insight:</strong> A brief must answer 7 things — Problem, Decision, Success, Human, Data, Out, Layers. 2 were thin: golden dataset and layers summary were absent.</div>
+      <ul class="file-list">
+        <li><span class="path">docs/intake-brief.md</span><span class="desc">Source brief (updated)</span></li>
+        <li><span class="path">docs/.memlog.md</span><span class="desc">Audit trail</span></li>
       </ul>
     </div>
   </div>
@@ -322,30 +393,25 @@
     <div class="step-header" onclick="toggle(this)">
       <div class="step-num">2</div>
       <div class="step-title-block">
-        <div class="step-title">Eval &amp; Data Layer Added <span class="step-badge badge-done">Done</span></div>
+        <div class="step-title">Eval &amp; Data Layer Added <span class="badge badge-done">Done</span></div>
         <div class="step-skill">/bmad-product-brief update · Day 2 cheat sheet</div>
       </div>
       <div class="chevron">▾</div>
     </div>
-    <div class="step-body open">
-      <div class="what-row">
-        <div class="what-box">
+    <div class="step-body">
+      <div class="row2">
+        <div class="info-box">
           <h4>What happened</h4>
-          <p>The Day 2 workshop cheat sheet was read and diffed against the brief. Key workshop rule: <em>"a golden dataset is a spreadsheet, labelled by someone who does the job, never by the agent."</em> The brief had no golden dataset spec at all.</p>
+          <p>Day 2 workshop cheat sheet diffed against the brief. Key rule: <em>"a golden dataset is a spreadsheet, labelled by someone who does the job, never by the agent."</em> Brief had no golden dataset spec.</p>
         </div>
-        <div class="what-box">
+        <div class="info-box">
           <h4>What was added</h4>
-          <p>New §5a with golden dataset schema, 20-build + 10-holdout split, seed data spec, and <code>results.json</code> export format. KPIs now reference the labelled example count. Layers summary added to §8.</p>
+          <p>New §5a with golden dataset schema, 20-build + 10-holdout split, seed data spec, and <code>results.json</code> export format. KPIs now reference labelled example counts.</p>
         </div>
       </div>
-      <div class="insight">
-        <strong>Workshop insight:</strong> "Data and labelled examples first" is the build order. Story 1 of Epic 1 should always be the data layer — not the agent.
-      </div>
-      <div class="insight" style="border-color: var(--accent2);">
-        <strong>Golden dataset columns:</strong> <code>input</code> (scenario) · <code>expected_answer</code> (correct outcome) · <code>expected_tools</code> (tool call order) · <code>why</code> (human rationale). Code checks the first three; a judge checks the last.
-      </div>
-      <ul class="output-list">
-        <li><span class="file">docs/intake-brief.md</span><span class="desc">§5a added, §5 KPIs updated, §6 scope updated, §8 layers added</span></li>
+      <div class="insight teal"><strong>Workshop insight:</strong> "Data and labelled examples first." Story 1 of Epic 1 is always the data layer — not the agent.</div>
+      <ul class="file-list">
+        <li><span class="path">docs/intake-brief.md</span><span class="desc">§5a added, §5 KPIs updated, §6 scope updated, §8 layers added</span></li>
       </ul>
     </div>
   </div>
@@ -355,28 +421,25 @@
     <div class="step-header" onclick="toggle(this)">
       <div class="step-num">3</div>
       <div class="step-title-block">
-        <div class="step-title">PRD Drafted <span class="step-badge badge-done">Done</span></div>
+        <div class="step-title">PRD Drafted <span class="badge badge-done">Done</span></div>
         <div class="step-skill">/bmad-prd · Fast path · MVP only, one page</div>
       </div>
       <div class="chevron">▾</div>
     </div>
-    <div class="step-body open">
-      <div class="what-row">
-        <div class="what-box">
+    <div class="step-body">
+      <div class="row2">
+        <div class="info-box">
           <h4>What happened</h4>
-          <p>PRD created fast-path from the updated brief. Workshop requirement: <em>"goal and metric, user journey, numbered FRs, NFRs, MVP scope and what's out, how it's tested."</em> All sections drafted in one pass.</p>
+          <p>PRD created fast-path from updated brief. Workshop requirement: goal and metric, user journey (Maria), numbered FRs, NFRs, MVP scope and what's out, how it's tested.</p>
         </div>
-        <div class="what-box">
+        <div class="info-box">
           <h4>Structure</h4>
-          <p>Goal + counter-metric · Maria's user journey (happy path + 4 non-happy paths) · FR-1 through FR-8 (numbered, table format) · NFR-1 through NFR-5 · MVP In/Out · Open Questions OQ-1 through OQ-4.</p>
+          <p>FR-1 → FR-8 in table format · Maria's user journey (happy path + 4 non-happy paths) · NFR-1 → NFR-5 · Open Questions OQ-1 → OQ-4</p>
         </div>
       </div>
-      <div class="insight">
-        <strong>Workshop insight:</strong> Every success metric must map to a labelled example. "≥ 90% extraction accuracy" is meaningless without "measured against 20 rows in <code>eval/labelled_claims.csv</code>."
-      </div>
-      <ul class="output-list">
-        <li><span class="file">_bmad-output/planning-artifacts/prds/prd-AgenticAI-Patient-InTake-2026-09-27/prd.md</span><span class="desc">PRD draft</span></li>
-        <li><span class="file">_bmad-output/planning-artifacts/prds/prd-AgenticAI-Patient-InTake-2026-09-27/.memlog.md</span><span class="desc">Audit trail</span></li>
+      <div class="insight"><strong>Workshop insight:</strong> Every success metric must map to a labelled example. "≥ 90% extraction accuracy" needs "measured against 20 rows in <code>eval/labelled_claims.csv</code>."</div>
+      <ul class="file-list">
+        <li><span class="path">_bmad-output/planning-artifacts/prds/prd-AgenticAI-Patient-InTake-2026-09-27/prd.md</span><span class="desc">PRD draft</span></li>
       </ul>
     </div>
   </div>
@@ -386,204 +449,192 @@
     <div class="step-header" onclick="toggle(this)">
       <div class="step-num">4</div>
       <div class="step-title-block">
-        <div class="step-title">Party Mode Review <span class="step-badge badge-done">Done</span></div>
+        <div class="step-title">Party Mode Review <span class="badge badge-done">Done</span></div>
         <div class="step-skill">/bmad-party-mode · Mary · John · Winston · Sally</div>
       </div>
       <div class="chevron">▾</div>
     </div>
-    <div class="step-body open">
-      <div class="what-row">
-        <div class="what-box">
+    <div class="step-body">
+      <div class="row2">
+        <div class="info-box">
           <h4>Who argued what</h4>
-          <p><strong>📊 Mary</strong> — cut nothing; called out missing competitive context and defended the audit log as the payer trust story.<br>
-          <strong>📋 John</strong> — cut FR-7.3 (resume); flagged missing rate/concurrency NFR.<br>
-          <strong>🏗️ Winston</strong> — challenged the "max 5 turns" magic number; demanded state names table.<br>
-          <strong>🎨 Sally</strong> — focused on the human handoff gap: what does Maria see? Does context transfer?</p>
+          <p><strong>📊 Mary</strong> — competitive context missing; defended audit log as payer trust story.<br>
+          <strong>📋 John</strong> — cut resume (FR-7.3); flagged missing rate/concurrency NFR.<br>
+          <strong>🏗️ Winston</strong> — challenged "max 5 turns" magic number; demanded state names table.<br>
+          <strong>🎨 Sally</strong> — human handoff gap: what does Maria see? Does context transfer?</p>
         </div>
-        <div class="what-box">
+        <div class="info-box">
           <h4>Biggest clash</h4>
-          <p>Mary vs. John on the audit log — Mary: "cutting it amputates the payer trust story." John: "only include if it's in the demo script." Unresolved — needs Srimaan's call.</p>
+          <p>Mary vs. John on the audit log — <em>"cutting it amputates the payer trust story."</em> vs. <em>"only include if it's in the demo script."</em> Resolved: keep it, show it in the trace walkthrough.</p>
         </div>
       </div>
-
       <div class="findings">
-        <div class="finding"><span class="pri pri-high">High</span><span class="text"><strong>FR-9 missing:</strong> Human handoff experience — what context transfers, what the member sees, whether they repeat their member ID</span><span class="by">Sally + John</span></div>
-        <div class="finding"><span class="pri pri-high">High</span><span class="text"><strong>OQ-2 is a scope question:</strong> Can dependents file? This changes FR-1.1 and FR-5.1 — must be In/Out, not an open question</span><span class="by">Mary</span></div>
-        <div class="finding"><span class="pri pri-high">High</span><span class="text"><strong>FR-5.2 magic number:</strong> "Max 5 clarification turns" — invented, no exit condition specified. What happens after 5?</span><span class="by">Winston</span></div>
-        <div class="finding"><span class="pri pri-high">High</span><span class="text"><strong>FR-5.4 assumption unresolved:</strong> Required claim fields list must be confirmed before build; wrong list = wrong stories</span><span class="by">Winston</span></div>
-        <div class="finding"><span class="pri pri-med">Medium</span><span class="text"><strong>State names table missing:</strong> "unverified / verified / locked" appear in prose with no single source of truth</span><span class="by">Winston</span></div>
-        <div class="finding"><span class="pri pri-med">Medium</span><span class="text"><strong>No concurrency NFR:</strong> What happens under load during a live demo?</span><span class="by">John</span></div>
-        <div class="finding"><span class="pri pri-med">Medium</span><span class="text"><strong>Missing eval scenario:</strong> "No repeat questions" (FR-5.3) has no labelled test case enforcing it</span><span class="by">Sally</span></div>
-        <div class="finding"><span class="pri pri-med">Medium</span><span class="text"><strong>No competitive context:</strong> Payer PM can't tell why they'd choose this over Olive AI, Waystar, Infinitus</span><span class="by">Mary</span></div>
+        <div class="finding"><span class="pri pri-high">High</span><span class="ftext"><strong>FR-9 missing:</strong> Human handoff experience — context transfer, what member sees, callback flow</span><span class="by">Sally + John</span></div>
+        <div class="finding"><span class="pri pri-high">High</span><span class="ftext"><strong>OQ-2 scope:</strong> Can dependents file? Changes FR-1.1 and FR-5.1 — must be In/Out, not open</span><span class="by">Mary</span></div>
+        <div class="finding"><span class="pri pri-high">High</span><span class="ftext"><strong>FR-5.2 magic number:</strong> "Max 5 turns" — invented, no exit condition specified</span><span class="by">Winston</span></div>
+        <div class="finding"><span class="pri pri-high">High</span><span class="ftext"><strong>FR-5.4 assumption:</strong> Required claim fields unconfirmed — wrong list = wrong stories</span><span class="by">Winston</span></div>
       </div>
-
       <div class="quote-block">
-        "You've built verification theater — she'll hit lockout and call the contact center and give her member ID again from scratch, which is exactly the problem you said you were solving."
+        "You've built verification theater — she'll hit lockout and give her member ID again from scratch, which is exactly the problem you said you were solving."
         <cite>— Sally 🎨</cite>
       </div>
-      <div class="quote-block">
-        "Five is a number you made up."
-        <cite>— Winston 🏗️ on FR-5.2</cite>
-      </div>
-
-      <ul class="output-list" style="margin-top:16px">
-        <li><span class="file">_bmad-output/planning-artifacts/prds/prd-AgenticAI-Patient-InTake-2026-09-27/review-party-mode.md</span><span class="desc">Full findings + action items</span></li>
+      <ul class="file-list" style="margin-top:14px;">
+        <li><span class="path">_bmad-output/planning-artifacts/prds/prd-AgenticAI-Patient-InTake-2026-09-27/review-party-mode.md</span><span class="desc">Full findings + action items</span></li>
       </ul>
     </div>
   </div>
 
-  <!-- ── STEP 5 DONE ── -->
+  <!-- Step 5 -->
   <div class="step-card">
     <div class="step-header" onclick="toggle(this)">
       <div class="step-num">5</div>
       <div class="step-title-block">
-        <div class="step-title">PRD Fixes — Party Mode Decisions <span class="step-badge badge-done">Done</span></div>
-        <div class="step-skill">Party mode round 2 · All 4 blockers resolved · prd.md updated</div>
+        <div class="step-title">PRD Fixes — Party Mode Decisions <span class="badge badge-done">Done</span></div>
+        <div class="step-skill">All 4 high-priority blockers resolved · .memlog.md updated (10 entries)</div>
       </div>
       <div class="chevron">▾</div>
     </div>
-    <div class="step-body open">
-      <p style="color: var(--muted); font-size:13px; margin-bottom:16px;">Mary, John, Winston, and Sally worked through all 4 high-priority blockers with Srimaan. Every decision was made in the room and logged to <code>.memlog.md</code>.</p>
-
-      <div class="findings">
-
-        <div class="finding">
-          <span class="pri pri-low">A-1 ✓</span>
-          <span class="text">
-            <strong>Verification failure → callback flow.</strong>
-            After 3 failures the agent says: <em>"I wasn't able to verify your identity. Leave me a number and our team will call you back."</em>
-            Agent calls <code>request_callback</code> tool (writes member ID + session ID + contact number to callbacks queue).
-            New state: <code>PENDING_CALLBACK</code>. No case created, no policy shown.
-            Workshop scope: mock tool writes to Postgres callbacks table.
-          </span>
-          <span class="by">✅ resolved</span>
-        </div>
-
-        <div class="finding">
-          <span class="pri pri-low">A-2 ✓</span>
-          <span class="text">
-            <strong>Minor dependents in scope; adult dependents out.</strong>
-            Subscriber may file on behalf of minor dependents. <code>patient_name</code> is required when patient ≠ subscriber.
-            Adult dependent authorization (HIPAA permission check) is explicitly out of scope for MVP — too complex for workshop.
-          </span>
-          <span class="by">✅ resolved</span>
-        </div>
-
-        <div class="finding">
-          <span class="pri pri-low">A-3 ✓</span>
-          <span class="text">
-            <strong>No hard turn limit — partial case with flag.</strong>
-            Removed "max 5 turns" magic number. Clarify loop asks for missing fields; if still missing, proceeds and creates the case anyway.
-            <code>create_case</code> tool receives <code>missing_fields[]</code> and <code>complete: bool</code>.
-            Member hears: <em>"I'll submit your claim now — our team may follow up about [missing field]."</em>
-            No new state or tool needed.
-          </span>
-          <span class="by">✅ resolved</span>
-        </div>
-
-        <div class="finding">
-          <span class="pri pri-low">A-4 ✓</span>
-          <span class="text">
-            <strong>Required claim fields confirmed.</strong>
-            Required: <code>date_of_service</code> · <code>place_of_service</code> · <code>provider_name</code> · <code>diagnosis_reason</code> · <code>patient_name</code> (when patient ≠ subscriber).
-            Optional (collected if available): <code>amounts</code> · <code>npi</code> · <code>accident_related</code> · <code>other_insurance</code>.
-            <code>[ASSUMPTION]</code> tag removed from FR-5.4.
-          </span>
-          <span class="by">✅ resolved</span>
-        </div>
-
-      </div>
-
-      <div class="what-box" style="margin-top:16px;">
+    <div class="step-body">
+      <table class="decision-table">
+        <thead><tr><th>Item</th><th>Decision</th></tr></thead>
+        <tbody>
+          <tr><td>A-1 ✓</td><td><strong>Verification failure → callback flow.</strong> After 3 failures, agent asks for callback number, calls <code>request_callback</code> tool (writes to callbacks queue). State: <code>PENDING_CALLBACK</code>. No case created, no policy shown. Workshop: mock tool writes to Postgres.</td></tr>
+          <tr><td>A-2 ✓</td><td><strong>Minor dependents in scope; adult dependents out.</strong> Subscriber files on behalf of minor dependents. <code>patient_name</code> required when patient ≠ subscriber. Adult dependent authorization (HIPAA) is out of scope for MVP.</td></tr>
+          <tr><td>A-3 ✓</td><td><strong>No hard turn limit — partial case with flag.</strong> Clarify loop asks; if still missing, creates case with <code>missing_fields[]</code> and <code>complete: false</code>. Member hears: "Our team may follow up about [field]."</td></tr>
+          <tr><td>A-4 ✓</td><td><strong>Required fields confirmed:</strong> <code>date_of_service</code> · <code>place_of_service</code> · <code>provider_name</code> · <code>diagnosis_reason</code> · <code>patient_name</code> (when dependent). <code>[ASSUMPTION]</code> tag removed.</td></tr>
+        </tbody>
+      </table>
+      <div class="info-box" style="margin-top:14px;">
         <h4>State machine — locked</h4>
-        <p style="font-size:13px; font-family: var(--mono);">
-          UNVERIFIED → VERIFIED → (case created)<br>
-          UNVERIFIED → PENDING_CALLBACK (3 failures → callback queue)<br>
-          Any state → HUMAN_HANDOFF (member-initiated)
-        </p>
+        <pre>UNVERIFIED → VERIFIED → (case created)
+UNVERIFIED → PENDING_CALLBACK  (3 failures → callback queue)
+Any state  → HANDOFF           (member-initiated)
+Any state  → CANCELLED         (member cancel)</pre>
       </div>
+    </div>
+  </div>
 
-      <ul class="output-list" style="margin-top:16px;">
-        <li><span class="file">_bmad-output/planning-artifacts/prds/prd-AgenticAI-Patient-InTake-2026-09-27/.memlog.md</span><span class="desc">6 entries logged</span></li>
-        <li><span class="file">_bmad-output/planning-artifacts/prds/prd-AgenticAI-Patient-InTake-2026-09-27/review-party-mode.md</span><span class="desc">Full findings reference</span></li>
+  <!-- Step 6 -->
+  <div class="step-card">
+    <div class="step-header" onclick="toggle(this)">
+      <div class="step-num">6</div>
+      <div class="step-title-block">
+        <div class="step-title">Epics &amp; Stories <span class="badge badge-done">Done</span></div>
+        <div class="step-skill">/bmad-create-epics-and-stories · 9 epics · 28 stories · all 4 steps validated</div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="step-body">
+      <div class="insight"><strong>Deploy decision:</strong> AWS AgentCore Runtime replaces ECS Fargate + Terraform. Epic 7 collapses from 3 stories → 1 deploy command. Saves ~40 min in the build window.</div>
+      <div class="row2">
+        <div class="info-box">
+          <h4>Developer assignments</h4>
+          <p><strong>Bharath → Track A</strong> (Agent): LangGraph, state machine, verification, claim nodes, conversation design.<br><br>
+          <strong>Srimaan → Track B</strong> (Platform): MCP tools, FastAPI, DB, golden dataset, AgentCore deploy, presentation.</p>
+        </div>
+        <div class="info-box">
+          <h4>Party mode fixes applied</h4>
+          <p>• Story <strong>2.0</strong> (golden dataset) added to E2 — labelled before any agent code<br>
+          • Story <strong>3.2</strong> un-deferred — stub router ships with E3<br>
+          • <strong>E9</strong> done-when is now testable; 5.2 web UI deferral risk documented</p>
+        </div>
+      </div>
+      <div class="info-box" style="margin-top:14px;">
+        <h4>Critical path — 2.5 hr build window (Claude Code)</h4>
+        <pre>Srimaan (Track B)                     Bharath (Track A)
+───────────────────────────────────   ───────────────────────────────────
+1.1  Repo scaffold + Docker  (20m) ──► (unblocks both tracks)
+2.0  Golden dataset          (15m)   1.3  LLM gateway mock      (15m)
+2.1  DB schema + seed        (20m)   3.1  LangGraph skeleton     (20m)
+2.2  Mock payer              (15m)   3.2  Stub router            (15m)
+2.3  Coverage MCP tools      (20m)   3.3  Intake node            (15m)
+2.4  Verification MCP tools  (20m)   3.4  Verify + callback      (25m)
+2.5  Case + callback tools   (15m)   3.5  Policy display         (15m)
+5.1  FastAPI endpoints       (20m) ──► (wires together)
+6.1  Eval harness            (20m)   4.1  Claim extraction       (20m)
+7.1  AgentCore deploy        (20m)   4.3  Confirm + case         (15m)
+9.2  Vercel dashboard        (10m)   9.1  Demo script            (10m)</pre>
+      </div>
+      <ul class="file-list" style="margin-top:14px;">
+        <li><span class="path">_bmad-output/planning-artifacts/epics.md</span><span class="desc">9 epics, 28 stories, Given/When/Then ACs, status: ready-for-development</span></li>
       </ul>
     </div>
   </div>
 
-  <!-- ── UPCOMING STEPS ── -->
-  <div class="section-label">Active — next step</div>
+  <!-- ── ACTIVE ── -->
+  <div class="section-label">Active — now</div>
 
-  <div class="step-card" style="border-color: var(--accent2);">
-    <div class="step-header" onclick="toggle(this)" style="background:#0f1f22;">
-      <div class="step-num" style="background:var(--accent2);color:#000;">6</div>
-      <div class="step-title-block">
-        <div class="step-title">Epics &amp; Stories <span class="step-badge badge-active">Next</span></div>
-        <div class="step-skill">/bmad-create-epics-and-stories → /bmad-spec epic-1</div>
-      </div>
-      <div class="chevron">▾</div>
-    </div>
-    <div class="step-body">
-      <p style="color:var(--muted); font-size:13px;">Workshop rule: three epics max, in build order. Story 1 is always the data layer. Each story must fit one session (20–30 min of agent work) and pass the four ready-to-build checks: fits one session · reviewer can say pass/fail · names files/tables/tools · does one thing.</p>
-      <div class="what-box" style="margin-top:12px;">
-        <h4>Expected epic order</h4>
-        <p style="font-size:13px;">Epic 1: Data &amp; seed layer + golden dataset · Epic 2: Agent core (verification + intake flow) · Epic 3: Eval, tracing, CI/CD</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="step-card">
+  <div class="step-card active">
     <div class="step-header" onclick="toggle(this)">
-      <div class="step-num upcoming">7</div>
+      <div class="step-num">7</div>
       <div class="step-title-block">
-        <div class="step-title">Build, Eval &amp; Ship <span class="step-badge badge-next">Upcoming</span></div>
-        <div class="step-skill">/bmad-build → mlflow eval → results.json → CI green → Vercel</div>
+        <div class="step-title">Build, Eval &amp; Ship <span class="badge badge-active">Now</span></div>
+        <div class="step-skill">/bmad-build → mlflow eval → results.json → AgentCore deploy → holdout at 3:00</div>
       </div>
       <div class="chevron">▾</div>
     </div>
-    <div class="step-body">
-      <p style="color:var(--muted); font-size:13px;">Build loop: one story per branch → /bmad-code-review → tests pass → merge. Eval: run against 20 labelled scenarios, export results.json. Ship: GitHub Actions CI (no model calls) + Vercel dashboard reading results.json. Holdout eval at 3:00.</p>
+    <div class="step-body open">
+      <p style="font-size:13px; color:var(--muted); margin-bottom:16px;">Build loop per story: one branch → <code>/bmad-code-review</code> → tests pass → merge → next story. Each story: 20–30 min of Claude Code work.</p>
+      <div class="row2">
+        <div class="info-box">
+          <h4>Eval target</h4>
+          <p>Run against 20 labelled scenarios in <code>eval/labelled_claims.csv</code>. Hard gates: 0 unverified cases, 0 pre-verification policy, 0 PHI leaks. Overall ≥ 90%. Export <code>results.json</code>.</p>
+        </div>
+        <div class="info-box">
+          <h4>Epic 9 — Presentation (parallel)</h4>
+          <p>9.1 Demo script (Bharath) · 9.2 Vercel dashboard reading results.json (Srimaan) · 9.3 This HTML updated with final results (both)</p>
+        </div>
+      </div>
+      <div class="findings" style="margin-top:4px;">
+        <div class="finding"><span class="pri pri-done">first</span><span class="ftext">Run <code>/bmad-build</code> on story <strong>1.1</strong> (Srimaan) — repo scaffold unblocks both tracks</span></div>
+        <div class="finding"><span class="pri pri-done">⚠️ risk</span><span class="ftext">Story 5.2 (web chat UI) is deferred — demo shows API output, not a browser window. Address in demo script narration.</span></div>
+      </div>
     </div>
   </div>
 
-  <!-- ── Next steps box ── -->
-  <div class="next-steps">
+  <!-- Next steps -->
+  <div class="next-box">
     <h3>Immediate next steps</h3>
     <div class="next-item">
-      <span class="cmd">✅ A-1 → A-4 resolved</span>
-      <span class="desc">All 4 PRD blockers closed in party mode — callback flow, minor dependents, partial case flag, required fields confirmed</span>
-    </div>
-    <div class="next-item">
-      <span class="cmd">/bmad-create-epics-and-stories</span>
-      <span class="desc">List 3 epics max, in build order, from the updated PRD — Story 1 must be the data layer</span>
-    </div>
-    <div class="next-item">
-      <span class="cmd">/bmad-spec epic-1</span>
-      <span class="desc">Turn Epic 1 into a spec; Story 1 = seed data + golden dataset (<code>eval/labelled_claims.csv</code>)</span>
-    </div>
-    <div class="next-item">
       <span class="cmd">/bmad-build story 1.1</span>
-      <span class="desc">Build data layer on its own branch → /bmad-code-review → tests pass → merge</span>
+      <span class="desc">Srimaan: repo scaffold + Docker — unblocks both tracks the moment it merges</span>
     </div>
     <div class="next-item">
-      <span class="cmd">mlflow eval → results.json</span>
-      <span class="desc">Run eval against 20 labelled scenarios, export results, check holdout at 3:00</span>
+      <span class="cmd">/bmad-build story 2.0</span>
+      <span class="desc">Both: golden dataset — 20 human-labelled scenarios before any agent code runs</span>
+    </div>
+    <div class="next-item">
+      <span class="cmd">Parallel build</span>
+      <span class="desc">Srimaan: 2.1 → 2.2 → 2.3 → 2.4 → 2.5 · Bharath: 1.3 → 3.1 → 3.2 → 3.3 → 3.4</span>
+    </div>
+    <div class="next-item">
+      <span class="cmd">make eval</span>
+      <span class="desc">Run against 20 build-set scenarios, export results.json, check all hard gates at 100%</span>
+    </div>
+    <div class="next-item">
+      <span class="cmd">agentcore deploy</span>
+      <span class="desc">Single command deploy to AWS AgentCore Runtime — no Terraform needed</span>
+    </div>
+    <div class="next-item">
+      <span class="cmd">Holdout eval at 3:00</span>
+      <span class="desc">10 withheld scenarios scored — the final proof the system generalises</span>
     </div>
   </div>
 
 </div>
 
 <footer>
-  Claims Intake Agent · Agentic AI Workshop · 2026-09-27 ·
+  Claims Intake Agent &nbsp;·&nbsp; Agentic AI Workshop &nbsp;·&nbsp; 2026-09-27 &nbsp;·&nbsp;
   Built with <a href="https://claude.ai/claude-code">Claude Code</a> + BMad
 </footer>
 
 <script>
   function toggle(header) {
     const body = header.nextElementSibling;
-    const chevron = header.querySelector('.chevron');
-    const isOpen = body.classList.contains('open');
-    body.classList.toggle('open', !isOpen);
-    chevron.textContent = isOpen ? '▾' : '▴';
+    const ch   = header.querySelector('.chevron');
+    const open = body.classList.contains('open');
+    body.classList.toggle('open', !open);
+    ch.textContent = open ? '▾' : '▴';
   }
 </script>
 </body>
