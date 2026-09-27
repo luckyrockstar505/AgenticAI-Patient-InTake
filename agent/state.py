@@ -8,7 +8,8 @@ from __future__ import annotations
 from enum import Enum
 from typing import Annotated, Any
 
-from langchain_core.messages import AnyMessage, add_messages
+from langchain_core.messages import AnyMessage
+from langgraph.graph.message import add_messages
 from typing_extensions import TypedDict
 
 from shared.schemas import ClaimDraft

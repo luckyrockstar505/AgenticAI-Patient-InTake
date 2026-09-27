@@ -19,6 +19,12 @@ from pydantic import BaseModel, ValidationError
 
 ModelTier = Literal["default", "fast"]
 
+# Type of `complete()` itself — nodes type-hint their injected `llm` param
+# against this so tests can pass a stand-in callable instead of the real
+# gateway. Kept here (not in agent/nodes) so nothing outside this module
+# needs to import litellm transitively.
+LLMFn = Callable[..., "LLMResult"]
+
 MOCK_SCRIPTS_GLOB = "tests/fakes/llm_scripts/*.yaml"
 RETRY_COUNT = 2
 TIMEOUT_SECONDS = 20.0
