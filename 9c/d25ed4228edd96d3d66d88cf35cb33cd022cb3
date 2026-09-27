@@ -1,0 +1,37 @@
+mcp_tools/server.py
+  s_8b12a18db9c228::t_38a7a6f7c51fc9 21-24,37-38
+  s_8b12a18db9c228::t_4a3a473e338263 39-40
+tests/contracts/test_coverage_contract.py
+  s_8b12a18db9c228::t_6764c9fc0f4744 16,21,155-166,257-266
+  s_8b12a18db9c228::t_8b40e40640def8 1-15,17-20,22-92,94-154,167-256,267-341
+  s_8b12a18db9c228::t_1659fb7943f533 93
+mcp_tools/tools/coverage.py
+  s_8b12a18db9c228::t_18d55a7ae6703d 85,121
+  s_8b12a18db9c228::t_dde93b833c3e1b 1-11,14-20,22-52,54-63,65-78,84,86-91,120,122-128,130-134,143-145,148,153-156,164-178,186-190,198-212,221,236-237
+  s_8b12a18db9c228::t_5a8b8d54e34f19 53
+  s_8b12a18db9c228::t_4dcb5a126111e1 21,64,79-83,92-119,129,135-142,146-147,149-152,157-163,179-185,191-197,213-220,222-235
+  s_8b12a18db9c228::t_ca1ecbf3d8a4cb 12-13
+docs/stories/2.3.fastmcp-coverage-tools.md
+  s_8b12a18db9c228::t_7ff0c7be915d0a 63,67,71-79,83-86
+  s_8b12a18db9c228::t_c858b072da60ef 5
+  s_8b12a18db9c228::t_91aa4901340f1a 34-38
+  s_8b12a18db9c228::t_ea8f56f8de3031 97
+Makefile
+  s_8b12a18db9c228::t_a1eeec625940f4 49
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9cd25ed4228edd96d3d66d88cf35cb33cd022cb3",
+  "prompts": {},
+  "sessions": {
+    "s_8b12a18db9c228": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "63134945-8335-4c88-8f62-c0821f20ba32",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Srimaan Yarram <srimaan.yarram@gmail.com>"
+    }
+  }
+}
