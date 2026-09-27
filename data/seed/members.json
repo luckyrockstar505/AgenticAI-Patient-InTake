@@ -1,0 +1,74 @@
+[
+  {
+    "persona": "P1",
+    "member_id": "ABC100000001",
+    "first_name": "Jane",
+    "last_name": "Doe",
+    "dob": "1985-03-04",
+    "zip": "95814",
+    "employer_group": "Acme Corp",
+    "subscriber_name": "Jane Doe",
+    "relationship": "self",
+    "payer_id": "MOCKPAYER01"
+  },
+  {
+    "persona": "P2",
+    "member_id": "ABC100000002",
+    "first_name": "Robert",
+    "last_name": "Chen",
+    "dob": "1972-11-20",
+    "zip": "94107",
+    "employer_group": "Globex Inc",
+    "subscriber_name": "Robert Chen",
+    "relationship": "self",
+    "payer_id": "MOCKPAYER01"
+  },
+  {
+    "persona": "P3",
+    "member_id": "ABC100000003",
+    "first_name": "Maria",
+    "last_name": "Garcia",
+    "dob": "1990-07-15",
+    "zip": "95630",
+    "employer_group": "Initech",
+    "subscriber_name": "Maria Garcia",
+    "relationship": "self",
+    "payer_id": "MOCKPAYER01"
+  },
+  {
+    "persona": "P4",
+    "member_id": "ABC100000004",
+    "first_name": "Katherine",
+    "last_name": "Nguyen",
+    "dob": "1988-02-28",
+    "zip": "95670",
+    "employer_group": "Umbrella Health",
+    "subscriber_name": "Tom Nguyen",
+    "relationship": "spouse",
+    "payer_id": "MOCKPAYER01"
+  },
+  {
+    "persona": "P5",
+    "member_id": "ABC100000005",
+    "first_name": "Samuel",
+    "last_name": "Okafor",
+    "dob": "1965-09-09",
+    "zip": "95819",
+    "employer_group": "Stark Logistics",
+    "subscriber_name": "Samuel Okafor",
+    "relationship": "self",
+    "payer_id": "MOCKPAYER01"
+  },
+  {
+    "persona": "P7",
+    "member_id": "ABC100000007",
+    "first_name": "Priya",
+    "last_name": "Raman",
+    "dob": "1995-12-01",
+    "zip": "95035",
+    "employer_group": "Wayne Analytics",
+    "subscriber_name": "Priya Raman",
+    "relationship": "self",
+    "payer_id": "MOCKPAYER01"
+  }
+]

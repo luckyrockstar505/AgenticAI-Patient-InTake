@@ -1,0 +1,188 @@
+[
+  {
+    "member_id": "ABC100000001",
+    "plan_name": "Silver PPO 2500",
+    "plan_type": "PPO",
+    "group_name": "Acme Corp",
+    "effective_date": "2026-01-01",
+    "termination_date": "2026-12-31",
+    "status": "active",
+    "network": "in-network required for full benefits",
+    "deductible": {
+      "individual": 2500,
+      "met": 800,
+      "remaining": 1700
+    },
+    "oop_max": {
+      "individual": 7000,
+      "met": 1200,
+      "remaining": 5800
+    },
+    "copays": {
+      "pcp": 25,
+      "specialist": 50,
+      "urgent_care": 75,
+      "er": 300
+    },
+    "coinsurance_pct": 20,
+    "coverage_period": {
+      "start": "2026-01-01",
+      "end": "2026-12-31"
+    }
+  },
+  {
+    "member_id": "ABC100000002",
+    "plan_name": "Gold HMO 1000",
+    "plan_type": "HMO",
+    "group_name": "Globex Inc",
+    "effective_date": "2026-01-01",
+    "termination_date": "2026-12-31",
+    "status": "active",
+    "network": "HMO \u2014 referrals required for specialists",
+    "deductible": {
+      "individual": 1000,
+      "met": 200,
+      "remaining": 800
+    },
+    "oop_max": {
+      "individual": 5000,
+      "met": 400,
+      "remaining": 4600
+    },
+    "copays": {
+      "pcp": 15,
+      "specialist": 35,
+      "urgent_care": 50,
+      "er": 250
+    },
+    "coinsurance_pct": 10,
+    "coverage_period": {
+      "start": "2026-01-01",
+      "end": "2026-12-31"
+    }
+  },
+  {
+    "member_id": "ABC100000003",
+    "plan_name": "Bronze HDHP 6000",
+    "plan_type": "HDHP",
+    "group_name": "Initech",
+    "effective_date": "2026-01-01",
+    "termination_date": "2026-12-31",
+    "status": "active",
+    "network": "in-network required for full benefits",
+    "deductible": {
+      "individual": 6000,
+      "met": 0,
+      "remaining": 6000
+    },
+    "oop_max": {
+      "individual": 8000,
+      "met": 0,
+      "remaining": 8000
+    },
+    "copays": {
+      "pcp": 0,
+      "specialist": 0,
+      "urgent_care": 0,
+      "er": 0
+    },
+    "coinsurance_pct": 30,
+    "coverage_period": {
+      "start": "2026-01-01",
+      "end": "2026-12-31"
+    }
+  },
+  {
+    "member_id": "ABC100000004",
+    "plan_name": "Silver PPO 2500",
+    "plan_type": "PPO",
+    "group_name": "Umbrella Health",
+    "effective_date": "2026-01-01",
+    "termination_date": "2026-12-31",
+    "status": "active",
+    "network": "in-network required for full benefits",
+    "deductible": {
+      "individual": 2500,
+      "met": 1500,
+      "remaining": 1000
+    },
+    "oop_max": {
+      "individual": 7000,
+      "met": 2100,
+      "remaining": 4900
+    },
+    "copays": {
+      "pcp": 25,
+      "specialist": 50,
+      "urgent_care": 75,
+      "er": 300
+    },
+    "coinsurance_pct": 20,
+    "coverage_period": {
+      "start": "2026-01-01",
+      "end": "2026-12-31"
+    }
+  },
+  {
+    "member_id": "ABC100000005",
+    "plan_name": "Silver PPO 3000",
+    "plan_type": "PPO",
+    "group_name": "Stark Logistics",
+    "effective_date": "2026-01-01",
+    "termination_date": "2026-06-30",
+    "status": "terminated",
+    "network": "in-network required for full benefits",
+    "deductible": {
+      "individual": 3000,
+      "met": 3000,
+      "remaining": 0
+    },
+    "oop_max": {
+      "individual": 7500,
+      "met": 3600,
+      "remaining": 3900
+    },
+    "copays": {
+      "pcp": 25,
+      "specialist": 50,
+      "urgent_care": 75,
+      "er": 300
+    },
+    "coinsurance_pct": 20,
+    "coverage_period": {
+      "start": "2026-01-01",
+      "end": "2026-06-30"
+    }
+  },
+  {
+    "member_id": "ABC100000007",
+    "plan_name": "Gold PPO 1500",
+    "plan_type": "PPO",
+    "group_name": "Wayne Analytics",
+    "effective_date": "2026-01-01",
+    "termination_date": "2026-12-31",
+    "status": "active",
+    "network": "in-network required for full benefits",
+    "deductible": {
+      "individual": 1500,
+      "met": 1500,
+      "remaining": 0
+    },
+    "oop_max": {
+      "individual": 6000,
+      "met": 2900,
+      "remaining": 3100
+    },
+    "copays": {
+      "pcp": 20,
+      "specialist": 40,
+      "urgent_care": 60,
+      "er": 250
+    },
+    "coinsurance_pct": 15,
+    "coverage_period": {
+      "start": "2026-01-01",
+      "end": "2026-12-31"
+    }
+  }
+]

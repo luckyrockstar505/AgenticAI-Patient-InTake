@@ -27,7 +27,7 @@ activation_steps_append = []
 persistent_facts = []
 
 # Where research runs live and how each run folder is named. Draft, Process,
-# and Run all use the same folder shape: brief.md (drafted prompts),
+# and Run all use the same folder shape: intake-brief.md (drafted prompts),
 # imports/ (originals, full fidelity), digests/ (extracted claims),
 # research.md (the canonical summary/report), .memlog.md.
 research_output_path = "{planning_artifacts}/research"

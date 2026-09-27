@@ -42,7 +42,7 @@ When invoked headless, do not ask. Complete the intent using what is provided, w
 {
   "status": "complete",
   "intent": "create",
-  "brief": "{doc_workspace}/brief.md",
+  "brief": "{doc_workspace}/intake-brief.md",
   "addendum": "{doc_workspace}/addendum.md",
   "memlog": "{doc_workspace}/.memlog.md",
   "open_questions": [],
