@@ -1,0 +1,22 @@
+_bmad-output/planning-artifacts/prds/prd-AgenticAI-Patient-InTake-2026-09-27/.memlog.md
+  s_35caad9d45fb32::t_0c7d8f7ceb68fb 3,12
+_bmad-output/workshop-walkthrough.html
+  s_35caad9d45fb32::t_43907682282a70 527-531,533-547,557,562-566
+  s_35caad9d45fb32::t_3c4a59b6e14de2 264
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2d4b1d61d77d0127bf6e5c7737f552e7e6d30ba1",
+  "prompts": {},
+  "sessions": {
+    "s_35caad9d45fb32": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d83052ea-1ded-4160-b1e7-6a4993ea8d47",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Srimaan Yarram <srimaan.yarram@gmail.com>"
+    }
+  }
+}
