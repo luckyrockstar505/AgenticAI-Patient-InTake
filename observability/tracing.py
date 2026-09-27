@@ -11,7 +11,7 @@ from typing import Any
 
 
 @contextmanager
-def span(name: str, **attributes: Any) -> Generator[None, None, None]:
+def span(name: str, **attributes: Any) -> Generator[None]:
     """Context manager that records an MLflow span.
 
     Story 1.4 provides the real implementation.

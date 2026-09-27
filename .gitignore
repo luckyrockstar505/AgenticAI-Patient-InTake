@@ -101,4 +101,4 @@ mlruns/
 mlartifacts/
 
 # uv
-.python-version
+# .python-version intentionally tracked for uv pin consistency

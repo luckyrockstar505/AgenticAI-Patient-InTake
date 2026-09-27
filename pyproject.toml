@@ -2,7 +2,7 @@
 name = "claims-intake-agent"
 version = "0.1.0"
 description = "AI-powered insurance claims intake agent — BMAD demo"
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 readme = "README.md"
 license = { text = "MIT" }
 
@@ -57,7 +57,7 @@ packages = ["agent", "api", "evals", "mcp_tools", "observability", "shared"]
 # ---------------------------------------------------------------------------
 [tool.ruff]
 line-length = 100
-target-version = "py312"
+target-version = "py313"
 # Only lint project source code — exclude pre-existing framework directories
 exclude = [
     "_bmad",
@@ -77,7 +77,7 @@ ignore = ["E501"]  # line length enforced by formatter
 known-first-party = ["agent", "api", "evals", "mcp_tools", "observability", "shared"]
 
 [tool.mypy]
-python_version = "3.12"
+python_version = "3.13"
 strict = false
 ignore_missing_imports = true
 # Only check project source — exclude pre-existing framework directories
