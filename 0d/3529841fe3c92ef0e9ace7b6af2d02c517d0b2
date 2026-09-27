@@ -1,0 +1,53 @@
+mcp_tools/db/migrations/alembic.ini
+  s_35caad9d45fb32::t_c250e2b7a3342c 1-43
+mcp_tools/db/models.py
+  s_35caad9d45fb32::t_3d79efeb08ae31 32-37,49,51-52,65-66,69,87-89,94,99-100,116-118,129-131
+  s_35caad9d45fb32::t_5798aae14afae8 1-31,38-48,50,53-64,67-68,70-86,90-93,95-98,101-115,119-128,132-134
+mcp_tools/db/migrations/script.py.mako
+  s_35caad9d45fb32::t_dff8900b48d963 1-28
+_bmad-output/implementation-artifacts/spec-2-1-db-schema-migrations-synthetic-seed.md
+  s_35caad9d45fb32::t_6631a41f3b84f6 5
+  s_35caad9d45fb32::t_4f10b3ae76fb0c 75
+  s_35caad9d45fb32::t_2420409896cbba 1-4,6-63,72-74,76-92
+  s_35caad9d45fb32::t_e4b63be8beca9b 64-71
+mcp_tools/db/session.py
+  s_35caad9d45fb32::t_db715cce74d1bc 1-13,20-55,57-74
+  s_35caad9d45fb32::t_aeaa6ce79c5728 14-19
+  s_35caad9d45fb32::t_d94838a104a95f 56
+mcp_tools/db/__init__.py
+  s_35caad9d45fb32::t_88dd6011a54db5 1-23
+_bmad-output/implementation-artifacts/epic-2-context.md
+  s_35caad9d45fb32::t_664d3b545cd63a 1-60
+scripts/seed.py
+  s_35caad9d45fb32::t_505c8189c37a8e 1-144
+Makefile
+  s_35caad9d45fb32::t_2ad66cbeea96ab 17
+  s_35caad9d45fb32::t_454678ee12c876 54-57,60
+tests/unit/test_models.py
+  s_35caad9d45fb32::t_f097c224561764 148-157
+  s_35caad9d45fb32::t_cc1a9a9d9de92e 63-67,73,79-82,95-99,106-108
+  s_35caad9d45fb32::t_8ce4ccf7528df7 1-62,68-72,74-78,83-94,100-105,109-147
+tests/integration/test_seed.py
+  s_35caad9d45fb32::t_91b3834443de02 1-217
+mcp_tools/db/migrations/env.py
+  s_35caad9d45fb32::t_e9fecc704a6a76 1-78
+mcp_tools/db/migrations/versions/0001_initial.py
+  s_35caad9d45fb32::t_b5a4d027a6f4bb 1-10,12-18,22-87,89-105,108-190
+  s_35caad9d45fb32::t_2ae3cf1578eee1 11,19-21,88,106-107
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "0d3529841fe3c92ef0e9ace7b6af2d02c517d0b2",
+  "prompts": {},
+  "sessions": {
+    "s_35caad9d45fb32": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d83052ea-1ded-4160-b1e7-6a4993ea8d47",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Srimaan Yarram <srimaan.yarram@gmail.com>"
+    }
+  }
+}
