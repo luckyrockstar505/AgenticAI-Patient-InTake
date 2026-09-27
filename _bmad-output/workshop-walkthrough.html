@@ -261,6 +261,7 @@
     <div class="chip">Method <strong>BMad</strong></div>
     <div class="chip">Model <strong>Claude Sonnet 4.6</strong></div>
     <div class="chip">Steps completed <strong>5 of 7</strong></div>
+    <div class="chip">Deploy <strong>AWS AgentCore</strong></div>
   </div>
 </div>
 
@@ -523,10 +524,27 @@
       <div class="chevron">▾</div>
     </div>
     <div class="step-body">
-      <p style="color:var(--muted); font-size:13px;">Workshop rule: three epics max, in build order. Story 1 is always the data layer. Each story must fit one session (20–30 min of agent work) and pass the four ready-to-build checks: fits one session · reviewer can say pass/fail · names files/tables/tools · does one thing.</p>
+      <p style="color:var(--muted); font-size:13px; margin-bottom:14px;">29 stories exist across 8 epics in <code>docs/epics/</code> and <code>docs/stories/</code>. Claude Code builds the critical path only — not all 29. Each story: 20–30 min of agent work.</p>
+      <div class="what-box">
+        <h4>🔑 Architectural decision — deploy</h4>
+        <p style="font-size:13px;"><strong>AWS AgentCore (Bedrock AgentCore Runtime)</strong> replaces ECS Fargate + Terraform. Epic 7 collapses from 3 stories → 1 deploy command. AgentCore Memory can replace Postgres checkpointer. Saves ~40 min.</p>
+      </div>
       <div class="what-box" style="margin-top:12px;">
-        <h4>Expected epic order</h4>
-        <p style="font-size:13px;">Epic 1: Data &amp; seed layer + golden dataset · Epic 2: Agent core (verification + intake flow) · Epic 3: Eval, tracing, CI/CD</p>
+        <h4>Critical path — 2.5 hr build window</h4>
+        <p style="font-size:13px; font-family:var(--mono);">
+          1. DB schema + seed data ·····20 min<br>
+          2. Golden dataset 20 rows ····15 min<br>
+          3. MCP tools (cover+verify+case)30 min<br>
+          4. LangGraph agent ···········40 min<br>
+          5. FastAPI chat endpoint ·····20 min<br>
+          6. Deploy to AgentCore ·······25 min<br>
+          7. Eval run + results.json ···15 min<br>
+          8. Presentation update ·······10 min
+        </p>
+      </div>
+      <div class="what-box" style="margin-top:12px;">
+        <h4>Deferred / stretch</h4>
+        <p style="font-size:13px; color:var(--muted);">Full GitHub Actions CI · Vercel dashboard · Voice (Epic 8) · Red team · Full AWS infra (Terraform)</p>
       </div>
     </div>
   </div>
@@ -536,12 +554,16 @@
       <div class="step-num upcoming">7</div>
       <div class="step-title-block">
         <div class="step-title">Build, Eval &amp; Ship <span class="step-badge badge-next">Upcoming</span></div>
-        <div class="step-skill">/bmad-build → mlflow eval → results.json → CI green → Vercel</div>
+        <div class="step-skill">/bmad-build → mlflow eval → results.json → AgentCore deploy</div>
       </div>
       <div class="chevron">▾</div>
     </div>
     <div class="step-body">
-      <p style="color:var(--muted); font-size:13px;">Build loop: one story per branch → /bmad-code-review → tests pass → merge. Eval: run against 20 labelled scenarios, export results.json. Ship: GitHub Actions CI (no model calls) + Vercel dashboard reading results.json. Holdout eval at 3:00.</p>
+      <p style="color:var(--muted); font-size:13px; margin-bottom:12px;">Build loop per story: one branch → /bmad-code-review → tests pass → merge → next story. Eval: run against 20 labelled scenarios, export results.json. Deploy: AgentCore Runtime (single command, no Terraform). Holdout eval at 3:00.</p>
+      <div class="what-box">
+        <h4>Epic 9 — Presentation (parallel track)</h4>
+        <p style="font-size:13px;">Story 9.1: Demo script · Story 9.2: Results dashboard (Vercel reads results.json) · Story 9.3: Slides — <code>workshop-walkthrough.html</code> is already the foundation.</p>
+      </div>
     </div>
   </div>
 
