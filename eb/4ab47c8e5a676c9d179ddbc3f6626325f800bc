@@ -1,0 +1,19 @@
+.gitignore
+  s_0b67de214459b9::t_096510651722ad 1-96
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "eb4ab47c8e5a676c9d179ddbc3f6626325f800bc",
+  "prompts": {},
+  "sessions": {
+    "s_0b67de214459b9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4f773422-a80e-4822-8f8e-edc7ddc2f40a",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Srimaan Yarram <srimaan.yarram@gmail.com>"
+    }
+  }
+}
