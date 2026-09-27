@@ -1,0 +1,44 @@
+_bmad-output/planning-artifacts/prds/prd-AgenticAI-Patient-InTake-2026-09-27/.memlog.md
+  s_35caad9d45fb32::t_c3323a6a20eba8 10
+  s_35caad9d45fb32::t_afc95b519fddfb 1-2,4-5
+  s_35caad9d45fb32::t_a928c7000087ba 8
+  s_35caad9d45fb32::t_9a351a9348ef9d 7
+  s_35caad9d45fb32::t_44376e4eb7b575 6
+  s_35caad9d45fb32::t_5da11147b54441 3,11
+  s_35caad9d45fb32::t_98e92a50eec479 9
+_bmad-output/planning-artifacts/prds/prd-AgenticAI-Patient-InTake-2026-09-27/review-party-mode.md
+  s_35caad9d45fb32::t_6f6e818d27eb28 1-69
+_bmad-output/planning-artifacts/prds/prd-AgenticAI-Patient-InTake-2026-09-27/prd.md
+  s_35caad9d45fb32::t_f76e151e30cd41 1-150
+docs/.memlog.md
+  s_35caad9d45fb32::t_0c6c225e976273 6
+  s_35caad9d45fb32::t_5e3de6ece930a6 3,7-10
+  s_35caad9d45fb32::t_505f051833cc1d 1-2,4-5
+docs/intake-brief.md
+  s_35caad9d45fb32::t_b72e1be987f696 215-228
+  s_35caad9d45fb32::t_13f4c0f7e2e008 92-168
+  s_35caad9d45fb32::t_2f301bd895c4bd 173-174,183-184
+_bmad-output/workshop-walkthrough.html
+  s_35caad9d45fb32::t_3f9a43009e53e2 435-438,440-441,446-447,449-494,496-509
+  s_35caad9d45fb32::t_94927237008170 514,516-518,520
+  s_35caad9d45fb32::t_74f7b2a3be8a9d 552-553,557,561,565-569
+  s_35caad9d45fb32::t_30ae13fcb08d95 278-279,281
+  s_35caad9d45fb32::t_3fb1a028e9960e 263
+  s_35caad9d45fb32::t_091869c6e081dc 1-262,264-277,280,282-434,439,442-445,448,495,510-513,515,519,521-551,554-556,558-560,562-564,570-590
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "eeb8c65ef3405ae1b6c7f383889453f3b294bea1",
+  "prompts": {},
+  "sessions": {
+    "s_35caad9d45fb32": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d83052ea-1ded-4160-b1e7-6a4993ea8d47",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Srimaan Yarram <srimaan.yarram@gmail.com>"
+    }
+  }
+}
