@@ -3,7 +3,7 @@ type: party-mode-review
 date: 2026-09-27
 participants: Mary (Analyst), John (PM), Winston (Architect), Sally (UX Designer)
 artifact: prd.md
-status: open
+status: partially-resolved
 ---
 
 # Party Mode Review — Claims Intake Agent PRD
@@ -67,3 +67,14 @@ uv run _bmad/scripts/memlog.py append \
   --workspace _bmad-output/planning-artifacts/prds/prd-AgenticAI-Patient-InTake-2026-09-27 \
   --type decision --text "<what was decided and why>"
 ```
+
+## Disposition (second pass)
+
+- **A-1, A-2, A-3, A-4** — already resolved per `.memlog.md`; folded into `prd.md` (FR-3.3, FR-1.1/FR-5.1, FR-5.2/FR-6.3, FR-5.4).
+- **A-5** — resolved: state table added to `prd.md`; full diagram still belongs in `docs/architecture.md` (satisfies both Winston's and Mary's C-2 positions).
+- **A-6** — resolved: NFR-6 concurrency floor (≥10 sessions) added.
+- **A-8** — resolved: one-line competitive context added under Goal.
+- **A-9** — resolved: mock-mode note added as NFR-4.
+- **A-7** — not resolved; moved to `prd.md` Backlog (needs a dataset to add the scenario to, see below).
+- **C-1, C-3** — still contested; carried into `prd.md` Open Items for Srimaan's call, with a safe default (event-only audit log) applied to FR-6.4 until decided.
+- **New finding this pass:** `docs/intake-brief.md` §5a's golden-dataset design (`eval/labelled_claims.csv`) and the repo's existing `evals/datasets/*.jsonl` + `evals/thresholds.yaml` are two different, already-built-vs-proposed eval designs for the same product. Neither review pass caught this since it wasn't cross-checked against the actual `evals/` folder. Carried into `prd.md` Open Items — blocks FR-8.2 and A-7 until resolved.
