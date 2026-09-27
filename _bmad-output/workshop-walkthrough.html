@@ -260,7 +260,7 @@
     <div class="chip">Project <strong>AgenticAI-Patient-InTake</strong></div>
     <div class="chip">Method <strong>BMad</strong></div>
     <div class="chip">Model <strong>Claude Sonnet 4.6</strong></div>
-    <div class="chip">Steps completed <strong>5 of 7</strong></div>
+    <div class="chip">Steps completed <strong>6 of 7</strong></div>
     <div class="chip">Deploy <strong>AWS AgentCore</strong></div>
   </div>
 </div>
@@ -278,10 +278,10 @@
     <div class="step-dot done"><div class="dot">✓</div><div class="label">Party Review</div></div>
     <div class="step-line done"></div>
     <div class="step-dot done"><div class="dot">✓</div><div class="label">PRD Fix</div></div>
+    <div class="step-line done"></div>
+    <div class="step-dot done"><div class="dot">✓</div><div class="label">Epics &amp; Stories</div></div>
     <div class="step-line"></div>
-    <div class="step-dot active"><div class="dot">6</div><div class="label">Epics &amp; Stories</div></div>
-    <div class="step-line"></div>
-    <div class="step-dot"><div class="dot">7</div><div class="label">Build &amp; Eval</div></div>
+    <div class="step-dot active"><div class="dot">7</div><div class="label">Build &amp; Eval</div></div>
   </div>
 
   <!-- ── COMPLETED STEPS ── -->
@@ -511,20 +511,20 @@
     </div>
   </div>
 
-  <!-- ── UPCOMING STEPS ── -->
-  <div class="section-label">Active — next step</div>
+  <!-- ── STEP 6 DONE ── -->
+  <div class="section-label">Completed steps (continued)</div>
 
-  <div class="step-card" style="border-color: var(--accent2);">
-    <div class="step-header" onclick="toggle(this)" style="background:#0f1f22;">
-      <div class="step-num" style="background:var(--accent2);color:#000;">6</div>
+  <div class="step-card">
+    <div class="step-header" onclick="toggle(this)">
+      <div class="step-num">6</div>
       <div class="step-title-block">
-        <div class="step-title">Epics &amp; Stories <span class="step-badge badge-active">Next</span></div>
-        <div class="step-skill">/bmad-create-epics-and-stories → /bmad-spec epic-1</div>
+        <div class="step-title">Epics &amp; Stories <span class="step-badge badge-done">Done</span></div>
+        <div class="step-skill">/bmad-create-epics-and-stories — 9 epics · 28 stories · all validated</div>
       </div>
       <div class="chevron">▾</div>
     </div>
     <div class="step-body">
-      <p style="color:var(--muted); font-size:13px; margin-bottom:14px;">29 stories exist across 8 epics in <code>docs/epics/</code> and <code>docs/stories/</code>. Claude Code builds the critical path only — not all 29. Each story: 20–30 min of agent work.</p>
+      <p style="color:var(--muted); font-size:13px; margin-bottom:14px;">Full epic/story breakdown created and validated. 9 epics, 28 stories (E8 stretch, E5/6/7 partially deferred). All FRs/NFRs/UX-DRs covered. Dependency chain clean. <strong>Bharath → Track A (Agent) · Srimaan → Track B (Platform)</strong>.</p>
       <div class="what-box">
         <h4>🔑 Architectural decision — deploy</h4>
         <p style="font-size:13px;"><strong>AWS AgentCore (Bedrock AgentCore Runtime)</strong> replaces ECS Fargate + Terraform. Epic 7 collapses from 3 stories → 1 deploy command. AgentCore Memory can replace Postgres checkpointer. Saves ~40 min.</p>
@@ -549,20 +549,29 @@
     </div>
   </div>
 
-  <div class="step-card">
-    <div class="step-header" onclick="toggle(this)">
-      <div class="step-num upcoming">7</div>
+  <div class="section-label">Active — next step</div>
+
+  <div class="step-card" style="border-color:var(--accent2);">
+    <div class="step-header" onclick="toggle(this)" style="background:#0f1f22;">
+      <div class="step-num" style="background:var(--accent2);color:#000;">7</div>
       <div class="step-title-block">
-        <div class="step-title">Build, Eval &amp; Ship <span class="step-badge badge-next">Upcoming</span></div>
+        <div class="step-title">Build, Eval &amp; Ship <span class="step-badge badge-active">Now</span></div>
         <div class="step-skill">/bmad-build → mlflow eval → results.json → AgentCore deploy</div>
       </div>
       <div class="chevron">▾</div>
     </div>
     <div class="step-body">
-      <p style="color:var(--muted); font-size:13px; margin-bottom:12px;">Build loop per story: one branch → /bmad-code-review → tests pass → merge → next story. Eval: run against 20 labelled scenarios, export results.json. Deploy: AgentCore Runtime (single command, no Terraform). Holdout eval at 3:00.</p>
+      <p style="color:var(--muted); font-size:13px; margin-bottom:12px;">Build loop per story: one branch → /bmad-code-review → tests pass → merge → next story. Eval: run against 20 labelled scenarios, export results.json. Deploy: AgentCore Runtime. Holdout eval at 3:00.</p>
       <div class="what-box">
-        <h4>Epic 9 — Presentation (parallel track)</h4>
-        <p style="font-size:13px;">Story 9.1: Demo script · Story 9.2: Results dashboard (Vercel reads results.json) · Story 9.3: Slides — <code>workshop-walkthrough.html</code> is already the foundation.</p>
+        <h4>Build order (critical path)</h4>
+        <p style="font-size:13px; font-family:var(--mono);">
+          Srimaan: 1.1 → 2.0 → 2.1 → 2.2 → 2.3 → 2.4 → 2.5 → 5.1 → 6.1 → 7.1 → 9.2<br>
+          Bharath: 1.3 → 1.4 → 3.1 → 3.2 → 3.3 → 3.4 → 3.5 → 4.1 → 4.2 → 4.3 → 9.1
+        </p>
+      </div>
+      <div class="what-box" style="margin-top:12px;">
+        <h4>Epic 9 — Presentation (parallel)</h4>
+        <p style="font-size:13px;">9.1 Demo script (Bharath) · 9.2 Vercel dashboard (Srimaan) · 9.3 This HTML updated with final results (both)</p>
       </div>
     </div>
   </div>
