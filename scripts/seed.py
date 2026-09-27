@@ -36,15 +36,13 @@ def _build_engine():
     """Build an async SQLAlchemy engine from DATABASE_URL."""
     from sqlalchemy.ext.asyncio import create_async_engine  # noqa: PLC0415
 
+    from mcp_tools.db.utils import normalise_db_url  # noqa: PLC0415
+
     db_url = os.environ.get("DATABASE_URL", "")
     if not db_url:
         print("ERROR: DATABASE_URL environment variable is not set.", file=sys.stderr)
         sys.exit(1)
-    if db_url.startswith("postgresql://"):
-        db_url = "postgresql+psycopg" + db_url[len("postgresql"):]
-    elif db_url.startswith("postgresql+psycopg2://"):
-        db_url = "postgresql+psycopg" + db_url[len("postgresql+psycopg2"):]
-    return create_async_engine(db_url, echo=False, pool_pre_ping=True)
+    return create_async_engine(normalise_db_url(db_url), echo=False, pool_pre_ping=True)
 
 
 async def _run_seed() -> None:

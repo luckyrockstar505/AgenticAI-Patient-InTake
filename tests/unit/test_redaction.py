@@ -89,6 +89,20 @@ def fresh() -> Redactor:
             ["[PHONE]"],
             ["800.555.1234"],
         ),
+        # ---- SSN -------------------------------------------------------------
+        (
+            "ssn_in_string",
+            "SSN 123-45-6789",
+            ["[SSN]"],
+            ["123-45-6789"],
+        ),
+        # ---- NPI in dict -----------------------------------------------------
+        (
+            "npi_in_dict",
+            {"provider_npi": "1234567890"},
+            ["[NPI]"],
+            ["1234567890"],
+        ),
     ],
 )
 def test_redact_matrix(
@@ -198,3 +212,12 @@ def test_multiple_phi_in_one_string() -> None:
     assert "ABC123456789" not in result
     assert "1990-01-15" not in result
     assert "206-555-0199" not in result
+
+
+def test_eleven_digit_number_not_redacted_as_npi() -> None:
+    """An 11-digit number should NOT be redacted as NPI (boundary check)."""
+    s = "number 12345678901"
+    result = redact(s)
+    # The NPI regex requires exactly 10 digits not surrounded by other digits,
+    # so 11 consecutive digits must not match.
+    assert "[NPI]" not in result

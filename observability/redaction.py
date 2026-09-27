@@ -7,18 +7,19 @@ Masks: member IDs, DOB, ZIP, phone, email, NPI, and per-session known values
 
 Usage
 -----
-    from observability.redaction import redact, _default_redactor
+    from observability.redaction import redact, get_redactor
 
     # One-off redaction (uses the process-wide default instance):
     clean = redact({"member_id": "ABC123456789", "note": "Hello Maria"})
 
     # Per-session known-value registration:
-    _default_redactor.register("Maria Garcia")
-    _default_redactor.register("ABC123456789")
+    get_redactor().register("Maria Garcia")
+    get_redactor().register("ABC123456789")
 """
 from __future__ import annotations
 
 import re
+import threading
 from typing import Any
 
 # ---------------------------------------------------------------------------
@@ -59,6 +60,7 @@ class Redactor:
 
     def __init__(self) -> None:
         self._known_values: set[str] = set()
+        self._lock = threading.Lock()
 
     # ------------------------------------------------------------------
     # Public API
@@ -72,7 +74,8 @@ class Redactor:
         full names, member IDs, or any other per-session sensitive string.
         """
         if value and isinstance(value, str):
-            self._known_values.add(value)
+            with self._lock:
+                self._known_values.add(value)
 
     def redact(self, obj: Any) -> Any:
         """Recursively redact PHI from *obj*.
@@ -98,10 +101,14 @@ class Redactor:
 
     def _redact_string(self, s: str) -> str:
         # 1. Known-value masking (longest values first to avoid partial hits)
-        for val in sorted(self._known_values, key=len, reverse=True):
-            if val in s:
+        # Copy the set under the lock to avoid holding the lock during regex ops.
+        with self._lock:
+            known = frozenset(self._known_values)
+
+        for val in sorted(known, key=len, reverse=True):
+            if val.lower() in s.lower():
                 replacement = "[ID]" if _MEMBER_ID_RE.fullmatch(val) else "[NAME]"
-                s = s.replace(val, replacement)
+                s = re.sub(re.escape(val), replacement, s, flags=re.IGNORECASE)
 
         # 2. SSN (before phone so ###-##-#### isn't consumed by phone RE)
         s = _SSN_RE.sub("[SSN]", s)
@@ -128,13 +135,28 @@ class Redactor:
 
 
 # ---------------------------------------------------------------------------
-# Module-level default instance + convenience function
+# Module-level default instance + convenience functions
 # ---------------------------------------------------------------------------
 
 #: Process-wide default redactor.  ``init_tracing()`` in ``tracing.py``
 #: attaches this to the MLflow span processor.  Call
-#: ``_default_redactor.register(value)`` per session to add known values.
+#: ``get_redactor().register(value)`` per session to add known values.
 _default_redactor = Redactor()
+
+
+def get_redactor() -> Redactor:
+    """Return the process-wide default :class:`Redactor` instance."""
+    return _default_redactor
+
+
+def clear_default_redactor() -> None:
+    """Replace the default redactor with a fresh instance.
+
+    Intended for session cleanup and test teardown to prevent known-value
+    bleed between sessions or test cases.
+    """
+    global _default_redactor
+    _default_redactor = Redactor()
 
 
 def redact(value: Any) -> Any:

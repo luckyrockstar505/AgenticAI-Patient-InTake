@@ -1,9 +1,10 @@
 """Database engine factory and async session utilities.
 
 Exports:
-  get_engine(url)  — create an AsyncEngine from a DATABASE_URL
-  get_session(url) — async context manager yielding an AsyncSession
-  Base             — re-exported from models for convenience
+  get_engine(url)   — create or return the cached AsyncEngine
+  get_session(url)  — async context manager yielding an AsyncSession
+  reset_engine()    — set the module-level cache to None (for tests)
+  Base              — re-exported from models for convenience
 """
 from __future__ import annotations
 
@@ -19,24 +20,16 @@ from sqlalchemy.ext.asyncio import (
 )
 
 from mcp_tools.db.models import Base
+from mcp_tools.db.utils import normalise_db_url
 
-__all__ = ["Base", "get_engine", "get_session"]
+__all__ = ["Base", "get_engine", "get_session", "reset_engine"]
 
-
-def _normalise_url(url: str) -> str:
-    """Ensure the URL uses the psycopg3 async driver prefix."""
-    if url.startswith("postgresql://"):
-        # plain URL → psycopg3
-        return "postgresql+psycopg" + url[len("postgresql"):]
-    if url.startswith("postgresql+psycopg2://"):
-        # legacy psycopg2 → psycopg3
-        return "postgresql+psycopg" + url[len("postgresql+psycopg2"):]
-    # already has the correct prefix (postgresql+psycopg://)
-    return url
+# Module-level singleton — created once, reused for the lifetime of the process.
+_engine: AsyncEngine | None = None
 
 
 def get_engine(url: str | None = None) -> AsyncEngine:
-    """Create and return a new AsyncEngine.
+    """Return the module-level cached AsyncEngine, creating it on first call.
 
     Parameters
     ----------
@@ -44,12 +37,26 @@ def get_engine(url: str | None = None) -> AsyncEngine:
         SQLAlchemy database URL.  Falls back to the ``DATABASE_URL``
         environment variable when *url* is ``None``.
     """
-    db_url = url or os.environ.get("DATABASE_URL", "")
-    if not db_url:
-        raise ValueError(
-            "A database URL must be supplied via the url parameter or DATABASE_URL env var."
+    global _engine
+    if _engine is None:
+        db_url = url or os.environ.get("DATABASE_URL", "")
+        if not db_url:
+            raise ValueError(
+                "A database URL must be supplied via the url parameter or DATABASE_URL env var."
+            )
+        _engine = create_async_engine(
+            normalise_db_url(db_url), echo=False, pool_pre_ping=True
         )
-    return create_async_engine(_normalise_url(db_url), echo=False, pool_pre_ping=True)
+    return _engine
+
+
+def reset_engine() -> None:
+    """Reset the module-level engine singleton to None.
+
+    Intended for use in tests that need a fresh engine between test cases.
+    """
+    global _engine
+    _engine = None
 
 
 @asynccontextmanager
@@ -70,5 +77,3 @@ async def get_session(url: str | None = None) -> AsyncGenerator[AsyncSession]:
         except Exception:
             await session.rollback()
             raise
-        finally:
-            await engine.dispose()

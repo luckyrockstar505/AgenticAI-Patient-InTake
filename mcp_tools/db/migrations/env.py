@@ -16,6 +16,7 @@ from sqlalchemy import engine_from_config, pool
 # Import Base so that Alembic can reference the metadata for autogenerate.
 # (Autogenerate is disabled per spec — write migrations by hand.)
 from mcp_tools.db.models import Base
+from mcp_tools.db.utils import normalise_db_url
 
 config = context.config
 
@@ -36,11 +37,7 @@ def _get_url() -> str:
         )
     # Alembic uses the sync SQLAlchemy engine.
     # psycopg3 (postgresql+psycopg://) supports sync mode natively — no change needed.
-    if url.startswith("postgresql://"):
-        url = "postgresql+psycopg" + url[len("postgresql"):]
-    elif url.startswith("postgresql+psycopg2://"):
-        url = "postgresql+psycopg" + url[len("postgresql+psycopg2"):]
-    return url
+    return normalise_db_url(url)
 
 
 def run_migrations_offline() -> None:

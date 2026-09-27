@@ -9,15 +9,17 @@ UV := uv
 help:
 	@echo ""
 	@echo "Claims Intake Agent — available targets"
-	@echo "  make up      Build images and start all four services"
-	@echo "  make down    Stop and remove containers (keeps volumes)"
-	@echo "  make test    Run unit tests with pytest"
-	@echo "  make eval    Run the eval suite (exits 0 even with no scenarios)"
-	@echo "  make lint    Run ruff + mypy"
-	@echo "  make migrate Run Alembic migrations (alembic upgrade head)"
-	@echo "  make seed    Seed the database with synthetic member data"
-	@echo "  make logs    Tail logs for all running containers"
-	@echo "  make lock    Regenerate uv.lock from pyproject.toml"
+	@echo "  make up               Build images and start all four services"
+	@echo "  make down             Stop and remove containers (keeps volumes)"
+	@echo "  make test             Run unit tests with pytest"
+	@echo "  make test-integration Run integration tests with pytest"
+	@echo "  make test-all         Run unit + integration tests"
+	@echo "  make eval             Run the eval suite (exits 0 even with no scenarios)"
+	@echo "  make lint             Run ruff + mypy"
+	@echo "  make migrate          Run Alembic migrations (alembic upgrade head)"
+	@echo "  make seed             Seed the database with synthetic member data"
+	@echo "  make logs             Tail logs for all running containers"
+	@echo "  make lock             Regenerate uv.lock from pyproject.toml"
 	@echo ""
 
 # ---------------------------------------------------------------------------
@@ -41,6 +43,13 @@ down:
 .PHONY: test
 test:
 	$(UV) run pytest tests/unit -v
+
+.PHONY: test-integration
+test-integration:
+	$(UV) run pytest tests/integration -v
+
+.PHONY: test-all
+test-all: test test-integration
 
 .PHONY: eval
 eval:
