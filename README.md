@@ -69,7 +69,27 @@ member ID + name
 
 ---
 
+## LLM gateway
+
+All model calls go through `agent/llm.py:complete()` — no other module imports `litellm` directly.
+
+- `LLM_MODE=mock` (default, used by `make test` / `make eval` / CI): responses come from `tests/fakes/llm_scripts/*.yaml`, matched by `purpose` + a regex on the last user message. No AWS credentials needed.
+- `LLM_MODE=bedrock`: routes through LiteLLM to AWS Bedrock, using `LLM_MODEL_DEFAULT` / `LLM_MODEL_FAST` from `.env`.
+
+### Enabling Bedrock model access
+
+1. In the AWS Console, go to **Bedrock → Model access** in your target region (`AWS_REGION` in `.env`, default `us-west-2`).
+2. Request access to the Claude model(s) you plan to use (a sonnet-class model for `LLM_MODEL_DEFAULT`, a haiku-class model for `LLM_MODEL_FAST`). Access is usually granted instantly for Anthropic models on Bedrock.
+3. Copy the exact model IDs (or inference-profile ARNs) shown in the console into `.env` as `LLM_MODEL_DEFAULT=bedrock/<id>` / `LLM_MODEL_FAST=bedrock/<id>` — model IDs vary by region and are never hardcoded in source.
+4. Make sure your shell has AWS credentials for that account (`AWS_PROFILE=<profile>` or an SSO login) — the gateway relies on the standard AWS credential chain; no static keys in code or `.env`.
+5. Run the manual smoke test:
+   ```bash
+   AWS_PROFILE=<profile> LLM_MODE=bedrock uv run python scripts/smoke_bedrock.py
+   ```
+   A successful run prints token counts, cost, latency, and `OK — Bedrock reachable and responding.`
+
 ## Development status
 
-Story 1.1 complete — repo scaffold and local Docker stack.  
+Story 1.1 complete — repo scaffold and local Docker stack.
+Story 1.3 complete — LLM gateway (LiteLLM/Bedrock + mock).
 Development continues story by story.  See `docs/stories/` for the backlog.

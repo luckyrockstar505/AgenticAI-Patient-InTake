@@ -1,0 +1,4 @@
+purpose: test_greet
+matches:
+  - pattern: "^hello$"
+    response: "hi there"

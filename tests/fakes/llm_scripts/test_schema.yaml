@@ -1,0 +1,6 @@
+purpose: test_schema
+matches:
+  - pattern: "please extract"
+    response: "this is not valid json"
+  - pattern: "valid JSON matching this schema"
+    response: '{"name": "Ann", "age": 30}'

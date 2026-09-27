@@ -23,6 +23,7 @@ dependencies = [
     "mcp>=1.8.1,<2.0.0",
     # LLM
     "litellm==1.67.0",
+    "pyyaml==6.0.3",
     # ML observability
     "mlflow==3.1.0",
     # Agent framework
@@ -43,6 +44,7 @@ dev = [
     "httpx==0.28.1",
     "ruff==0.9.10",
     "mypy==1.15.0",
+    "types-pyyaml==6.0.12.20241230",
 ]
 
 [build-system]
