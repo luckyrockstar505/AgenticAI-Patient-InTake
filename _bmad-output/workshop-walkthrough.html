@@ -332,8 +332,8 @@
     <div class="chip">Project <strong>AgenticAI-Patient-InTake</strong></div>
     <div class="chip">Method <strong>BMad</strong></div>
     <div class="chip">Model <strong>Claude Sonnet 4.6</strong></div>
-    <div class="chip">Deploy <strong>AWS AgentCore</strong></div>
-    <div class="chip">Steps completed <strong>6 of 7</strong></div>
+    <div class="chip">Deploy <strong>EC2 + Docker Compose</strong></div>
+    <div class="chip">Build progress <strong>8 of 28 stories</strong></div>
   </div>
 </div>
 
@@ -525,7 +525,7 @@ Any state  → CANCELLED         (member cancel)</pre>
       <div class="chevron">▾</div>
     </div>
     <div class="step-body">
-      <div class="insight"><strong>Deploy decision:</strong> AWS AgentCore Runtime replaces ECS Fargate + Terraform. Epic 7 collapses from 3 stories → 1 deploy command. Saves ~40 min in the build window.</div>
+      <div class="insight"><strong>Deploy decision (updated):</strong> EC2 + docker compose replaces EKS / Terraform. CI via GitHub Actions (story 1.2). CD: build → ECR → SSH deploy. No infrastructure provisioning scripts needed.</div>
       <div class="row2">
         <div class="info-box">
           <h4>Developer assignments</h4>
@@ -574,50 +574,136 @@ Any state  → CANCELLED         (member cancel)</pre>
       <div class="chevron">▾</div>
     </div>
     <div class="step-body open">
-      <p style="font-size:13px; color:var(--muted); margin-bottom:16px;">Build loop per story: one branch → <code>/bmad-code-review</code> → tests pass → merge → next story. Each story: 20–30 min of Claude Code work.</p>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:16px;">Build loop: one branch → <code>/bmad-build</code> → review → merge → next story. Deployment: EC2 + docker compose + GitHub Actions CI/CD (no EKS / no Terraform).</p>
+
+      <!-- Build status grid -->
+      <div style="margin-bottom:16px;">
+        <h4 style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin-bottom:10px;">Story progress — as of 2026-09-27</h4>
+        <table style="width:100%; border-collapse:collapse; font-size:13px;">
+          <thead>
+            <tr style="border-bottom:1px solid var(--border);">
+              <th style="text-align:left; padding:4px 8px; color:var(--muted); font-weight:500;">Story</th>
+              <th style="text-align:left; padding:4px 8px; color:var(--muted); font-weight:500;">What</th>
+              <th style="text-align:left; padding:4px 8px; color:var(--muted); font-weight:500;">Owner</th>
+              <th style="text-align:left; padding:4px 8px; color:var(--muted); font-weight:500;">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border-soft);">
+              <td style="padding:5px 8px; font-family:var(--mono); font-size:12px;">1.1</td>
+              <td style="padding:5px 8px;">Repo scaffold + Docker stack</td>
+              <td style="padding:5px 8px; color:var(--muted);">Srimaan</td>
+              <td style="padding:5px 8px;"><span class="badge badge-done">Merged</span></td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border-soft);">
+              <td style="padding:5px 8px; font-family:var(--mono); font-size:12px;">1.2</td>
+              <td style="padding:5px 8px;">CI pipeline (lint, type, test, build)</td>
+              <td style="padding:5px 8px; color:var(--muted);">Srimaan</td>
+              <td style="padding:5px 8px;"><span class="badge badge-active">PR open</span></td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border-soft);">
+              <td style="padding:5px 8px; font-family:var(--mono); font-size:12px;">1.3</td>
+              <td style="padding:5px 8px;">LLM gateway (LiteLLM + Bedrock mock)</td>
+              <td style="padding:5px 8px; color:var(--muted);">Bharath</td>
+              <td style="padding:5px 8px;"><span class="badge badge-done">Merged</span></td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border-soft);">
+              <td style="padding:5px 8px; font-family:var(--mono); font-size:12px;">1.4</td>
+              <td style="padding:5px 8px;">MLflow tracing baseline + PHI redaction</td>
+              <td style="padding:5px 8px; color:var(--muted);">Srimaan</td>
+              <td style="padding:5px 8px;"><span class="badge badge-done">Merged</span></td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border-soft);">
+              <td style="padding:5px 8px; font-family:var(--mono); font-size:12px;">2.1</td>
+              <td style="padding:5px 8px;">DB schema, migrations, synthetic seed</td>
+              <td style="padding:5px 8px; color:var(--muted);">Srimaan</td>
+              <td style="padding:5px 8px;"><span class="badge badge-done">Merged</span></td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border-soft);">
+              <td style="padding:5px 8px; font-family:var(--mono); font-size:12px;">2.2</td>
+              <td style="padding:5px 8px;">Mock payer eligibility service</td>
+              <td style="padding:5px 8px; color:var(--muted);">Srimaan</td>
+              <td style="padding:5px 8px;"><span class="badge badge-done">Merged</span></td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border-soft);">
+              <td style="padding:5px 8px; font-family:var(--mono); font-size:12px;">2.3</td>
+              <td style="padding:5px 8px;">FastMCP coverage tools (fetch, policy, end)</td>
+              <td style="padding:5px 8px; color:var(--muted);">Srimaan</td>
+              <td style="padding:5px 8px;"><span class="badge badge-done">Merged</span></td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border-soft);">
+              <td style="padding:5px 8px; font-family:var(--mono); font-size:12px;">2.4</td>
+              <td style="padding:5px 8px;">FastMCP verification tools</td>
+              <td style="padding:5px 8px; color:var(--muted);">Srimaan</td>
+              <td style="padding:5px 8px; color:var(--muted);">Queued</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border-soft);">
+              <td style="padding:5px 8px; font-family:var(--mono); font-size:12px;">2.5</td>
+              <td style="padding:5px 8px;">FastMCP case + callback tools</td>
+              <td style="padding:5px 8px; color:var(--muted);">Srimaan</td>
+              <td style="padding:5px 8px; color:var(--muted);">Queued</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border-soft);">
+              <td style="padding:5px 8px; font-family:var(--mono); font-size:12px;">3.1</td>
+              <td style="padding:5px 8px;">LangGraph skeleton, state &amp; checkpointer</td>
+              <td style="padding:5px 8px; color:var(--muted);">Bharath</td>
+              <td style="padding:5px 8px;"><span class="badge badge-done">Merged</span></td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border-soft);">
+              <td style="padding:5px 8px; font-family:var(--mono); font-size:12px;">3.2</td>
+              <td style="padding:5px 8px;">Intent classifier &amp; global router</td>
+              <td style="padding:5px 8px; color:var(--muted);">Bharath</td>
+              <td style="padding:5px 8px; color:var(--muted);">Unblocked (3.1 ✓)</td>
+            </tr>
+            <tr>
+              <td style="padding:5px 8px; font-family:var(--mono); font-size:12px; color:var(--muted);">3.3 – 8.x</td>
+              <td style="padding:5px 8px; color:var(--muted);">Remaining stories</td>
+              <td style="padding:5px 8px; color:var(--muted);">Both</td>
+              <td style="padding:5px 8px; color:var(--muted);">Not started</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <div class="row2">
         <div class="info-box">
-          <h4>Eval target</h4>
-          <p>Run against 20 labelled scenarios in <code>eval/labelled_claims.csv</code>. Hard gates: 0 unverified cases, 0 pre-verification policy, 0 PHI leaks. Overall ≥ 90%. Export <code>results.json</code>.</p>
+          <h4>Deployment target (simplified)</h4>
+          <p><strong>No EKS / no Terraform.</strong> EC2 t3.medium + docker compose (api, mcp-tools, postgres, mlflow). GitHub Actions: CI on PR · CD on merge to main via ECR push + SSH deploy.</p>
         </div>
         <div class="info-box">
-          <h4>Epic 9 — Presentation (parallel)</h4>
-          <p>9.1 Demo script (Bharath) · 9.2 Vercel dashboard reading results.json (Srimaan) · 9.3 This HTML updated with final results (both)</p>
+          <h4>Eval target</h4>
+          <p>Hard gates: 0 unverified cases, 0 pre-verification policy, 0 PHI leaks — 100% required. Overall intent accuracy ≥ 90% on Bedrock. <code>make eval</code> (mock) must exit 0 in CI.</p>
         </div>
-      </div>
-      <div class="findings" style="margin-top:4px;">
-        <div class="finding"><span class="pri pri-done">first</span><span class="ftext">Run <code>/bmad-build</code> on story <strong>1.1</strong> (Srimaan) — repo scaffold unblocks both tracks</span></div>
-        <div class="finding"><span class="pri pri-done">⚠️ risk</span><span class="ftext">Story 5.2 (web chat UI) is deferred — demo shows API output, not a browser window. Address in demo script narration.</span></div>
       </div>
     </div>
   </div>
 
   <!-- Next steps -->
   <div class="next-box">
-    <h3>Immediate next steps</h3>
+    <h3>Up next</h3>
     <div class="next-item">
-      <span class="cmd">/bmad-build story 1.1</span>
-      <span class="desc">Srimaan: repo scaffold + Docker — unblocks both tracks the moment it merges</span>
+      <span class="cmd">Merge PR #14</span>
+      <span class="desc">Story 2.3 coverage tools — unblocks 2.4 verification tools</span>
     </div>
     <div class="next-item">
-      <span class="cmd">/bmad-build story 2.0</span>
-      <span class="desc">Both: golden dataset — 20 human-labelled scenarios before any agent code runs</span>
+      <span class="cmd">/bmad-build story 1.2</span>
+      <span class="desc">CI pipeline (in progress) — GitHub Actions lint + test + eval on every PR</span>
     </div>
     <div class="next-item">
-      <span class="cmd">Parallel build</span>
-      <span class="desc">Srimaan: 2.1 → 2.2 → 2.3 → 2.4 → 2.5 · Bharath: 1.3 → 3.1 → 3.2 → 3.3 → 3.4</span>
+      <span class="cmd">/bmad-build story 2.4</span>
+      <span class="desc">Srimaan: FastMCP verification tools (start_verification, check_answer)</span>
     </div>
     <div class="next-item">
-      <span class="cmd">make eval</span>
-      <span class="desc">Run against 20 build-set scenarios, export results.json, check all hard gates at 100%</span>
+      <span class="cmd">/bmad-build story 3.2</span>
+      <span class="desc">Bharath: intent classifier &amp; router — now unblocked by 3.1 merge</span>
     </div>
     <div class="next-item">
-      <span class="cmd">agentcore deploy</span>
-      <span class="desc">Single command deploy to AWS AgentCore Runtime — no Terraform needed</span>
+      <span class="cmd">EC2 + docker compose deploy</span>
+      <span class="desc">Launch t3.medium · create 2 ECR repos · GitHub Actions CD (no Terraform, no EKS)</span>
     </div>
     <div class="next-item">
-      <span class="cmd">Holdout eval at 3:00</span>
-      <span class="desc">10 withheld scenarios scored — the final proof the system generalises</span>
+      <span class="cmd">make eval-live</span>
+      <span class="desc">Run Bedrock evals against live stack — verify all hard gates at 100%</span>
     </div>
   </div>
 
