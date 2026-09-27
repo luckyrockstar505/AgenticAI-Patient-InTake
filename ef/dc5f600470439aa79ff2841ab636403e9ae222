@@ -1,0 +1,24 @@
+_bmad-output/workshop-walkthrough.html
+  s_35caad9d45fb32::t_157972a1fa52e2 281-282,284
+  s_35caad9d45fb32::t_40eb82dd27d6e4 527
+  s_35caad9d45fb32::t_7bda6fc4ebdf22 552-556,558
+  s_35caad9d45fb32::t_82bfb6e8c66f39 564,566-574
+  s_35caad9d45fb32::t_41aa59486c8364 263
+  s_35caad9d45fb32::t_449cd86a502be8 514-515,517-519,521-522
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "efdc5f600470439aa79ff2841ab636403e9ae222",
+  "prompts": {},
+  "sessions": {
+    "s_35caad9d45fb32": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d83052ea-1ded-4160-b1e7-6a4993ea8d47",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Srimaan Yarram <srimaan.yarram@gmail.com>"
+    }
+  }
+}
