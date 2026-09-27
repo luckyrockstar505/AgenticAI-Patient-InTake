@@ -11,6 +11,7 @@ import re
 import time
 from collections.abc import Callable
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any, Literal
 
 import litellm
@@ -25,7 +26,7 @@ ModelTier = Literal["default", "fast"]
 # needs to import litellm transitively.
 LLMFn = Callable[..., "LLMResult"]
 
-MOCK_SCRIPTS_GLOB = "tests/fakes/llm_scripts/*.yaml"
+MOCK_SCRIPTS_GLOB = str(Path(__file__).parent.parent / "tests" / "fakes" / "llm_scripts" / "*.yaml")
 RETRY_COUNT = 2
 TIMEOUT_SECONDS = 20.0
 
@@ -158,6 +159,8 @@ def _bedrock_caller(model_tier: ModelTier, schema: type[BaseModel] | None) -> _C
             timeout=TIMEOUT_SECONDS,
         )
         latency_ms = (time.perf_counter() - start) * 1000
+        if not response.choices:
+            raise LLMGatewayError("Empty choices list returned by model")
         content = response.choices[0].message.content or ""
         usage = getattr(response, "usage", None)
         try:
@@ -189,13 +192,17 @@ def _load_mock_scripts() -> dict[str, list[_MockRule]]:
     scripts: dict[str, list[_MockRule]] = {}
     for path in sorted(glob.glob(MOCK_SCRIPTS_GLOB)):
         with open(path, encoding="utf-8") as f:
-            doc = yaml.safe_load(f) or {}
+            try:
+                doc = yaml.safe_load(f) or {}
+            except yaml.YAMLError:
+                continue
         purpose = doc.get("purpose")
         if not purpose:
             continue
         rules = [
             _MockRule(pattern=re.compile(m["pattern"], re.IGNORECASE), response=m["response"])
             for m in doc.get("matches", [])
+            if "pattern" in m and "response" in m
         ]
         scripts.setdefault(purpose, []).extend(rules)
     return scripts

@@ -11,6 +11,7 @@ Or via Docker:
 """
 from __future__ import annotations
 
+import asyncio
 import os
 
 import httpx
@@ -26,10 +27,11 @@ app = FastAPI(title="Claims Intake Agent API")
 
 # ---------------------------------------------------------------------------
 # Tracing — initialised once at import time so every request is traced.
-# Environment variables are resolved here; init_tracing() will use defaults
-# for any that are missing (e.g. in test runs without a live MLflow server).
+# Guarded by APP_ENV so unit tests don't incur MLflow side-effects (e.g.
+# mlruns/ directory creation or global TracerProvider mutation).
 # ---------------------------------------------------------------------------
-init_tracing()
+if os.environ.get("APP_ENV") != "test":
+    init_tracing()
 
 # ---------------------------------------------------------------------------
 # Configuration (resolved at import time so tests can set env vars before import)
@@ -49,14 +51,19 @@ MCP_HEALTHZ_URL: str = f"{_MCP_BASE}/healthz"
 # ---------------------------------------------------------------------------
 async def db_health_check() -> str:
     """Attempt a SELECT 1 against Postgres.  Returns 'ok' or 'error'."""
-    try:
+
+    def _check() -> str:
         engine = sqlalchemy.create_engine(DATABASE_URL, pool_pre_ping=True)
-        with engine.connect() as conn:
-            conn.execute(sqlalchemy.text("SELECT 1"))
-        engine.dispose()
-        return "ok"
-    except Exception:
-        return "error"
+        try:
+            with engine.connect() as conn:
+                conn.execute(sqlalchemy.text("SELECT 1"))
+            return "ok"
+        except Exception:
+            return "error"
+        finally:
+            engine.dispose()
+
+    return await asyncio.to_thread(_check)
 
 
 async def mcp_health_check() -> str:
