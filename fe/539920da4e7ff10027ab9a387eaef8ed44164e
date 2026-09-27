@@ -1,0 +1,33 @@
+Dockerfile.api
+  s_35caad9d45fb32::t_3ccb5db8d6a208 4,24
+Dockerfile.mcp
+  s_35caad9d45fb32::t_05426841742599 4,21
+observability/tracing.py
+  s_35caad9d45fb32::t_58137191a37de0 14
+pyproject.toml
+  s_35caad9d45fb32::t_90d72dbb135d59 80
+  s_35caad9d45fb32::t_b0392ea46a8d9e 5
+  s_35caad9d45fb32::t_08e6baa2fd1903 60
+.gitignore
+  s_35caad9d45fb32::t_8ebd896078f2e1 104
+.python-version
+  s_35caad9d45fb32::t_a8c708207b0188 1
+uv.lock
+  s_35caad9d45fb32::t_e1db62ca3c4d02 3,5-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "fe539920da4e7ff10027ab9a387eaef8ed44164e",
+  "prompts": {},
+  "sessions": {
+    "s_35caad9d45fb32": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d83052ea-1ded-4160-b1e7-6a4993ea8d47",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Srimaan Yarram <srimaan.yarram@gmail.com>"
+    }
+  }
+}
