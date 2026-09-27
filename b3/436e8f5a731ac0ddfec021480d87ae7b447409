@@ -1,0 +1,24 @@
+_bmad-output/planning-artifacts/epics.md
+  s_35caad9d45fb32::t_52c46257ac8a25 216
+  s_35caad9d45fb32::t_f3510f9482de1a 332-335
+  s_35caad9d45fb32::t_4a6e92381fafbe 221
+  s_35caad9d45fb32::t_cdc1ae2c2c4679 2
+  s_35caad9d45fb32::t_d03be272f7799f 359-846
+  s_35caad9d45fb32::t_46714f55ea105e 193-194,200
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b3436e8f5a731ac0ddfec021480d87ae7b447409",
+  "prompts": {},
+  "sessions": {
+    "s_35caad9d45fb32": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d83052ea-1ded-4160-b1e7-6a4993ea8d47",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Srimaan Yarram <srimaan.yarram@gmail.com>"
+    }
+  }
+}
