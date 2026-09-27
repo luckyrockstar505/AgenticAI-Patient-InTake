@@ -1,0 +1,97 @@
+[project]
+name = "claims-intake-agent"
+version = "0.1.0"
+description = "AI-powered insurance claims intake agent — BMAD demo"
+requires-python = ">=3.13"
+readme = "README.md"
+license = { text = "MIT" }
+
+dependencies = [
+    # Web
+    "fastapi==0.115.6",
+    "uvicorn[standard]==0.34.0",
+    "sse-starlette==2.2.1",
+    "httpx==0.28.1",
+    # Data validation
+    "pydantic==2.10.4",
+    # Database
+    "sqlalchemy==2.0.36",
+    "alembic==1.14.0",
+    "psycopg[binary]==3.2.4",
+    # MCP
+    "fastmcp==2.3.4",
+    "mcp>=1.8.1,<2.0.0",
+    # LLM
+    "litellm==1.67.0",
+    # ML observability
+    "mlflow==3.1.0",
+    # Agent framework
+    "langgraph==0.3.5",
+    "langchain-core==0.3.53",
+    "langgraph-checkpoint-postgres==2.0.17",
+    # Utilities
+    "rapidfuzz==3.12.1",
+    "anyio==4.8.0",
+    "python-dotenv==1.1.0",
+    "typing-extensions==4.12.2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest==8.3.5",
+    "pytest-asyncio==0.26.0",
+    "httpx==0.28.1",
+    "ruff==0.9.10",
+    "mypy==1.15.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["agent", "api", "evals", "mcp_tools", "observability", "shared"]
+
+# ---------------------------------------------------------------------------
+# Tool configuration
+# ---------------------------------------------------------------------------
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+# Only lint project source code — exclude pre-existing framework directories
+exclude = [
+    "_bmad",
+    ".agents",
+    ".claude",
+    "docs",
+    "scripts",
+    ".venv",
+    "infra",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "C4"]
+ignore = ["E501"]  # line length enforced by formatter
+
+[tool.ruff.lint.isort]
+known-first-party = ["agent", "api", "evals", "mcp_tools", "observability", "shared"]
+
+[tool.mypy]
+python_version = "3.13"
+strict = false
+ignore_missing_imports = true
+# Only check project source — exclude pre-existing framework directories
+exclude = [
+    "tests/",
+    "data/",
+    "_bmad/",
+    "\\.agents/",
+    "\\.claude/",
+    "docs/",
+    "scripts/",
+    "infra/",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"

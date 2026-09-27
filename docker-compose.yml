@@ -1,0 +1,136 @@
+---
+# Claims Intake Agent — local development stack
+# Four services: api, mcp-tools, postgres, mlflow
+# Shared network: claims-net
+#
+# Quick start:
+#   cp .env.example .env
+#   make up
+#   curl http://localhost:8000/healthz
+
+version: "3.9"
+
+services:
+
+  # ---------------------------------------------------------------------------
+  # API service (FastAPI + LangGraph agent)
+  # ---------------------------------------------------------------------------
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    image: claims-api:local
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://claims:claims@postgres:5432/claims
+      MCP_URL: http://mcp-tools:8765/mcp
+      MLFLOW_TRACKING_URI: http://mlflow:5000
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mcp-tools:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "python3 -c \"import urllib.request; urllib.request.urlopen('http://localhost:8000/healthz', timeout=5)\""]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    networks:
+      - claims-net
+    restart: on-failure
+
+  # ---------------------------------------------------------------------------
+  # MCP tools service (FastMCP)
+  # ---------------------------------------------------------------------------
+  mcp-tools:
+    build:
+      context: .
+      dockerfile: Dockerfile.mcp
+    image: claims-mcp:local
+    ports:
+      - "8765:8765"
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://claims:claims@postgres:5432/claims
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "python3 -c \"import urllib.request; urllib.request.urlopen('http://localhost:8765/healthz', timeout=5)\""]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    networks:
+      - claims-net
+    restart: on-failure
+
+  # ---------------------------------------------------------------------------
+  # Postgres (data store + LangGraph checkpointer)
+  # ---------------------------------------------------------------------------
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: claims
+      POSTGRES_PASSWORD: claims
+      POSTGRES_DB: claims
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U claims -d claims"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    networks:
+      - claims-net
+    restart: unless-stopped
+
+  # ---------------------------------------------------------------------------
+  # MLflow tracking server
+  # ---------------------------------------------------------------------------
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v3.1.0
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    command:
+      - mlflow
+      - server
+      - --host=0.0.0.0
+      - --port=5000
+      - --backend-store-uri=sqlite:///mlflow.db
+      - --default-artifact-root=/mlflow/artifacts
+    volumes:
+      - mlflow_data:/mlflow
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://localhost:5000/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    networks:
+      - claims-net
+    restart: unless-stopped
+
+# ---------------------------------------------------------------------------
+# Named volumes
+# ---------------------------------------------------------------------------
+volumes:
+  postgres_data:
+  mlflow_data:
+
+# ---------------------------------------------------------------------------
+# Networks
+# ---------------------------------------------------------------------------
+networks:
+  claims-net:
+    driver: bridge
