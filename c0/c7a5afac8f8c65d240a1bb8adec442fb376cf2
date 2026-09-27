@@ -1,0 +1,42 @@
+CONTRIBUTING.md
+  s_8b12a18db9c228::t_1dfca7b0296a85 68-86
+  s_8b12a18db9c228::t_8b21d1aa2b569d 11
+pyproject.toml
+  s_8b12a18db9c228::t_2868f0cfa45b69 85-88
+docs/stories/1.2.ci-pipeline-lint-type-test-build.md
+  s_8b12a18db9c228::t_1f50a6335b3696 62,66,70-74,78-83
+  s_8b12a18db9c228::t_ec18de4b3a1710 33-37
+  s_8b12a18db9c228::t_d89d31cab2dc05 94
+  s_8b12a18db9c228::t_7d7a35043bf286 5
+tests/conftest.py
+  s_8b12a18db9c228::t_c7c4af800e4cc6 1-34
+_bmad-output/workshop-walkthrough.html
+  s_8b12a18db9c228::t_28f10fa1d04777 335-336
+  s_8b12a18db9c228::t_15784a753ce99f 577-601,603-631,633-667,670-671,674-675
+  s_8b12a18db9c228::t_ccea79d153d420 602
+  s_8b12a18db9c228::t_99fabb3b4f86ae 632
+  s_8b12a18db9c228::t_fc214a31b6b9a9 528
+  s_8b12a18db9c228::t_8b180ed54ef55e 683,685-686,689-690,693-694,697-698,701-702,705-706
+.github/workflows/ci.yml
+  s_8b12a18db9c228::t_4a86afc01b81d0 21
+  s_8b12a18db9c228::t_da81d04675255c 1-20,22-44,46-80,82-133,135-139
+  s_8b12a18db9c228::t_3960bdcf6a5922 45
+  s_8b12a18db9c228::t_5a12d76a61a7eb 81
+  s_8b12a18db9c228::t_e72346ef58d090 134
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c0c7a5afac8f8c65d240a1bb8adec442fb376cf2",
+  "prompts": {},
+  "sessions": {
+    "s_8b12a18db9c228": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "63134945-8335-4c88-8f62-c0821f20ba32",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Srimaan Yarram <srimaan.yarram@gmail.com>"
+    }
+  }
+}
