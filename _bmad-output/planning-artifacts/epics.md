@@ -1,5 +1,6 @@
 ---
-stepsCompleted: ["step-01-validate-prerequisites", "step-02-design-epics", "step-03-create-stories"]
+stepsCompleted: ["step-01-validate-prerequisites", "step-02-design-epics", "step-03-create-stories", "step-04-final-validation"]
+status: ready-for-development
 inputDocuments:
   - _bmad-output/planning-artifacts/prds/prd-AgenticAI-Patient-InTake-2026-09-27/prd.md
   - docs/architecture.md
