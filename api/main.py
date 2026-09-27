@@ -1,6 +1,7 @@
 """FastAPI application entry-point.
 
 Story 1.1: scaffold with /healthz endpoint.
+Story 1.4: init_tracing() wired at startup for MLflow observability + PHI redaction.
 Stories 5.x add sessions, messages, cases, and the chat UI.
 
 Run locally:
@@ -16,10 +17,19 @@ import httpx
 import sqlalchemy
 from fastapi import Depends, FastAPI
 
+from observability.tracing import init_tracing
+
 # ---------------------------------------------------------------------------
 # App instance
 # ---------------------------------------------------------------------------
 app = FastAPI(title="Claims Intake Agent API")
+
+# ---------------------------------------------------------------------------
+# Tracing — initialised once at import time so every request is traced.
+# Environment variables are resolved here; init_tracing() will use defaults
+# for any that are missing (e.g. in test runs without a live MLflow server).
+# ---------------------------------------------------------------------------
+init_tracing()
 
 # ---------------------------------------------------------------------------
 # Configuration (resolved at import time so tests can set env vars before import)
