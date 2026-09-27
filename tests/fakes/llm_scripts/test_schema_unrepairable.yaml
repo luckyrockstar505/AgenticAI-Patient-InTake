@@ -1,0 +1,6 @@
+purpose: test_schema_unrepairable
+matches:
+  - pattern: "please extract"
+    response: "still not json"
+  - pattern: "valid JSON matching this schema"
+    response: "still not valid even after repair"
