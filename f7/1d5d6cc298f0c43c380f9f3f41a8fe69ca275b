@@ -1,0 +1,28 @@
+pyproject.toml
+  s_8b12a18db9c228::t_aa1f89e7305bd8 35
+mcp_tools/tools/verification.py
+  s_8b12a18db9c228::t_4df2c33e724bb8 13,40-42,51-57,94,183-184,194,202-204,234-236,257,266-273,296,314,334-338,396-408,423-424,431-432,440-452,467-468,475,480-482,484-486,488,491-534,556-557,563-564
+tests/contracts/test_verification_contract.py
+  s_8b12a18db9c228::t_8ab58a9ada0625 456-547
+docs/stories/2.4.fastmcp-verification-tools.md
+  s_8b12a18db9c228::t_18d011192f8e02 74,79-82
+  s_8b12a18db9c228::t_dece9e12c78a25 93-94
+uv.lock
+  s_8b12a18db9c228::t_0c26472a34aa16 434
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f71d5d6cc298f0c43c380f9f3f41a8fe69ca275b",
+  "prompts": {},
+  "sessions": {
+    "s_8b12a18db9c228": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "63134945-8335-4c88-8f62-c0821f20ba32",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Srimaan Yarram <srimaan.yarram@gmail.com>"
+    }
+  }
+}
