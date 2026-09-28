@@ -84,6 +84,10 @@ known-first-party = ["agent", "api", "evals", "mcp_tools", "observability", "sha
 python_version = "3.13"
 strict = false
 ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["agent.*", "mcp_tools.*", "shared.*"]
+strict = true
 # Only check project source — exclude pre-existing framework directories
 exclude = [
     "tests/",
