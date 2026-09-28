@@ -21,6 +21,7 @@ from fastmcp import FastMCP
 from mcp_tools.db.session import get_session
 from mcp_tools.payer_mock import MockPayerClient
 from mcp_tools.tools.coverage import register as _reg_coverage
+from mcp_tools.tools.verification import register as _reg_verification
 
 # ---------------------------------------------------------------------------
 # MCP tool definitions
@@ -36,6 +37,9 @@ def ping() -> dict[str, bool]:
 
 # Register coverage tools (fetch_coverage, get_policy_view, end_session)
 _reg_coverage(mcp, MockPayerClient(), get_session)
+
+# Register verification tools (start_verification, check_answer)
+_reg_verification(mcp, get_session)
 
 
 # ---------------------------------------------------------------------------
