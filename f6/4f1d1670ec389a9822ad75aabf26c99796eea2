@@ -1,0 +1,21 @@
+pyproject.toml
+  s_8b12a18db9c228::t_82bad6d36f9e9e 17
+uv.lock
+  s_8b12a18db9c228::t_24042362e6fc95 402,438,920-976,3040-3044
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f64f1d1670ec389a9822ad75aabf26c99796eea2",
+  "prompts": {},
+  "sessions": {
+    "s_8b12a18db9c228": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "63134945-8335-4c88-8f62-c0821f20ba32",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Srimaan Yarram <srimaan.yarram@gmail.com>"
+    }
+  }
+}
