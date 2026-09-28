@@ -431,7 +431,7 @@ requires-dist = [
     { name = "mlflow", specifier = "==3.1.0" },
     { name = "psycopg", extras = ["binary"], specifier = "==3.2.4" },
     { name = "pydantic", specifier = "==2.10.4" },
-    { name = "python-dateutil", specifier = ">=2.9" },
+    { name = "python-dateutil", specifier = "==2.9.0.post0" },
     { name = "python-dotenv", specifier = "==1.1.0" },
     { name = "pyyaml", specifier = "==6.0.3" },
     { name = "rapidfuzz", specifier = "==3.12.1" },

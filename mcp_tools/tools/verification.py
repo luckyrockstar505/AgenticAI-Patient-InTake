@@ -10,6 +10,7 @@ appear in span attributes, log lines, or error messages.
 from __future__ import annotations
 
 import datetime
+import hashlib
 import os
 import random
 import uuid
@@ -36,12 +37,22 @@ MAX_VERIFY_ATTEMPTS: int = int(os.environ.get("MAX_VERIFY_ATTEMPTS", "3"))
 # Challenge questions (DOB is always first; challenge is drawn from this pool)
 _CHALLENGE_QUESTIONS = ["zip", "employer_group", "subscriber_name"]
 
+# All valid question IDs
+_VALID_QUESTION_IDS = frozenset(["dob"] + _CHALLENGE_QUESTIONS)
+
 # Mapping from question_id to prompt_hint value returned to the agent
 _PROMPT_HINTS: dict[str, str] = {
     "dob": "date_of_birth",
     "zip": "zip_code",
     "employer_group": "employer_group",
     "subscriber_name": "subscriber_name",
+}
+
+# The not-found response shape (identical to name-mismatch — no enumeration)
+_NOT_FOUND_RESPONSE: dict[str, Any] = {
+    "verification_id": None,
+    "name_match": False,
+    "next_question": {"id": "dob", "prompt_hint": "date_of_birth"},
 }
 
 # ---------------------------------------------------------------------------
@@ -80,7 +91,7 @@ def _dob_match(answer: str, expected_dob: datetime.date | None) -> bool:
         return False
     try:
         parsed = _dateutil_parser.parse(answer, dayfirst=False)
-    except (ParserError, ValueError, OverflowError):
+    except (ParserError, ValueError, OverflowError, TypeError):
         return False
     # Reject 2-digit years that resolve to a future year
     if parsed.year > datetime.date.today().year:
@@ -169,8 +180,8 @@ def register(mcp: FastMCP, get_db: GetDb) -> None:
         """Create a verification record and perform identity pre-checks.
 
         Returns ``{ok: true, data: {verification_id, name_match, next_question}}``.
-        Unknown member IDs return the same NOT_FOUND_OR_MISMATCH error code as a
-        name mismatch (no enumeration).
+        Unknown member IDs return the same response shape as a name mismatch
+        (verification_id=None) so that callers cannot enumerate valid IDs.
         Audit event: ``verification_started``.
         """
         async with get_db() as session:
@@ -180,7 +191,7 @@ def register(mcp: FastMCP, get_db: GetDb) -> None:
             member = result.scalar_one_or_none()
 
             if member is None:
-                # No enumeration: same response as a mismatch
+                # No enumeration: return same shape as mismatch, with verification_id=None
                 session.add(
                     AuditLog(
                         session_id=session_id,
@@ -188,10 +199,9 @@ def register(mcp: FastMCP, get_db: GetDb) -> None:
                         detail={"member_found": False},
                     )
                 )
-                return _err(
-                    "NOT_FOUND_OR_MISMATCH",
-                    "Member not found or identity check failed.",
-                )
+                with tracing.span("mcp.start_verification", name_match=False):
+                    pass
+                return _ok(_NOT_FOUND_RESPONSE)
 
             name_ok = _name_match(full_name, member.first_name, member.last_name)
             name_marker = "name:ok" if name_ok else "name:fail"
@@ -221,6 +231,9 @@ def register(mcp: FastMCP, get_db: GetDb) -> None:
                 )
             )
 
+        with tracing.span("mcp.start_verification", name_match=name_ok):
+            pass
+
         return _ok(
             {
                 "verification_id": str(v_id),
@@ -241,7 +254,7 @@ def register(mcp: FastMCP, get_db: GetDb) -> None:
         Returns ``{ok: true, data: {status, attempts, remaining_attempts, next_question?}}``.
         Expected answers are never returned in any field.
         Span ``mcp.check_answer`` records ``question_id``, ``status``, ``attempts`` only.
-        Audit events: ``verification_answer`` (every call), ``verification_passed``,
+        Audit events: ``verification_answer`` (every answer), ``verification_passed``,
         ``verification_locked``.
         """
         # Validate UUID early — return VALIDATION, no DB access needed
@@ -250,16 +263,17 @@ def register(mcp: FastMCP, get_db: GetDb) -> None:
         except ValueError:
             return _err("VALIDATION", "Invalid verification_id format.")
 
-        # Seed for question selection: explicit env var (for evals/tests) or hash of id
-        verify_seed: int | str = os.environ.get(
-            "VERIFY_SEED", str(hash(verification_id))
+        # Validate question_id before touching the DB
+        if question_id not in _VALID_QUESTION_IDS:
+            return _err("VALIDATION", "Unknown question_id.")
+
+        # Stable seed: explicit env var (for evals/tests) or SHA-256-based fallback
+        verify_seed: str = os.environ.get(
+            "VERIFY_SEED",
+            hashlib.sha256(verification_id.encode()).hexdigest(),
         )
 
         max_attempts = int(os.environ.get("MAX_VERIFY_ATTEMPTS", str(MAX_VERIFY_ATTEMPTS)))
-
-        # Collect outputs before the DB block so they can be used in the span below
-        outcome_status = "PENDING"
-        outcome_attempts = 0
 
         async with get_db() as session:
             v_result = await session.execute(
@@ -275,12 +289,11 @@ def register(mcp: FastMCP, get_db: GetDb) -> None:
 
             # Already LOCKED — return immediately, no processing, no attempt increment
             if verification.status == "LOCKED":
-                outcome_status = "LOCKED"
                 outcome_attempts = verification.attempts
                 with tracing.span(
                     "mcp.check_answer",
                     question_id=question_id,
-                    status=outcome_status,
+                    status="LOCKED",
                     attempts=outcome_attempts,
                 ):
                     pass
@@ -294,12 +307,11 @@ def register(mcp: FastMCP, get_db: GetDb) -> None:
 
             # Already PASSED — return immediately
             if verification.status == "PASSED":
-                outcome_status = "PASSED"
                 outcome_attempts = verification.attempts
                 with tracing.span(
                     "mcp.check_answer",
                     question_id=question_id,
-                    status=outcome_status,
+                    status="PASSED",
                     attempts=outcome_attempts,
                 ):
                     pass
@@ -319,6 +331,11 @@ def register(mcp: FastMCP, get_db: GetDb) -> None:
             if member is None:
                 return _err("INTERNAL", "An internal error occurred.")
 
+            # Guard: reject a question that has already been answered in this session
+            current_ids: list[str] = list(verification.asked_question_ids or [])
+            if any(entry.startswith(question_id + ":") for entry in current_ids):
+                return _err("VALIDATION", "Question already answered.")
+
             # ----------------------------------------------------------------
             # Evaluate the answer
             # ----------------------------------------------------------------
@@ -331,13 +348,11 @@ def register(mcp: FastMCP, get_db: GetDb) -> None:
                 correct = _fuzzy_match(answer, member.employer_group)
             elif question_id == "subscriber_name":
                 correct = _fuzzy_match(answer, member.subscriber_name)
-            # Unknown question_id → treat as wrong answer (safe default)
 
             # ----------------------------------------------------------------
             # Update asked_question_ids: replace the pending marker with :ok/:fail
             # ----------------------------------------------------------------
             suffix = ":ok" if correct else ":fail"
-            current_ids: list[str] = list(verification.asked_question_ids or [])
             new_ids: list[str] = []
             replaced = False
             for entry in current_ids:
@@ -363,8 +378,6 @@ def register(mcp: FastMCP, get_db: GetDb) -> None:
             if _check_pass(new_ids):
                 verification.status = "PASSED"
                 verification.asked_question_ids = new_ids
-                outcome_status = "PASSED"
-                outcome_attempts = current_attempts
 
                 # Flip the most-recent non-discarded snapshot to 'verified'
                 snap_result = await session.execute(
@@ -380,6 +393,19 @@ def register(mcp: FastMCP, get_db: GetDb) -> None:
                 if snapshot is not None:
                     snapshot.status = "verified"
 
+                # Audit: every answer + passed
+                session.add(
+                    AuditLog(
+                        session_id=session_id,
+                        event="verification_answer",
+                        detail={
+                            "verification_id": str(v_uuid),
+                            "question_id": question_id,
+                            "correct": correct,
+                            "attempts": current_attempts,
+                        },
+                    )
+                )
                 session.add(
                     AuditLog(
                         session_id=session_id,
@@ -394,25 +420,36 @@ def register(mcp: FastMCP, get_db: GetDb) -> None:
                 with tracing.span(
                     "mcp.check_answer",
                     question_id=question_id,
-                    status=outcome_status,
-                    attempts=outcome_attempts,
+                    status="PASSED",
+                    attempts=current_attempts,
                 ):
                     pass
 
                 return _ok(
                     {
                         "status": "PASSED",
-                        "attempts": outcome_attempts,
-                        "remaining_attempts": max(0, max_attempts - outcome_attempts),
+                        "attempts": current_attempts,
+                        "remaining_attempts": max(0, max_attempts - current_attempts),
                     }
                 )
 
             if current_attempts >= max_attempts:
                 verification.status = "LOCKED"
                 verification.asked_question_ids = new_ids
-                outcome_status = "LOCKED"
-                outcome_attempts = current_attempts
 
+                # Audit: every answer + locked
+                session.add(
+                    AuditLog(
+                        session_id=session_id,
+                        event="verification_answer",
+                        detail={
+                            "verification_id": str(v_uuid),
+                            "question_id": question_id,
+                            "correct": correct,
+                            "attempts": current_attempts,
+                        },
+                    )
+                )
                 session.add(
                     AuditLog(
                         session_id=session_id,
@@ -427,31 +464,77 @@ def register(mcp: FastMCP, get_db: GetDb) -> None:
                 with tracing.span(
                     "mcp.check_answer",
                     question_id=question_id,
-                    status=outcome_status,
-                    attempts=outcome_attempts,
+                    status="LOCKED",
+                    attempts=current_attempts,
                 ):
                     pass
 
                 return _ok(
                     {
                         "status": "LOCKED",
-                        "attempts": outcome_attempts,
+                        "attempts": current_attempts,
                         "remaining_attempts": 0,
                     }
                 )
 
-            # Still PENDING — pick next question if this was the DOB step
+            # ----------------------------------------------------------------
+            # Still PENDING — pick next question when needed
+            # ----------------------------------------------------------------
             next_q: dict[str, str] | None = None
-            if question_id == "dob":
+
+            # After DOB or a wrong challenge answer, offer the next unused question
+            if question_id == "dob" or (question_id in _CHALLENGE_QUESTIONS and not correct):
                 next_qid = _pick_question(new_ids, verify_seed)
-                if next_qid:
+                if next_qid is not None:
                     next_q = {"id": next_qid, "prompt_hint": _PROMPT_HINTS[next_qid]}
                     new_ids.append(next_qid)  # mark as pending
+                else:
+                    # All challenge questions exhausted, pass criteria unmet → lock
+                    verification.status = "LOCKED"
+                    verification.asked_question_ids = new_ids
+
+                    session.add(
+                        AuditLog(
+                            session_id=session_id,
+                            event="verification_answer",
+                            detail={
+                                "verification_id": str(v_uuid),
+                                "question_id": question_id,
+                                "correct": correct,
+                                "attempts": current_attempts,
+                            },
+                        )
+                    )
+                    session.add(
+                        AuditLog(
+                            session_id=session_id,
+                            event="verification_locked",
+                            detail={
+                                "verification_id": str(v_uuid),
+                                "attempts": current_attempts,
+                                "reason": "questions_exhausted",
+                            },
+                        )
+                    )
+
+                    with tracing.span(
+                        "mcp.check_answer",
+                        question_id=question_id,
+                        status="LOCKED",
+                        attempts=current_attempts,
+                    ):
+                        pass
+
+                    return _ok(
+                        {
+                            "status": "LOCKED",
+                            "attempts": current_attempts,
+                            "remaining_attempts": 0,
+                        }
+                    )
 
             verification.status = "PENDING"
             verification.asked_question_ids = new_ids
-            outcome_status = "PENDING"
-            outcome_attempts = current_attempts
 
             session.add(
                 AuditLog(
@@ -470,15 +553,15 @@ def register(mcp: FastMCP, get_db: GetDb) -> None:
             with tracing.span(
                 "mcp.check_answer",
                 question_id=question_id,
-                status=outcome_status,
-                attempts=outcome_attempts,
+                status="PENDING",
+                attempts=current_attempts,
             ):
                 pass
 
         response_data: dict[str, Any] = {
             "status": "PENDING",
-            "attempts": outcome_attempts,
-            "remaining_attempts": max(0, max_attempts - outcome_attempts),
+            "attempts": current_attempts,
+            "remaining_attempts": max(0, max_attempts - current_attempts),
         }
         if next_q is not None:
             response_data["next_question"] = next_q

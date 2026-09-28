@@ -453,3 +453,95 @@ async def test_check_answer_no_phi_leak(mcp_instance, db, test_member):
     assert "95814" not in resp_text, "ZIP leaked into response"
     assert "Acme" not in resp_text, "Employer name leaked into response"
     assert "1985-03-04" not in resp_text, "DOB ISO string leaked into response"
+
+    # Also assert that a verification_answer audit row was written for this PENDING outcome
+    audit_result = await db.execute(
+        select(AuditLog).where(
+            AuditLog.session_id == session_id,
+            AuditLog.event == "verification_answer",
+        )
+    )
+    audit = audit_result.scalar_one_or_none()
+    assert audit is not None
+    assert audit.detail is not None
+    assert audit.detail["question_id"] == "dob"
+
+
+# ---------------------------------------------------------------------------
+# Test 8 – name-mismatch verification can never reach PASSED
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.anyio
+async def test_name_mismatch_can_never_pass(mcp_instance, db, test_member):
+    """AC: a name-mismatch verification remains non-PASSED even with correct DOB + challenge."""
+    session_id = f"s-{uuid.uuid4()}"
+
+    # Insert a coverage snapshot so the snap-flip logic has something to act on
+    snap = CoverageSnapshot(
+        id=uuid.uuid4(),
+        session_id=session_id,
+        member_id=test_member.member_id,
+        payload={"plan_name": "Bronze HMO"},
+        source="mock_payer",
+        status="unverified",
+    )
+    db.add(snap)
+    await db.commit()
+
+    # Step 1: start with a wrong name
+    start_resp = await _call(
+        mcp_instance,
+        "start_verification",
+        {
+            "session_id": session_id,
+            "member_id": test_member.member_id,
+            "full_name": "Totally Wrong Person",
+        },
+    )
+    assert start_resp["ok"] is True
+    assert start_resp["data"]["name_match"] is False
+    v_id = start_resp["data"]["verification_id"]
+
+    # Step 2: correct DOB
+    dob_resp = await _call(
+        mcp_instance,
+        "check_answer",
+        {
+            "session_id": session_id,
+            "verification_id": v_id,
+            "question_id": "dob",
+            "answer": "March 4 1985",
+        },
+    )
+    assert dob_resp["ok"] is True
+    # Should be PENDING (not PASSED)
+    assert dob_resp["data"]["status"] != "PASSED"
+    challenge_qid = dob_resp["data"].get("next_question", {}).get("id")
+
+    if challenge_qid:
+        # Step 3: correct challenge answer
+        challenge_answers = {
+            "zip": "95814",
+            "employer_group": "Acme Corp",
+            "subscriber_name": "Jane Doe",
+        }
+        final_resp = await _call(
+            mcp_instance,
+            "check_answer",
+            {
+                "session_id": session_id,
+                "verification_id": v_id,
+                "question_id": challenge_qid,
+                "answer": challenge_answers[challenge_qid],
+            },
+        )
+        assert final_resp["ok"] is True
+        # Even with correct answers, name:fail means PASSED is impossible
+        assert final_resp["data"]["status"] != "PASSED", (
+            "Verification with name mismatch must never reach PASSED"
+        )
+
+    # Snapshot must remain unverified
+    await db.refresh(snap)
+    assert snap.status == "unverified"
