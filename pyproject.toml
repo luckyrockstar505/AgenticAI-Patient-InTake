@@ -3,7 +3,6 @@ name = "claims-intake-agent"
 version = "0.1.0"
 description = "AI-powered insurance claims intake agent — BMAD demo"
 requires-python = ">=3.13"
-readme = "README.md"
 license = { text = "MIT" }
 
 dependencies = [
@@ -15,7 +14,7 @@ dependencies = [
     # Data validation
     "pydantic==2.10.4",
     # Database
-    "sqlalchemy==2.0.36",
+    "sqlalchemy[asyncio]==2.0.36",
     "alembic==1.14.0",
     "psycopg[binary]==3.2.4",
     # MCP
