@@ -1,0 +1,37 @@
+mcp_tools/tools/verification.py
+  s_8b12a18db9c228::t_240d6cf39db2b0 1-51,53-55,57-167,169-237,239-485
+  s_8b12a18db9c228::t_d8d7185e42798d 52,56,168,238
+tests/contracts/test_verification_contract.py
+  s_8b12a18db9c228::t_1eea966061c97b 1-455
+mcp_tools/tools/coverage.py
+  s_8b12a18db9c228::t_e440c68a0ffc74 41,45,71,124,203
+docs/stories/2.4.fastmcp-verification-tools.md
+  s_8b12a18db9c228::t_e0c4ba190882f8 34-40
+  s_8b12a18db9c228::t_046d357c272e8e 66,70,74,78-84
+  s_8b12a18db9c228::t_04bd6cc51b57c5 95
+  s_8b12a18db9c228::t_15bf5d8e1ba986 5
+pyproject.toml
+  s_8b12a18db9c228::t_9e0982a97fe35a 35
+  s_8b12a18db9c228::t_7e20f1d2411cdd 49
+mcp_tools/server.py
+  s_8b12a18db9c228::t_91c94f6f4aed40 24
+  s_8b12a18db9c228::t_aec8c98985dfca 41-43
+uv.lock
+  s_8b12a18db9c228::t_d1b8896166d01e 398,415,434,451,3136-3144
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e403df4da83c55df4856d2695fee05491008bddf",
+  "prompts": {},
+  "sessions": {
+    "s_8b12a18db9c228": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "63134945-8335-4c88-8f62-c0821f20ba32",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Srimaan Yarram <srimaan.yarram@gmail.com>"
+    }
+  }
+}
