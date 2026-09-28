@@ -38,11 +38,11 @@ _VALID_REASONS = frozenset(
 # ---------------------------------------------------------------------------
 
 
-def _ok(data: dict[str, Any]) -> dict[str, Any]:
+def _ok(data: dict[str, Any]) -> dict:
     return {"ok": True, "data": data}
 
 
-def _err(code: str, message: str) -> dict[str, Any]:
+def _err(code: str, message: str) -> dict:
     return {"ok": False, "error": {"code": code, "message": message}}
 
 
@@ -68,7 +68,7 @@ def register(mcp: FastMCP, payer: PayerClient, get_db: GetDb) -> None:
     """
 
     @mcp.tool()
-    async def fetch_coverage(session_id: str, member_id: str) -> dict[str, Any]:
+    async def fetch_coverage(session_id: str, member_id: str) -> dict:
         """Fetch eligibility from the payer and store an unverified snapshot.
 
         Returns {ok: true, data: {snapshot_id: <uuid|null>, found: <bool>}}.
@@ -121,7 +121,7 @@ def register(mcp: FastMCP, payer: PayerClient, get_db: GetDb) -> None:
             return _ok({"snapshot_id": str(snap_id) if snap_id else None, "found": found})
 
     @mcp.tool()
-    async def get_policy_view(session_id: str, verification_id: str) -> dict[str, Any]:
+    async def get_policy_view(session_id: str, verification_id: str) -> dict:
         """Return the coverage policy for a verified member.
 
         Returns NOT_VERIFIED for any non-PASSED verification status, including
@@ -200,7 +200,7 @@ def register(mcp: FastMCP, payer: PayerClient, get_db: GetDb) -> None:
         return _ok(policy)
 
     @mcp.tool()
-    async def end_session(session_id: str, reason: str) -> dict[str, Any]:
+    async def end_session(session_id: str, reason: str) -> dict:
         """Close a session: discard unverified snapshots and write audit.
 
         Idempotent — calling twice returns {ok: true, data: {closed: true}}.
